@@ -17,7 +17,7 @@
     class="relative isolate block w-full min-h-[100svh] bg-[#101a17] text-[#f5f1e7]">
 
     <figure id="hero-media" aria-label="Фотографии клуба"
-      class="absolute inset-0 z-0 m-0 h-screen w-full overflow-hidden">
+      class="absolute inset-0 z-0 m-0 w-full overflow-hidden">
       <div id="hero-matte" class="absolute inset-0">
         <div class="hero-shot absolute inset-0" data-shot="0">
           <img
@@ -40,8 +40,8 @@
       class="absolute inset-x-[var(--edge)] top-[clamp(14px,2.4svh,28px)] z-50 block">
       <a href="#hero" aria-label="Лайм Падел" class="hero-logo inline-block min-h-11">
         <picture>
-          <source media="(max-width: 767px)" srcset="./images/logo/lime-padel-logo-mark.svg">
-          <img src="./images/logo/lime-padel-logo.svg" alt="" width="454" height="560"
+          <source media="(max-width: 767px)" srcset="./images/logo/lime-padel-logo-mark-800.png">
+          <img src="./images/logo/lime-padel-logo-1000.png" alt="" width="454" height="560"
             class="block h-auto w-[48px] md:w-[72px]">
         </picture>
       </a>
@@ -93,11 +93,11 @@
 
     <footer id="hero-address" tabindex="-1"
       class="absolute inset-x-[var(--edge)] bottom-[24px] z-40 block border-t border-[#f5f1e7]/40 pt-3">
-      <div class="hero-contact-lines relative z-10">
-        <p class="hero-place font-bold">Казань · ТЦ «Франт», 3-й этаж</p>
-        <address class="hero-street text-base not-italic">ул. Юлиуса Фучика, 90</address>
+      <p class="hero-place">Казань · ТЦ «Франт», 3-й этаж</p>
+      <address class="hero-street">ул. Юлиуса Фучика, 90</address>
+      <div id="hero-hours">
         <p>Ежедневно · 08:00–23:00</p>
-        <p><a href="tel:+79027112003" class="underline underline-offset-4">8 (902) 711-20-03</a></p>
+        <a href="tel:+79027112003">8 (902) 711-20-03</a>
       </div>
     </footer>
   </section>
