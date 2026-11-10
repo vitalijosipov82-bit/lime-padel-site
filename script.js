@@ -4,11 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const edge = document.getElementById("hero-cut");
     
     // Массив фестивальных кадров
-    const shots = [
-        "./public/hero-cut/on-court-1440.webp",
-        "./public/hero-cut/club.webp",
-        "./public/hero-cut/ball.webp"
-    ];
+    const shots = [ "on-court-1440.webp", "club.webp", "ball.webp" ];
     let currentIdx = 0;
     let isTransitioning = false;
 
