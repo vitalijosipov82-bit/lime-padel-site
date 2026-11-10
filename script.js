@@ -12,6 +12,9 @@
     const toggle = hero.querySelector('[data-toggle]');
     const next = hero.querySelector('[data-next]');
     const status = hero.querySelector('[data-status]');
+    const count = hero.querySelector('[data-count]');
+    const chapter = hero.querySelector('[data-chapter]');
+    const chapterNames = ['На корте', 'Крытый зал', 'Деталь игры'];
     let current = matte?.querySelector('.hero-shot');
     const poster = current?.querySelector('img');
 
@@ -84,18 +87,56 @@
 
     function showShot(incoming) {
       const previous = current;
-      previous.setAttribute('aria-hidden', 'true');
-      matte.append(incoming);
-      current = incoming;
-
+      const image = incoming.querySelector('img');
       const gsap = window.gsap;
-      if (!gsap || reduce.matches || !visible || document.hidden) {
+
+      if (reduce.matches || !visible || document.hidden) {
+        matte.append(incoming);
+        current = incoming;
         previous.remove();
         return Promise.resolve();
       }
 
       return new Promise(resolve => {
         const state = { p: 0 };
+        let completed = false;
+
+        function finish() {
+          if (completed) return;
+          completed = true;
+          incoming.style.removeProperty('clip-path');
+          image.style.removeProperty('transform');
+          seam.setAttribute('hidden', '');
+          seam.style.removeProperty('opacity');
+          previous.remove();
+          finishCut = null;
+          resolve();
+        }
+
+        previous.setAttribute('aria-hidden', 'true');
+        matte.append(incoming);
+        current = incoming;
+
+        if (!gsap) {
+          if (!incoming.animate) {
+            finish();
+            return;
+          }
+
+          const diagonal = matte.clientHeight * slope;
+          const width = matte.clientWidth;
+          const animation = incoming.animate([
+            { clipPath: `polygon(0 0, 0 0, ${-diagonal}px 100%, 0 100%)` },
+            { clipPath: `polygon(0 0, ${width + diagonal}px 0, ${width}px 100%, 0 100%)` },
+          ], {
+            duration: 700,
+            easing: 'cubic-bezier(.65, 0, .35, 1)',
+          });
+
+          finishCut = () => animation.finish();
+          animation.finished.then(finish, finish);
+          return;
+        }
 
         function draw() {
           const width = matte.clientWidth;
@@ -110,32 +151,34 @@
           seam.setAttribute('viewBox', `0 0 ${seam.clientWidth} ${height}`);
           path.setAttribute('d', `M ${top + offset} 0 L ${bottom + offset} ${height}`);
           seam.style.opacity = String(Math.max(0, Math.min(
-            1, (state.p - .08) / .12, (.64 - state.p) / .16
+            1, (state.p - .08) / .12, (.68 - state.p) / .16
           )));
-        }
-
-        function finish() {
-          incoming.style.removeProperty('clip-path');
-          seam.hidden = true;
-          seam.setAttribute('hidden', '');
-          seam.style.removeProperty('opacity');
-          previous.remove();
-          finishCut = null;
-          resolve();
         }
 
         seam.removeAttribute('hidden');
         draw();
 
-        const tween = gsap.to(state, {
-          p: 1,
-          duration: .56,
-          ease: 'power3.inOut',
-          onUpdate: draw,
+        const timeline = gsap.timeline({
+          paused: true,
           onComplete: finish,
+          onInterrupt: finish,
         });
 
-        finishCut = () => tween.progress(1);
+        timeline.to(state, {
+          p: 1,
+          duration: .7,
+          ease: 'power3.inOut',
+          onUpdate: draw,
+        }, 0);
+
+        timeline.fromTo(image, { scale: 1.065 }, {
+          scale: 1,
+          duration: .7,
+          ease: 'power2.out',
+        }, 0);
+
+        finishCut = () => timeline.progress(1);
+        timeline.play(0);
       });
     }
 
@@ -159,6 +202,8 @@
           if (request !== revision || (!manual && !canPlay())) return;
           await showShot(incoming);
           index = candidate;
+          if (count) count.textContent = String(index + 1).padStart(2, '0');
+          if (chapter) chapter.textContent = chapterNames[index];
           if (manual) status.textContent = shots[index].alt;
           return;
         }

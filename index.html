@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#101a17">
   <meta name="description" content="Падел-клуб «Лайм» в Казани. Играйте с друзьями или начните с тренером. ТЦ «Франт», 3-й этаж.">
   <title>Лайм — падел-клуб в Казани</title>
-  <link rel="stylesheet" href="./style-dist.css?v=0a757bee">
+  <link rel="stylesheet" href="./style-dist.css?v=b5665913">
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
   <script defer src="./script.js"></script>
 </head>
@@ -15,66 +15,70 @@
 
 <main id="main" tabindex="-1">
   <section id="hero" class="hero" aria-labelledby="hero-title">
-    <div class="hero-media" id="hero-media">
-      <div class="hero-matte" data-matte>
-        <div class="hero-shot" data-shot="0">
-          <img
-            src="./images/hero/on-court-1440.webp"
-            srcset="./images/hero/on-court-768.webp 768w, ./images/hero/on-court-1440.webp 1440w, ./images/hero/on-court-1920.webp 1920w"
-            sizes="(min-width: 1024px) 76vw, 100vw"
-            width="1440" height="960" fetchpriority="high" decoding="async"
-            alt="Спортсменка с ракеткой на синем корте клуба «Лайм»">
-        </div>
+  <div id="hero-media" class="hero-media">
+    <div class="hero-matte" data-matte>
+      <div class="hero-shot" data-shot="0">
+        <img
+          src="./images/hero/on-court-1440.webp"
+          srcset="./images/hero/on-court-768.webp 768w, ./images/hero/on-court-1440.webp 1440w, ./images/hero/on-court-1920.webp 1920w"
+          sizes="100vw"
+          width="1440" height="960"
+          fetchpriority="high" decoding="async"
+          alt="Спортсменка с ракеткой на синем корте клуба «Лайм»">
       </div>
-      <div class="hero-shade" aria-hidden="true"></div>
-      <svg class="hero-seam" data-seam aria-hidden="true" hidden>
-        <path fill="none" stroke="#d9f36b" stroke-width="1.5"
-              vector-effect="non-scaling-stroke"/>
-      </svg>
     </div>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <svg class="hero-seam" data-seam aria-hidden="true" hidden>
+      <path fill="none" stroke="#d9f36b" stroke-width="1.5"
+            vector-effect="non-scaling-stroke"/>
+    </svg>
+  </div>
 
-    <header class="hero-head">
-      <a class="hero-brand" href="#hero" aria-label="Лайм Падел">
-        <img src="./images/logo/lime-padel-logo-mark.svg" width="44" height="44" alt="">
-        <span>ЛАЙМ ПАДЕЛ</span>
-      </a>
-      <a class="hero-route" href="#hero-location">Как добраться</a>
-    </header>
+  <header class="hero-head">
+    <a class="hero-brand" href="#hero" aria-label="Лайм Падел">
+      <img src="./images/logo/lime-padel-logo-mark.svg" width="46" height="46" alt="">
+      <span>ЛАЙМ<br>ПАДЕЛ</span>
+    </a>
+    <a class="hero-route" href="#hero-location">Как добраться <span aria-hidden="true">↘</span></a>
+  </header>
 
-    <div class="hero-copy">
-      <h1 id="hero-title">
-        <span class="hero-kicker">Падел-клуб · Казань</span>
-        <strong class="hero-name">ЛАЙМ</strong>
-      </h1>
+  <div class="hero-copy">
+    <h1 id="hero-title">
+      <span class="hero-kicker">Падел-клуб · Казань</span>
+      <strong class="hero-name">ЛАЙМ</strong>
+    </h1>
+    <p class="hero-lead">Играйте с друзьями<br class="hero-break"> или начните с тренером.</p>
 
-      <p class="hero-lead">Играйте с друзьями или начните с тренером.</p>
-
-      <a class="hero-book" href="https://n1437757.yclients.ru/company/1301052/record-type?o=">
-        <span>Забронировать корт</span>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
-             aria-hidden="true" focusable="false">
+    <a class="hero-book" href="https://n1437757.yclients.ru/company/1301052/record-type?o=">
+      <span>Забронировать корт</span>
+      <span class="hero-book-arrow" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M6 18 18 6M7 6h11v11" stroke="currentColor"
                 stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-      </a>
-    </div>
+      </span>
+    </a>
+  </div>
 
-    <footer id="hero-location" class="hero-location" tabindex="-1">
-      <p class="hero-place">ТЦ «Франт» · 3-й этаж</p>
-      <address>Казань, ул. Юлиуса Фучика, 90</address>
-      <p class="hero-hours">
-        Ежедневно · 08:00–23:00
-        <a href="tel:+79027112003">8 (902) 711-20-03</a>
+  <footer class="hero-rail" id="hero-location" tabindex="-1">
+    <p class="hero-place">ТЦ «Франт» <span>· 3-й этаж</span></p>
+    <address>Казань, ул. Юлиуса Фучика, 90</address>
+    <p class="hero-hours">
+      Ежедневно · 08:00–23:00
+      <a href="tel:+79027112003">8 (902) 711-20-03</a>
+    </p>
+
+    <div class="hero-controls" data-controls role="group" aria-label="Фотографии клуба" hidden>
+      <p class="hero-chapter">
+        <span class="hero-count"><span data-count>01</span> / 03</span>
+        <span data-chapter>На корте</span>
       </p>
-    </footer>
-
-    <div class="hero-controls" data-controls role="group"
-         aria-label="Фотографии клуба" hidden>
       <button type="button" data-toggle aria-controls="hero-media">Пауза</button>
       <button type="button" data-next aria-controls="hero-media">Следующий кадр</button>
       <span class="sr-only" role="status" data-status></span>
     </div>
-  </section>
+  </footer>
+</section>
 </main>
 </body>
 </html>
