@@ -10,19 +10,18 @@
     <script src="https://cloudflare.com"></script>
 </head>
 <body>
-<a class="hero-skip" href="#main">К основному содержимому</a>
+<a class="hero-skip sr-only" href="#main">К основному содержимому</a>
 
 <main id="main" tabindex="-1">
   <section id="hero" aria-labelledby="hero-title"
     class="relative isolate block w-full min-h-[100svh] bg-[#101a17] text-[#f5f1e7]">
 
     <figure id="hero-media" aria-label="Фотографии клуба"
-      class="absolute inset-0 z-0 m-0 overflow-hidden">
+      class="absolute inset-0 z-0 m-0 h-screen w-full overflow-hidden">
       <div id="hero-matte" class="absolute inset-0">
         <div class="hero-shot absolute inset-0" data-shot="0">
           <img
-            src="./public/hero-cut/on-court-1440.webp"
-            srcset="./public/hero-cut/on-court-768.webp 768w, ./public/hero-cut/on-court-1440.webp 1440w, ./public/hero-cut/on-court-1920.webp 1920w"
+            src="on-court-1440.webp" srcset="on-court-768.webp 768w, on-court-1440.webp 1440w, on-court-1920.webp 1920w"
             sizes="100vw" width="1440" height="960" fetchpriority="high" decoding="async"
             alt="Спортсменка с ракеткой на синем корте клуба «Лайм»"
             class="absolute inset-0 block h-full w-full object-cover object-[68%_36%]">
@@ -94,12 +93,11 @@
 
     <footer id="hero-address" tabindex="-1"
       class="absolute inset-x-[var(--edge)] bottom-[24px] z-40 block border-t border-[#f5f1e7]/40 pt-3">
-      <p class="hero-place m-0 font-bold">Казань · ТЦ «Франт», 3-й этаж</p>
-      <address class="hero-street mt-1 text-base not-italic">ул. Юлиуса Фучика, 90</address>
-      <div id="hero-hours" class="absolute bottom-0 right-0 text-right text-base">
-        <p class="m-0">Ежедневно · 08:00–23:00</p>
-        <a href="tel:+79027112003"
-          class="inline-block min-h-11 py-2 underline underline-offset-4">8 (902) 711-20-03</a>
+      <div class="hero-contact-lines relative z-10">
+        <p class="hero-place font-bold">Казань · ТЦ «Франт», 3-й этаж</p>
+        <address class="hero-street text-base not-italic">ул. Юлиуса Фучика, 90</address>
+        <p>Ежедневно · 08:00–23:00</p>
+        <p><a href="tel:+79027112003" class="underline underline-offset-4">8 (902) 711-20-03</a></p>
       </div>
     </footer>
   </section>
