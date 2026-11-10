@@ -1,332 +1,73 @@
 @import "tailwindcss";
-@font-face {
-  font-family: Manrope;
-  src: url('./public/hero-cut/manrope-cyr.woff2') format('woff2');
-  font-weight: 400 800;
-  font-display: swap;
-  unicode-range: U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;
-}
 
-@font-face {
-  font-family: Manrope;
-  src: url('./public/hero-cut/manrope-lat.woff2') format('woff2');
-  font-weight: 400 800;
-  font-display: swap;
-  unicode-range: U+0000-00FF,U+2000-206F;
-}
-
-:root {
-  color-scheme: dark;
-  --ink: #101a17;
-  --paper: #f5f1e7;
-  --lime: #d9f36b;
-  --lime-pressed: #bdd64f;
-  --focus: #f5f1e7;
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-
+/* Базовые настройки шрифтов темы */
 body {
-  margin: 0;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: Manrope, system-ui, sans-serif;
+  font-family: 'Manrope', system-ui, sans-serif;
+  background-color: #101a17;
+  color: #f5f1e7;
 }
 
-#main { margin: 0; padding: 0; width: 100%; }
 #hero [hidden] { display: none !important; }
-#hero p, #hero h1, #hero figure { margin: 0; }
-#hero a { color: inherit; }
 
-#hero :is(a, button):focus-visible,
-.hero-skip:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 5px;
-}
-
-.hero-sr-only,
-.hero-skip:not(:focus) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-.hero-skip:focus {
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  z-index: 100;
-  padding: 12px;
-  background: var(--ink);
-  color: var(--paper);
-}
-
-#hero {
-  --edge: clamp(20px, 5vw, 96px);
-  --action-bottom: max(118px, 15svh);
-  position: relative;
-  isolation: isolate;
-  display: block;
-  width: 100%;
-  min-height: 100svh;
-  background: var(--ink);
-}
-
-#hero-media, #hero-matte, .hero-shot, #hero-shade, #hero-cut {
-  position: absolute;
-  inset: 0;
-}
-
-#hero-media {
-  z-index: 0;
-  overflow: hidden;
-  background: #142a2c;
-}
-
-.hero-shot img {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform-origin: 65% 43%;
-}
-
-.hero-shot[data-shot="0"] img { object-position: 68% 36%; }
-.hero-shot[data-shot="1"] img { object-position: 55% 52%; }
-.hero-shot[data-shot="2"] img { object-position: 56% 48%; }
-
+/* Двойной градиент затемнения для идеального контраста текста (§2 ТЗ) */
 #hero-shade {
-  z-index: 10;
-  pointer-events: none;
-  background:
-    linear-gradient(0deg, rgb(16 26 23 / 98%) 0%, rgb(16 26 23 / 70%) 14%,
-      transparent 33%, transparent 82%, rgb(16 26 23 / 68%) 100%),
-    linear-gradient(90deg, #101a17 0%, rgb(16 26 23 / 88%) 24%,
-      rgb(16 26 23 / 72%) 42%, rgb(16 26 23 / 20%) 65%, transparent 83%);
+  background-image: 
+    linear-gradient(90deg, #101a17 0%, rgb(16 26 23 / 0.84) 26%, rgb(16 26 23 / 0.34) 53%, transparent 76%),
+    linear-gradient(0deg, rgb(16 26 23 / 0.94), transparent 32%, transparent 83%, rgb(16 26 23 / 0.60));
 }
 
-#hero-cut {
-  display: block;
-  width: 100%;
-  height: 100%;
-  z-index: 20;
-  pointer-events: none;
-}
-
-#hero-head {
-  position: absolute;
-  inset: clamp(14px, 2.4svh, 28px) var(--edge) auto;
-  z-index: 50;
-}
-
-.hero-logo { display: inline-block; min-height: 44px; }
-.hero-logo img { display: block; width: 72px; height: auto; }
-
-.hero-route {
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: inline-block;
-  min-height: 44px;
-  padding-block: 12px;
-  font-size: .875rem;
-  font-weight: 800;
-  text-underline-offset: 4px;
-}
-
-#hero-copy {
-  position: absolute;
-  top: 23%;
-  left: var(--edge);
-  z-index: 30;
-  width: calc(100% - 2 * var(--edge));
-}
-
-.hero-line {
-  display: block;
-  overflow: hidden;
-  padding-block: .12em;
-}
-
-.hero-kicker {
-  display: block;
-  font-size: clamp(.875rem, 1.15vw, 1.125rem);
-  font-weight: 800;
-  line-height: 1.25;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
-
-.hero-line--name {
-  margin-block-start: -.08em;
-  padding-block: .18em .08em;
-  font-size: clamp(8rem, 17.2vw, 20rem);
-}
-
-.hero-name {
-  display: block;
-  font-size: 1em;
-  font-weight: 800;
-  line-height: .94;
-  letter-spacing: -.065em;
-}
-
-#hero .hero-lead {
-  margin-block-start: 8px;
-  max-width: 30ch;
-  font-size: clamp(1rem, 1.45vw, 1.375rem);
-  font-weight: 600;
-  line-height: 1.42;
-}
-
+/* Премиальная брутальная стилизация кнопки CTA (§2 ТЗ) */
 #hero-book {
   position: absolute;
-  bottom: var(--action-bottom);
-  left: calc(var(--edge) + 24px);
-  z-index: 40;
-  display: block;
-  min-height: 56px;
-  width: min(22rem, 100%);
-  padding: 14px 52px 14px 0;
-  border-bottom: 2px solid var(--lime);
-  background: linear-gradient(90deg, rgb(16 26 23 / 90%), rgb(16 26 23 / 80%));
+  color: #f5f1e7;
   text-decoration: none;
-  font-size: 1.125rem;
-  font-weight: 800;
-  line-height: 1.4;
+  transition: color 220ms ease;
 }
 
 #hero-book::after {
   content: "";
   position: absolute;
-  inset: auto 0 0;
+  left: 0;
+  bottom: 0;
+  width: min(22rem, 100%);
   height: 6px;
-  pointer-events: none;
-  background: var(--lime);
+  background-color: #d9f36b;
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 220ms cubic-bezier(.22, 1, .36, 1);
+  transition: transform 220ms cubic-bezier(.22,1,.36,1);
 }
 
-#hero-book svg {
-  position: absolute;
-  top: 50%;
-  right: 8px;
-  width: 24px;
-  height: 24px;
-  transform: translateY(-50%);
-  transition: transform 220ms ease-out;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  #hero-book:hover::after { transform: scaleX(1); }
-  #hero-book:hover svg { transform: translate(6px, -50%); }
-}
-
-#hero-book:active::after {
-  background: var(--lime-pressed);
+#hero-book:hover::after {
   transform: scaleX(1);
 }
 
-#hero-controls {
-  position: absolute;
-  right: var(--edge);
-  bottom: var(--action-bottom);
-  z-index: 40;
-  background: rgb(16 26 23 / 88%);
-  text-align: right;
+#hero-book:hover svg {
+  transform: translate(6px, -50%);
 }
 
-#hero-controls button {
-  display: inline-block;
-  min-width: 44px;
-  min-height: 44px;
-  padding: 6px 10px;
-  border: 0;
-  background: transparent;
-  color: var(--paper);
-  font: inherit;
-  font-size: .8125rem;
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  cursor: pointer;
+#hero-book svg {
+  transition: transform 220ms cubic-bezier(.22,1,.36,1);
 }
 
-#hero-address {
-  position: absolute;
-  inset: auto var(--edge) 24px;
-  z-index: 40;
-  border-top: 1px solid rgb(245 241 231 / 40%);
-  padding: 12px 20rem 0 0;
+/* Специфический контур фокуса по WCAG (§2 ТЗ) */
+#hero-book:focus-visible {
+  outline: 2px solid #f5f1e7;
+  outline-offset: 5px;
 }
 
-.hero-place {
-  font-size: clamp(1.125rem, 1.65vw, 1.625rem);
-  font-weight: 800;
-  line-height: 1.25;
-}
-
-.hero-street {
-  margin-top: 4px;
-  font-size: 1rem;
-  font-style: normal;
-  line-height: 1.45;
-}
-
-#hero-hours {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  font-size: 1rem;
-  line-height: 1.35;
-  text-align: right;
-}
-
-#hero-hours a {
-  display: inline-block;
-  min-height: 44px;
-  padding-block: 8px;
-  text-underline-offset: 4px;
-}
-
+/* Переход элементов в естественный поток на мобильных разрешениях (§3 ТЗ) */
 @media (max-width: 1023px), (max-height: 699px) {
-  #hero { padding: clamp(10.5rem, 38svh, 23rem) var(--edge) 20px; }
-
-  #hero-copy, #hero-book, #hero-controls, #hero-address, #hero-hours {
-    position: relative;
-    inset: auto;
+  #hero { padding: clamp(9.5rem, 34svh, 22rem) var(--edge) 20px; }
+  #hero #hero-copy, #hero #hero-book, #hero #hero-controls,
+  #hero #hero-address, #hero #hero-hours { position: relative; inset: auto; }
+  #hero #hero-copy { width: 100%; }
+  #hero #hero-copy .hero-line + .hero-line { font-size: clamp(3.5rem, 16vw, 6rem); }
+  #hero #hero-book { margin-block-start: 12px; }
+  #hero #hero-controls { margin-block: 6px; text-align: left; }
+  #hero #hero-address { margin-block-start: 12px; padding-inline-end: 0; }
+  #hero #hero-hours { margin-block-start: 8px; text-align: left; }
+  #hero #hero-shade {
+    background: linear-gradient(180deg, rgb(16 26 23 / 0.63), transparent 19%, rgb(16 26 23 / 0.23) 32%, #101a17 72%);
   }
-
-  #hero-copy { width: 100%; }
-  .hero-line--name { font-size: clamp(3.5rem, 16vw, 7rem); }
-  #hero-book { margin-top: 14px; }
-  #hero-controls { width: fit-content; margin-top: 6px; text-align: left; }
-  #hero-address { margin-top: 16px; padding-right: 0; }
-  #hero-hours { margin-top: 8px; text-align: left; }
-
-  #hero-shade {
-    background: linear-gradient(180deg, rgb(16 26 23 / 67%) 0%,
-      transparent 18%, rgb(16 26 23 / 18%) 31%,
-      rgb(16 26 23 / 88%) 49%, #101a17 76%);
-  }
-
-  .hero-shot[data-shot="0"] img { object-position: 76% 26%; }
-  .hero-shot[data-shot="2"] img { object-position: 55% 38%; }
-}
-
-@media (max-width: 767px) {
-  .hero-logo img { width: 48px; }
-  .hero-route { background: rgb(16 26 23 / 82%); padding-inline: 8px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #hero-book::after, #hero-book svg { transition: none; }
-  #hero-book:hover svg { transform: translateY(-50%); }
 }
