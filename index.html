@@ -1,57 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101a17">
-  <meta name="description" content="Падел-клуб ЛАЙМ в Казани. Бронируйте корт и играйте с друзьями.">
-  <title>ЛАЙМ ПАДЕЛ — падел-клуб в Казани</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style-dist.css">
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <meta name="description" content="Падел-клуб «Лайм» в Казани. Играйте с друзьями или начните с тренером. ТЦ «Франт», 3-й этаж.">
+  <title>Лайм — падел-клуб в Казани</title>
+  <link rel="stylesheet" href="./style-dist.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script defer src="./script.js"></script>
 </head>
-<body class="bg-[#101a17] font-['Montserrat',sans-serif] text-[#f5f1e7]">
-  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-[#d9f36b] focus:p-3 focus:text-[#101a17]">К основному содержимому</a>
-  <main id="main">
-    <section id="hero" aria-labelledby="hero-title" class="relative isolate min-h-[700px] min-h-[max(700px,100svh)] overflow-hidden bg-[#101a17]">
-      <figure id="hero-media" class="absolute inset-0 z-0 m-0 h-full w-full overflow-hidden">
-        <div id="hero-matte" class="absolute inset-0">
-          <div class="absolute inset-0" data-shot="0">
-            <img src="on-court-1440.webp" alt="Игра на корте падел-клуба ЛАЙМ" fetchpriority="high" class="h-full w-full object-cover object-center">
-          </div>
-        </div>
-        <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-10 bg-black/40"></div>
-        <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
-        <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
-        <svg id="hero-cut" aria-hidden="true" hidden class="pointer-events-none absolute inset-0 z-20 h-full w-full"><path fill="none" stroke="#d9f36b" stroke-width="1.5" vector-effect="non-scaling-stroke"></path></svg>
-      </figure>
-
-      <header class="relative z-30 flex items-center justify-between gap-4 px-5 py-5 sm:px-8 lg:px-12 lg:py-7">
-        <a href="#hero" class="text-base font-extrabold uppercase tracking-tight text-[#d9f36b] sm:text-xl">ЛАЙМ ПАДЕЛ</a>
-        <a href="#hero-address" class="flex min-h-11 items-center text-xs font-semibold transition-colors hover:text-[#d9f36b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d9f36b] sm:text-sm">Как добраться <span aria-hidden="true" class="ml-2 text-[#d9f36b]">↗</span></a>
-      </header>
-
-      <div class="absolute left-5 top-[30%] z-20 right-5 sm:left-8 lg:left-12">
-        <h1 id="hero-title" class="m-0">
-          <span class="block overflow-hidden"><span data-intro-line class="block text-xs font-bold uppercase tracking-[0.2em] text-[#d9f36b] sm:text-sm">Падел-клуб</span></span>
-          <span class="mt-3 block overflow-hidden"><span data-intro-line class="block text-[clamp(5rem,15vw,14rem)] font-black leading-[0.8] tracking-tight">ЛАЙМ</span></span>
-        </h1>
-        <p class="mt-6 max-w-[25rem] text-sm font-medium leading-relaxed text-white/90 sm:text-base">Играйте с друзьями или начните с тренером.</p>
-      </div>
-
-      <a href="https://n1437757.yclients.ru/company/1301052/record-type?o=" class="absolute bottom-44 left-5 z-20 inline-flex min-h-12 items-center gap-8 border-b-2 border-[#d9f36b] pb-3 text-base font-bold transition-colors hover:text-[#d9f36b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d9f36b] sm:left-8 sm:text-lg md:bottom-32 lg:left-12">
-        <span>Забронировать корт</span><span aria-hidden="true" class="text-2xl font-normal text-[#d9f36b]">↗</span>
-      </a>
-
-      <footer id="hero-address" class="absolute inset-x-5 bottom-6 z-20 flex justify-between gap-4 border-t border-white/30 pt-4 text-[11px] leading-relaxed sm:inset-x-8 sm:text-sm lg:inset-x-12">
-        <address class="not-italic"><span class="block font-bold">Казань</span><span class="block text-white/85">ул. Юлиуса Фучика, 90</span></address>
-        <div class="text-right"><span class="block text-white/85">Ежедневно · 08:00–23:00</span><a href="tel:+79027112003" class="block font-bold transition-colors hover:text-[#d9f36b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#d9f36b]">8 (902) 711-20-03</a></div>
-      </footer>
-    </section>
-  </main>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
-  <script src="script.js"></script>
+<body>
+  <a class="skip-link" href="#main">К основному содержимому</a>
+  <header class="site-head"><div class="wrap site-head__inner">
+    <a class="brand" href="#hero" aria-label="Лайм Падел — к первому экрану"><img src="./images/logo/lime-padel-logo-mark.svg" width="40" height="40" alt=""><span>ЛАЙМ ПАДЕЛ</span></a>
+    <a class="site-head__location" href="#hero-location">Где мы</a>
+  </div></header>
+  <main id="main" tabindex="-1"><section id="hero" class="hero" aria-labelledby="hero-title"><div class="wrap hero__grid">
+    <div class="hero__copy"><p class="hero__eyebrow">Казань · ТЦ «Франт»</p><h1 id="hero-title"><span>Падел-клуб</span><span class="hero__name">Лайм</span></h1><p class="hero__lead">Играйте с друзьями или начните с тренером.</p>
+      <a class="hero__book" data-hero-book href="https://n1437757.yclients.ru/company/1301052/record-type?o="><span>Забронировать корт</span><svg data-hero-arrow width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <figure class="hero__figure"><div class="hero__mask" data-hero-mask><picture><source type="image/webp" srcset="./images/hero/on-court-768.webp 768w, ./images/hero/on-court-1440.webp 1440w, ./images/hero/on-court-1920.webp 1920w" sizes="(min-width: 1536px) 790px, (min-width: 1200px) 53vw, (min-width: 768px) 50vw, calc(100vw - 40px)"><img src="./images/Модель/Лайм%20Падел.%20Модель%20001.jpg" width="6889" height="4593" fetchpriority="high" decoding="async" alt="Спортсменка с ракеткой и мячами на синем корте клуба «Лайм»"></picture></div>
+      <figcaption id="hero-location" class="hero__location" tabindex="-1"><span class="hero__place">ТЦ «Франт» · 3-й этаж</span><span>Казань, ул. Юлиуса Фучика, 90</span><span>Ежедневно · 08:00–23:00</span></figcaption>
+    </figure>
+  </div></section></main>
 </body>
 </html>
