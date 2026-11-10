@@ -1,90 +1,213 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const media = document.getElementById("hero-media");
-    const matte = document.getElementById("hero-matte");
-    const edge = document.getElementById("hero-cut");
-    
-    // Массив фестивальных кадров
-    const shots = [ "on-court-1440.webp", "club.webp", "ball.webp" ];
-    let currentIdx = 0;
-    let isTransitioning = false;
+(() => {
+  'use strict';
 
-    // 1. Скрипт стартового вступления GSAP строго по контракту ТЗ (§4)
-    const introLines = document.querySelectorAll("[data-intro-line]");
-    const initTl = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
-    
-    initTl.fromTo(matte,
-      { clipPath: 'inset(0 8% 0 0)' },
-      { clipPath: 'inset(0 0% 0 0)', duration: 0.64, stagger: 0, clearProps: 'clipPath' },
-      0
-    ).fromTo(introLines,
-      { yPercent: 28, opacity: 0 },
-      { yPercent: 0, opacity: 1, duration: 0.5, stagger: 0.06, clearProps: 'transform,opacity' },
-      0.10
+  const hero = document.querySelector('[data-hero]');
+  if (!hero) return;
+
+  const film = hero.querySelector('[data-film]');
+  const reel = hero.querySelector('[data-reel]');
+  const playButton = hero.querySelector('[data-play]');
+  const nextButton = hero.querySelector('[data-next]');
+  const playIcon = playButton.querySelector('[data-play-icon]');
+  const pauseIcon = playButton.querySelector('[data-pause-icon]');
+  const number = hero.querySelector('[data-number]');
+  const announcement = hero.querySelector('[data-announcement]');
+  const meter = hero.querySelector('[data-meter]');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+
+  const shots = [
+    { src: './on-court-1440.webp', name: 'На корте' },
+    { src: './club.webp', name: 'Клуб' },
+    { src: './ball.webp', name: 'Мяч' },
+  ];
+  const hold = 5000;
+  const cutDuration = 720;
+  const slope = Math.tan(11 * Math.PI / 180);
+  const decoded = new Map();
+
+  let current = film.querySelector('.shot');
+  let active = 0;
+  let playing = true;
+  let switching = false;
+  let timer = 0;
+  let progress;
+  let completeCut;
+  let generation = 0;
+
+  function autoplay() {
+    return playing && !reduced.matches && !document.hidden;
+  }
+
+  function reflectPlayback() {
+    playButton.hidden = reduced.matches;
+    playButton.setAttribute('aria-label', playing ? 'Приостановить показ' : 'Продолжить показ');
+    playIcon.toggleAttribute('hidden', playing);
+    pauseIcon.toggleAttribute('hidden', !playing);
+  }
+
+  function clearClock() {
+    clearTimeout(timer);
+    progress?.cancel();
+    progress = undefined;
+  }
+
+  function stopPending() {
+    generation++;
+    clearClock();
+    completeCut?.();
+  }
+
+  function loadFrame(index) {
+    if (decoded.has(index)) return decoded.get(index);
+    const image = new Image();
+    image.alt = '';
+    image.className = 'shot';
+    image.dataset.frame = String(index);
+    image.decoding = 'async';
+    image.src = shots[index].src;
+    const request = image.decode().then(() => image, () => {
+      decoded.delete(index);
+      return null;
+    });
+    decoded.set(index, request);
+    return request;
+  }
+
+  function startClock() {
+    clearClock();
+    if (!autoplay() || switching) return;
+
+    loadFrame((active + 1) % shots.length);
+    progress = meter.animate?.(
+      [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }],
+      { duration: hold, fill: 'forwards' },
     );
+    timer = setTimeout(() => advance(false), hold);
+  }
 
-    // 2. Функция создания CourtCut (Смена кадров под углом 11° строго по формуле §5)
-    function createCourtCut(gsap, media, next, previous, edge, onDone) {
-      const path = edge.querySelector('path');
-      const state = { p: 0 };
-      const d = Math.tan(11 * Math.PI / 180);
-      let done = false;
+  function reveal(incoming) {
+    const outgoing = current;
+    if (reduced.matches || document.hidden) {
+      film.replaceChildren(incoming);
+      return Promise.resolve();
+    }
 
-      function paint() {
-        const w = media.clientWidth;
-        const h = media.clientHeight;
-        if (!w || !h) return;
-        const dx = h * d;
-        const top = state.p * (w + dx);
-        const bottom = top - dx;
-        next.style.clipPath = `polygon(0 0, ${top}px 0, ${bottom}px ${h}px, 0 ${h}px)`;
-        edge.setAttribute('viewBox', `0 0 ${w} ${h}`);
-        path.setAttribute('d', `M ${top} 0 L ${bottom} ${h}`);
-        edge.style.opacity = String(Math.max(0, Math.min(1,
-          (state.p - 0.08) / 0.12, (0.64 - state.p) / 0.16
-        )));
+    return new Promise(resolve => {
+      const state = { progress: 0 };
+      let width = film.clientWidth;
+      let height = film.clientHeight;
+      let observer;
+      let nativeAnimation;
+      let timeline;
+      let complete = false;
+
+      function polygon(progress) {
+        const offset = height * slope;
+        const top = progress * (width + offset);
+        const bottom = top - offset;
+        return 'polygon(0 0, ' + top + 'px 0, ' + bottom + 'px ' + height + 'px, 0 ' + height + 'px)';
+      }
+
+      function render() {
+        incoming.style.clipPath = polygon(state.progress);
       }
 
       function finish() {
-        if (done) return;
-        done = true;
-        edge.setAttribute('hidden', '');
-        edge.style.removeProperty('opacity');
-        next.style.removeProperty('clip-path');
-        previous.remove();
-        onDone();
+        if (complete) return;
+        complete = true;
+        observer?.disconnect();
+        timeline?.kill();
+        nativeAnimation?.cancel();
+        incoming.style.removeProperty('clip-path');
+        outgoing.remove();
+        completeCut = undefined;
+        resolve();
       }
 
-      paint();
-      edge.removeAttribute('hidden');
-      const timeline = gsap.timeline({ onComplete: finish });
-      timeline.to(state, { p: 1, duration: 0.56, ease: 'power3.inOut', onUpdate: paint }, 0);
-      timeline.fromTo(next.querySelector('img'), { scale: 1.055 }, {
-        scale: 1, duration: 0.56, ease: 'power2.out', clearProps: 'transform', overwrite: 'auto',
-      }, 0);
+      completeCut = finish;
+      render();
+      film.append(incoming);
+
+      if (window.gsap?.timeline) {
+        if ('ResizeObserver' in window) {
+          observer = new ResizeObserver(() => {
+            width = film.clientWidth;
+            height = film.clientHeight;
+            render();
+          });
+          observer.observe(film);
+        }
+        timeline = window.gsap.timeline({ paused: true, onComplete: finish });
+        timeline.to(state, { progress: 1, duration: cutDuration / 1000, ease: 'power3.inOut', onUpdate: render });
+        timeline.play();
+      } else if (incoming.animate) {
+        nativeAnimation = incoming.animate(
+          [{ clipPath: polygon(0) }, { clipPath: polygon(1) }],
+          { duration: cutDuration, easing: 'cubic-bezier(.65, 0, .35, 1)' },
+        );
+        nativeAnimation.finished.then(finish, finish);
+        if ('ResizeObserver' in window) {
+          observer = new ResizeObserver(() => {
+            if (film.clientWidth !== width || film.clientHeight !== height) finish();
+          });
+          observer.observe(film);
+        }
+      } else {
+        finish();
+      }
+    });
+  }
+
+  async function advance(manual) {
+    if (switching || (!manual && !autoplay())) return;
+    switching = true;
+    clearClock();
+    const request = generation;
+
+    try {
+      for (let offset = 1; offset < shots.length; offset++) {
+        const index = (active + offset) % shots.length;
+        const incoming = await loadFrame(index);
+        if (request !== generation || (!manual && !autoplay())) return;
+        if (!incoming) continue;
+
+        await reveal(incoming);
+        current = incoming;
+        active = index;
+        number.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(shots.length).padStart(2, '0');
+        if (manual) announcement.textContent = 'Кадр ' + (index + 1) + ' из ' + shots.length + '. ' + shots[index].name;
+        return;
+      }
+    } finally {
+      switching = false;
+      startClock();
     }
+  }
 
-    // 3. Логика таймера автоматической смены (5600мс выдержка, 560мс переход)
-    function nextFrame() {
-        if (isTransitioning) return;
-        isTransitioning = true;
+  playButton.addEventListener('click', () => {
+    playing = !playing;
+    reflectPlayback();
+    if (playing) startClock();
+    else stopPending();
+  });
+  nextButton.addEventListener('click', () => advance(true));
 
-        const previous = matte.querySelector(`[data-shot='${currentIdx}']`);
-        currentIdx = (currentIdx + 1) % shots.length;
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopPending();
+    else startClock();
+  });
+  reduced.addEventListener('change', () => {
+    reflectPlayback();
+    if (reduced.matches) stopPending();
+    else startClock();
+  });
 
-        // Создаем новый слой поверх предыдущего
-        const next = document.createElement("div");
-        next.setAttribute("data-shot", currentIdx);
-        next.className = "absolute inset-0";
-        next.innerHTML = `<img src="${shots[currentIdx]}" class="absolute inset-0 h-full w-full object-cover">`;
-        matte.appendChild(next);
-
-        // Запуск триггера скольжения маски
-        createCourtCut(gsap, media, next, previous, edge, () => {
-            isTransitioning = false;
-            setTimeout(nextFrame, 5600);
-        });
-    }
-
-    // Старт цикла автоматических кадров
-    setTimeout(nextFrame, 5600);
-});
+  const poster = current;
+  decoded.set(0, poster.decode().then(() => poster, () => {
+    decoded.delete(0);
+    return null;
+  }));
+  reflectPlayback();
+  reel.hidden = false;
+  startClock();
+})();
