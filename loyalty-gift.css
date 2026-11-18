@@ -1,0 +1,127 @@
+/* Approved: «На покрытии» + «Раскрытие пары», 15.11.2026. */
+@font-face {
+  font-family: 'Fira Benefits';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('assets/fonts/firasansextracondensed-normal-900.woff2') format('woff2');
+}
+
+#loyalty-gift {
+  --benefit-ball-size: 82px;
+  --benefit-ball-top: 8px;
+  --benefit-number: clamp(38px,4vw,56px);
+  --scene-ease: cubic-bezier(.22,.75,.18,1);
+  position: relative;
+  isolation: isolate;
+  color: #071a17;
+  background: #044785 url('assets/court-texture-1x.webp') center/768px 768px;
+  clip-path: polygon(0 0,100% 28px,100% 100%,0 calc(100% - 28px));
+}
+#loyalty-gift.benefits {
+  /* Ball overlaps the card edge by 16px, within the card's smallest top inset. */
+  padding: calc(var(--benefit-ball-size) + var(--benefit-ball-top) - 16px) 4vw clamp(44px,4.4vw,64px);
+}
+#loyalty-gift .benefits__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
+#loyalty-gift.benefits .benefits__brand-ball {
+  position: absolute;
+  z-index: 2;
+  top: var(--benefit-ball-top);
+  left: 50%;
+  width: var(--benefit-ball-size);
+  height: var(--benefit-ball-size);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+#loyalty-gift .benefits__offers { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 24px; row-gap: 0; }
+#loyalty-gift .benefits__offer { display: grid; grid-row: span 6; grid-template-rows: repeat(5,auto) 1fr; min-width: 0; border-radius: 22px; border: 0; padding: clamp(20px,2.25vw,32px); }
+@supports (grid-template-rows: subgrid) { #loyalty-gift .benefits__offer { grid-template-rows: subgrid; } }
+/* White loyalty card selected by the owner, 16.11.2026. */
+#loyalty-gift .benefits__loyalty { background: #fff; }
+#loyalty-gift .benefits__gift { background: rgba(4,50,95,.88); color: #fff; }
+#loyalty-gift h3 { margin: 0; font-family: 'Fira Benefits', var(--font-display); font-size: clamp(36px,3.45vw,50px); line-height: .98; letter-spacing: -.02em; text-transform: uppercase; text-wrap: balance; }
+#loyalty-gift p, #loyalty-gift dl, #loyalty-gift dd { margin: 0; }
+#loyalty-gift .benefits__lead { margin-top: 10px; max-width: none; font-size: 16px; line-height: 1.45; }
+#loyalty-gift .benefits__metrics { min-width: 0; padding: 16px 0; }
+#loyalty-gift .benefits__stats { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start; gap: 16px; }
+#loyalty-gift .benefits__stats dt, #loyalty-gift .benefits__amount { font: 800 var(--benefit-number)/1 'Fira Sans Extra Condensed', 'Fira Benefits', 'Arial Narrow', sans-serif; letter-spacing: -.025em; font-variant-numeric: lining-nums; white-space: nowrap; }
+#loyalty-gift .benefits__stats dt { color: #044785; }
+#loyalty-gift .benefits__stats dt span { font-size: .68em; }
+#loyalty-gift .benefits__stats small { font-size: max(12px,.3em); font-weight: 700; letter-spacing: 0; }
+#loyalty-gift .benefits__amount { display: flex; align-items: baseline; gap: 10px; color: #d9f21e; }
+#loyalty-gift .benefits__dash { font-size: .65em; font-weight: 700; }
+#loyalty-gift .benefits__stats dd, #loyalty-gift .benefits__redeem { margin-top: 6px; font-size: 16px; line-height: 1.4; }
+#loyalty-gift .benefits__terms { margin: 0; padding: 10px 0 14px; border-top: 1px solid #071a1740; font-size: 16px; line-height: 1.4; }
+#loyalty-gift .benefits__gift .benefits__terms { border-top-color: #ffffff54; }
+#loyalty-gift .benefits__actions { display: grid; grid-template-rows: auto auto; row-gap: 6px; align-content: start; min-width: 0; }
+#loyalty-gift .benefits__gift .benefits__actions { grid-template-rows: auto; align-content: end; }
+#loyalty-gift .benefits__action-label { margin: 0; font-size: 16px; font-weight: 650; line-height: 24px; }
+#loyalty-gift .benefits__actions > .benefits__button { width: 100%; }
+#loyalty-gift .benefits__bots { display: grid; grid-row: 2; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+#loyalty-gift .benefits__button { display: inline-flex; align-items: center; justify-content: space-between; min-height: 46px; gap: 10px; padding: 4px 5px 4px 18px; border: 1px solid currentColor; border-radius: 28px; font-size: 15px; line-height: 1.3; font-weight: 650; }
+#loyalty-gift .benefits__button--fill { color: #071a17; background: #d9f21e; border-color: #d9f21e; }
+#loyalty-gift .benefits__button-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: 0 0 36px; border-radius: 50%; background: #d9f21e; color: #071a17; overflow: hidden; transition: transform 180ms var(--scene-ease); }
+#loyalty-gift .benefits__button--fill .benefits__button-icon { background: #071a17; color: #d9f21e; }
+#loyalty-gift .benefits__button svg { flex-shrink: 0; transition: transform 240ms var(--scene-ease); }
+#loyalty-gift .benefits__details { margin-top: 12px; font-size: 16px; line-height: 1.4; }
+#loyalty-gift :is(.benefits__lead, .benefits__stats dd, .benefits__redeem, .benefits__terms, .benefits__details p) { text-wrap: pretty; }
+#loyalty-gift .benefits__details p + p { margin-top: 6px; }
+#loyalty-gift .benefits__contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: 16px; row-gap: 0; }
+#loyalty-gift .benefits__contact a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; text-decoration: underline; text-underline-offset: .2em; }
+#loyalty-gift a:focus-visible { outline: 3px solid #044785; outline-offset: 4px; }
+#loyalty-gift .benefits__gift a:focus-visible { outline-color: #d9f21e; }
+#loyalty-gift ::selection { color: #071a17; background: #d9f21e; }
+/* Temporary motion masks leave the final typography uncut. */
+#loyalty-gift .scene-line { display: block; }
+#loyalty-gift .is-scene-entering .scene-line { clip-path: inset(-.16em -2px); }
+#loyalty-gift .scene-line > span { display: block; }
+#loyalty-gift .is-scene-entering dt.scene-number-mask, #loyalty-gift .is-scene-entering .benefits__amount.scene-number-mask { overflow: clip; }
+#loyalty-gift[data-scene] dt > .scene-number { display: block; font: inherit; letter-spacing: inherit; }
+#loyalty-gift .benefits__amount > .scene-number { display: flex; align-items: baseline; gap: inherit; font: inherit; letter-spacing: inherit; }
+#loyalty-gift .scene-control-text { display: block; position: relative; overflow: clip; line-height: 1.3; }
+#loyalty-gift .scene-label-front { display: block; transition: transform 320ms var(--scene-ease); }
+#loyalty-gift .scene-label-back { position: absolute; inset: 0; transform: translateY(110%); transition: transform 320ms var(--scene-ease); }
+#loyalty-gift .benefits__button:focus-visible .scene-label-front { transform: translateY(-110%); }
+#loyalty-gift .benefits__button:focus-visible .scene-label-back { transform: translateY(0); }
+#loyalty-gift .benefits__button:focus-visible .benefits__button-icon svg { transform: translateX(4px); }
+#loyalty-gift .benefits__button:active .benefits__button-icon, #loyalty-gift .benefits__button.is-pressed .benefits__button-icon { transform: scale(.9); }
+#loyalty-gift .benefits__contact a:focus-visible { text-decoration-thickness: 2px; }
+@media (hover:hover) {
+  #loyalty-gift .benefits__button { transition: background-color .15s,color .15s; }
+  #loyalty-gift .benefits__button--line:hover { background: #efffd6; }
+  #loyalty-gift .benefits__button--fill:hover { background: #efffd6; border-color: #efffd6; color: #071a17; }
+}
+@media (hover:hover) and (pointer:fine) {
+  #loyalty-gift .benefits__button:hover .scene-label-front { transform: translateY(-110%); }
+  #loyalty-gift .benefits__button:hover .scene-label-back { transform: translateY(0); }
+  #loyalty-gift .benefits__button:hover .benefits__button-icon svg { transform: translateX(4px); }
+  #loyalty-gift .benefits__contact a:hover { text-decoration-thickness: 2px; }
+}
+@media (min-width:1120px) {
+  #loyalty-gift .benefits__loyalty .benefits__actions {
+    grid-template: auto / max-content minmax(0,1fr);
+    column-gap: 12px;
+    align-items: center;
+  }
+  #loyalty-gift .benefits__bots { grid-area: 1 / 2; }
+}
+@media (max-width:800px) {
+  #loyalty-gift { --benefit-ball-size: 68px; clip-path: polygon(0 0,100% 18px,100% 100%,0 calc(100% - 18px)); }
+  #loyalty-gift.benefits { padding-inline: 5vw; }
+  #loyalty-gift.benefits .benefits__brand-ball { left: auto; right: 7vw; transform: none; }
+  #loyalty-gift .benefits__offers { grid-template-columns: minmax(0,1fr); row-gap: 16px; }
+  #loyalty-gift .benefits__offer { display: block; grid-row: auto; }
+}
+@media (max-width:480px) {
+  #loyalty-gift .benefits__stats { gap: 10px; }
+  #loyalty-gift .benefits__amount { gap: 8px; }
+  #loyalty-gift .benefits__bots { gap: 10px; }
+  #loyalty-gift .benefits__button { padding-left: 12px; font-size: 15px; gap: 8px; }
+}
+@media (max-width:350px) { #loyalty-gift .benefits__offer { padding-inline: 16px; } #loyalty-gift .benefits__bots { grid-template-columns: minmax(0,1fr); } }
+@media (prefers-reduced-motion:reduce) {
+  #loyalty-gift * { animation: none !important; transition: none !important; }
+  #loyalty-gift .scene-label-front, #loyalty-gift .scene-label-back, #loyalty-gift .benefits__button-icon, #loyalty-gift .benefits__button-icon svg { transform: none !important; }
+  #loyalty-gift .scene-label-back { display: none; }
+}
+@media (forced-colors:active) { #loyalty-gift .benefits__offer { border: 1px solid CanvasText; clip-path: none; } }

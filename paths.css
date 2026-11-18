@@ -1,0 +1,449 @@
+/* Второй экран «В игру с первого шага» (#start) — все стили блока здесь.
+   Структура (11.11.2026): единая схема карточки, вся карточка — ссылка.
+   Композиция (11.11.2026, вариант C со стенда work/start-lab, выбран владельцем):
+   фон — синий покрытия корта с фото «Попробуй падел» (#044785) с тонкой разметкой корта;
+   «С ПЕРВОГО» — лайм, как «ИГРАЕМ?» в Hero; карточки — широкие строки
+   (фото | название и текст | цена и кнопка), скругление 20 px, кнопки-пилюли как в Hero.
+   Карточки (11.11.2026, вариант B со стенда work/glass-lab, выбран владельцем): прозрачное стекло —
+   тот же материал, что у билета «Пробное занятие» в Hero; белый текст; кнопки как «Забронировать корт».
+   Сценарии различаются фото и меткой. Разметки корта на фоне нет: сквозь стекло она шла по тексту.
+   Начало (12.11.2026, B из work/entry-lab, выбран владельцем): компактное
+   «ПРОБНОЕ, КОРТ / ИЛИ ТРЕНИРОВКА» без повторного лида; вся тройка видна на 1440×900.
+   Фон (12.11.2026, A со стенда work/court-lab, выбран владельцем): настоящее покрытие корта ЛАЙМ —
+   синий ворс с песком из фото «Модель 082»; плитку собирает work/court-lab/make_texture.py. */
+
+.intro {
+  --court-bg: #044785;
+  /* правая колонка не уже 330 px: иначе на 1101–1300 px «Записаться на пробное» в кнопке переносится */
+  --rows: minmax(0, 23%) minmax(0, 1fr) minmax(330px, 27%);
+  position: relative;
+  overflow: hidden;
+  background: var(--court-bg);
+  color: #fff;
+  padding-top: 64px;
+}
+
+.intro > * {
+  position: relative;
+}
+
+/* Покрытие корта. Плитка 768 css px: 1x — 768×768 (129 КБ), 2x — 1536×1536 (310 КБ).
+   Средний цвет плитки #064b80 почти равен --court-bg, поэтому стыки не меняются:
+   сверху текстура проявляется из ровного синего, в который уходит Hero (маска 240 px),
+   снизу её накрывает растворение в «Клуб» (.intro::after в transitions.css). */
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: var(--court-bg);
+  background-image: url("assets/court-texture-1x.webp");
+  background-image: image-set(url("assets/court-texture-1x.webp") 1x, url("assets/court-texture.webp") 2x);
+  background-size: 768px 768px;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 240px);
+  mask-image: linear-gradient(180deg, transparent 0, #000 240px);
+}
+
+/* ---------- заголовок и лид ---------- */
+
+.intro-head {
+  display: block;
+  margin-bottom: 32px;
+}
+
+.intro .section-heading {
+  grid-column: 1 / 3;
+}
+
+.intro .section-heading h2 {
+  max-width: 25ch;
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.intro .section-heading h2 em {
+  color: var(--lime);
+}
+
+.intro .section-lead {
+  max-width: 440px;
+  margin: 0;
+  padding-left: 28px; /* на одной линии с ценой и кнопкой в карточках */
+}
+
+/* ---------- карточки: широкие строки ---------- */
+
+.paths {
+  display: grid;
+  gap: 12px;
+}
+
+.path {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--rows);
+  grid-template-rows: auto auto 1fr;
+  border-radius: 20px;
+  overflow: hidden;
+  color: #fff;
+  /* стекло билета пробного (hero-trial.css): светлая полупрозрачная заливка, размытие, бледно-зелёная кромка */
+  background: linear-gradient(135deg, rgba(240, 255, 243, .16), rgba(224, 247, 232, .06));
+  -webkit-backdrop-filter: blur(10px) saturate(1.12);
+  backdrop-filter: blur(10px) saturate(1.12);
+  box-shadow: inset 0 0 0 1px rgba(226, 247, 199, .5);
+}
+
+.path-photo {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  display: block;
+  min-height: 220px;
+  overflow: hidden; /* фото приближается при наведении и не должно вылезать в соседнюю колонку */
+  background: #032f59;
+}
+
+.path-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.path-num {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+  padding: 28px 32px 0;
+  color: #e3eeff; /* светлее метки секции: при приглушении карточки мелкий текст держит 4,5 : 1 */
+  font-size: .7rem;
+  text-transform: uppercase;
+  letter-spacing: .13em;
+}
+
+.path h3 {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: clamp(2.4rem, 3.6vw, 3.8rem);
+  margin: 12px 32px 12px;
+}
+
+.path h3 br {
+  display: none; /* в строке название помещается в одну линию */
+}
+
+.path-what {
+  grid-column: 2;
+  grid-row: 3;
+  max-width: 520px;
+  margin: 0;
+  padding: 0 32px 28px;
+  font-size: .95rem;
+  line-height: 1.45;
+}
+
+.path-bottom {
+  grid-column: 3;
+  grid-row: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px;
+  border-left: 1px solid rgba(226, 247, 199, .22);
+}
+
+.path-price {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+  font-size: .85rem;
+}
+
+.path-price strong {
+  font-size: 2rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.path-price small {
+  display: block;
+  margin-top: 8px;
+  font-size: .8125rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #ecf5ff;
+}
+
+.path { scroll-margin-top: 16px; }
+
+/* Кнопка-пилюля с кругом-стрелкой — тот же язык, что «Забронировать корт» в Hero.
+   Светлая обводка, лаймовый круг, тёмная стрелка.
+   ::after растягивает ссылку на всю карточку: нажимается вся строка, на Tab — одна остановка. */
+.path-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 6px 6px 6px 20px;
+  border: 1px solid rgba(229, 250, 206, .82);
+  border-radius: 999px;
+  color: #f6fff0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  line-height: 1.2;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+.path-cta__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--ink);
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+
+.path-cta__icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.path-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.path-cta:focus-visible {
+  outline: none;
+}
+
+.path:has(.path-cta:focus-visible) {
+  outline: 3px solid #ff6b00;
+  outline-offset: 4px;
+}
+
+/* ---------- движение ----------
+   Появление (Buenas open 0:04–0:05): метка, заголовок, лид и карточки поднимаются на 28 px
+   и проявляются каскадом по 90 мс, каждая — когда входит в экран (paths-reveal.js).
+   Скрывает только скрипт (.reveal-on), без JS всё видно.
+   Реакция (Buenas open 0:06): выбранная мышью или Tab карточка приподнимается, фото приближается,
+   стрелка сдвигается, соседние карточки приглушаются: вся карточка до 80 % (текст держит 5,4 : 1),
+   фото — сильнее, до 45 %, чтобы выбор был заметен.
+   Появление идёт свойством translate, наведение — transform, чтобы они не мешали друг другу. */
+
+.intro {
+  --ease-out: cubic-bezier(.22, .75, .18, 1);
+}
+
+[data-reveal] {
+  transition:
+    opacity .6s var(--ease-out) var(--reveal-delay, 0ms),
+    translate .7s var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.reveal-on [data-reveal]:not(.is-in) {
+  opacity: 0;
+  translate: 0 28px;
+}
+
+.path,
+.path.is-settled {
+  transition:
+    opacity .25s ease,
+    transform .25s var(--ease-out),
+    translate .7s var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+.path[data-reveal]:not(.is-settled) {
+  transition:
+    opacity .6s var(--ease-out) var(--reveal-delay, 0ms),
+    translate .7s var(--ease-out) var(--reveal-delay, 0ms),
+    transform .25s var(--ease-out);
+}
+
+.path-cta__icon svg {
+  transition: transform .3s var(--ease-out);
+}
+
+/* Клавиатура: выбранная карточка яркая, соседние приглушены — работает и без мыши. */
+.paths:has(.path-cta:focus-visible) .path:not(:has(.path-cta:focus-visible)) {
+  opacity: .8;
+}
+
+.paths:has(.path-cta:focus-visible) .path:not(:has(.path-cta:focus-visible)) .path-photo img {
+  opacity: .55;
+}
+
+.path-photo img {
+  transition: transform .6s var(--ease-out), opacity .25s ease;
+}
+
+.path:has(.path-cta:focus-visible) .path-cta__icon {
+  transform: scale(1.08);
+}
+
+@media (hover: hover) {
+  .paths:has(.path:hover) .path:not(:hover) {
+    opacity: .8;
+  }
+
+  .paths:has(.path:hover) .path:not(:hover) .path-photo img {
+    opacity: .55;
+  }
+
+  .path:hover {
+    transform: translateY(-4px);
+  }
+
+  .path:hover .path-photo img {
+    transform: scale(1.05);
+  }
+
+  .path:hover .path-cta__icon {
+    transform: scale(1.08);
+  }
+
+  .path:hover .path-cta__icon svg {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* ---------- узкий широкий экран: цена и кнопка уходят под текст ---------- */
+
+@media (max-width: 1100px) {
+  .intro {
+    --rows: minmax(0, 34%) minmax(0, 1fr);
+  }
+
+
+  .intro .section-heading {
+    grid-column: 1 / -1;
+  }
+
+  .intro .section-lead {
+    grid-column: 1 / -1;
+    padding-left: 0;
+  }
+
+  .path {
+    grid-template-rows: auto auto auto 1fr;
+  }
+
+  .path-bottom {
+    grid-column: 2;
+    grid-row: 4;
+    justify-content: flex-end;
+    padding: 0 32px 28px;
+    border-left: 0;
+  }
+
+  .path-what {
+    padding-bottom: 20px;
+  }
+
+  .path-cta {
+    max-width: 380px;
+  }
+}
+
+/* ---------- телефон: фото полосой сверху, карточки стопкой ---------- */
+
+@media (max-width: 560px) {
+
+  .intro { padding-top: 48px; }
+
+  .intro-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+
+  .intro .section-heading h2 {
+    max-width: 17ch;
+    font-size: 2.125rem;
+  }
+
+  .path {
+    display: flex;
+    flex-direction: column;
+    border-radius: 18px;
+  }
+
+  .path-photo {
+    min-height: 0;
+    aspect-ratio: 5 / 2;
+  }
+
+  .path-num {
+    padding: 18px 20px 0;
+  }
+
+  .path h3 {
+    font-size: clamp(2.6rem, 11vw, 4.4rem);
+    margin: 10px 20px 10px;
+  }
+
+  .path h3 br {
+    display: inline;
+  }
+
+  .path-what {
+    padding: 0 20px 16px;
+  }
+
+  .path-bottom {
+    gap: 12px;
+    padding: 0 20px 20px;
+  }
+
+  .path-price strong {
+    font-size: 1.6rem;
+  }
+
+  .path-cta {
+    max-width: none;
+  }
+}
+
+/* Самые узкие телефоны: «Записаться на пробное» помещается в кнопку одной строкой. */
+@media (max-width: 360px) {
+  .path-cta {
+    padding-left: 16px;
+    font-size: .9rem;
+  }
+}
+
+/* Уменьшенное движение: скрипт не прячет блок, сдвигов и приближения нет;
+   остаётся только мгновенное приглушение соседних карточек как подсказка выбора. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .path,
+  .path.is-settled,
+  .path[data-reveal]:not(.is-settled),
+  .path-cta,
+  .path-cta__icon,
+  .path-cta__icon svg,
+  .path-photo img {
+    transition: none;
+  }
+
+  .reveal-on [data-reveal]:not(.is-in) {
+    opacity: 1;
+    translate: none;
+  }
+
+  .path:hover,
+  .path:hover .path-photo img,
+  .path:hover .path-cta__icon,
+  .path:hover .path-cta__icon svg,
+  .path:has(.path-cta:focus-visible) .path-cta__icon {
+    transform: none;
+  }
+}

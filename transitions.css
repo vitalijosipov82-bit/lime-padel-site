@@ -1,0 +1,78 @@
+/* Переходы между блоками главной — все стыки здесь.
+   Вариант A «Фото перетекает в корт» (стенд work/transition-lab, выбран владельцем 11.11.2026):
+   прямых линий между блоками нет. Низ фото Hero (синие корты) уходит в синий фон второго экрана,
+   синий второго экрана растворяется в тёмно-зелёном «Клуба», фото клуба проявляется из него.
+   Цвета: #044785 — синий покрытия (фон #start, см. paths.css), #06241f — --deep, фон «Клуба». */
+
+/* ---------- Hero → «В игру с первого шага» ----------
+   Отдельный слой поверх фото и затемнения, но под текстом и кнопками (у .hero-main z-index: 2):
+   утверждённое затемнение Hero не меняется, добавляется только переход внизу. */
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26%;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(180deg,
+    rgba(4, 71, 133, 0) 0%,
+    rgba(4, 71, 133, .55) 55%,
+    #044785 100%);
+}
+
+/* ---------- «В игру с первого шага» → «Клуб» ---------- */
+.intro > * {
+  z-index: 1; /* содержимое блока над растворением */
+}
+
+/* Карточки второго экрана прозрачные: растворение должно лежать целиком в нижнем отступе,
+   иначе низ последней карточки темнеет сквозь стекло. Отступ равен высоте растворения. */
+.intro {
+  padding-bottom: 180px;
+}
+
+.intro::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 180px;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(6, 36, 31, 0), #06241f);
+}
+
+.club-image {
+  position: relative;
+}
+
+.club-image::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 38%;
+  pointer-events: none;
+  background: linear-gradient(180deg, #06241f, rgba(6, 36, 31, 0));
+}
+
+/* «Цены» → «Тренеры»: оба блока белые, отдельный переход не нужен
+   (решение владельца 13.11.2026). Фон #coaches задан в coaches.css. */
+
+@media (max-width: 560px) {
+  .hero::after {
+    height: 22%;
+  }
+
+  .intro {
+    padding-bottom: 120px;
+  }
+
+  .intro::after {
+    height: 120px;
+  }
+}

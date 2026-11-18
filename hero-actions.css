@@ -1,0 +1,253 @@
+/* The booking action follows the Hero description; trial remains the next step. */
+.hero-main {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+}
+
+.hero-copy {
+  align-self: auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.hero-offer { min-width: 0; }
+
+.hero-bottom {
+  display: block;
+  border-top: 0;
+  padding-top: 0;
+  width: 100%;
+}
+
+.hero-bottom .hero-trial {
+  width: max-content;
+  max-width: 100%;
+}
+
+.hero-decision {
+  display: grid;
+  justify-items: start;
+  width: min(100%, 320px);
+  max-width: none;
+  margin: clamp(20px, 3vh, 30px) 0 0 clamp(8px, 2vw, 28px);
+}
+
+.hero-decision .hero-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: relative;
+  min-width: 0;
+  min-height: 58px;
+  gap: 12px;
+  padding: 7px 7px 7px 19px;
+  border: 1px solid rgba(229, 250, 206, .82);
+  border-radius: 999px;
+  background: transparent;
+  box-shadow: none;
+  color: #f6fff0;
+  font-family: var(--font-text);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: none;
+  white-space: nowrap;
+  animation: none;
+  translate: none;
+  transform: none;
+  cursor: pointer;
+  transition: background-color .28s ease, border-color .28s ease,
+              box-shadow .28s ease, transform .28s ease, color .28s ease;
+}
+
+.hero-decision .hero-action--book {
+  width: 100%;
+  border-color: var(--lime);
+  background: var(--lime);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+.hero-action__label { text-shadow: none; }
+
+.hero-action__icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--lime);
+  transition: transform .32s cubic-bezier(.2,.8,.2,1), background-color .32s ease;
+}
+
+.hero-action__icon svg {
+  width: 19px;
+  height: 19px;
+  transition: transform .32s cubic-bezier(.2,.8,.2,1);
+}
+
+.hero-action__label {
+  display: inline-block;
+  white-space: pre;
+}
+
+.hero-action__char {
+  display: inline-block;
+  position: relative;
+  height: 1.2em;
+  overflow: hidden;
+  vertical-align: -.23em;
+}
+
+.hero-action__char-current,
+.hero-action__char-next {
+  display: block;
+  line-height: 1.2;
+  transition: transform .65s cubic-bezier(.2,1,.25,1);
+  transition-delay: var(--swap-delay, 0ms);
+}
+
+.hero-action__char-current { transform: translateY(0); }
+.hero-action__char-next {
+  position: absolute;
+  inset: 0;
+  transform: translateY(100%);
+}
+
+.hero-action.is-swapping .hero-action__char-current { transform: translateY(-100%); }
+.hero-action.is-swapping .hero-action__char-next { transform: translateY(0); }
+
+@media (hover: hover) {
+  .hero-decision .hero-action--book:hover {
+    padding-left: 19px;
+    border-color: var(--lime);
+    background: var(--lime);
+    color: var(--ink);
+    box-shadow: none;
+    transform: translateY(-2px);
+  }
+  .hero-decision .hero-action--book:hover .hero-action__icon { background: var(--ink); transform: scale(1.08); }
+  .hero-decision .hero-action--book:hover .hero-action__icon svg { transform: translate(2px,-2px); }
+}
+
+.hero-decision .hero-action:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+
+.hero-decision .hero-action--book:active { transform: translateY(1px); }
+
+/* Широкий экран: главное — одной колонкой слева (заголовок → описание → «Забронировать корт»),
+   билет пробного — отдельно в правом нижнем углу (hero-trial.css). Раньше описание, кнопка
+   и билет теснились в узкой правой колонке (замечание владельца 12.11.2026). */
+@media (min-width: 1200px) {
+  .hero-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: clamp(28px, 4vh, 44px);
+    align-items: start;
+  }
+
+  .hero-copy > h1 { margin-bottom: 0; }
+  .hero-copy > .hero-offer {
+    width: min(100%, 420px);
+    margin-left: clamp(8px, 1.2vw, 20px); /* на одной линии с нижней строкой «ПАДЕЛ» без её сдвига */
+  }
+  .hero-offer .hero-description {
+    margin: 0 0 30px;
+    text-shadow: 0 2px 14px rgba(2, 19, 18, .65);
+  }
+  .hero-offer .hero-decision {
+    width: min(100%, 340px);
+    margin: 0;
+  }
+}
+
+/* Заголовок «ЛАЙМ ПАДЕЛ»: первое слово — лаймовым (решение владельца 12.11.2026).
+   styles.css красит строки заголовка в белый, поэтому цвет задан здесь явно. */
+.hero h1.hero-title-friends .hero-title-lime {
+  color: var(--lime);
+}
+
+@media (min-width: 801px) {
+  .home-page .hero { padding-top: clamp(96px, 11vh, 118px); }
+  .hero-copy > .hero-offer { transform: translateY(clamp(16px, 3.2vh, 30px)); }
+  .hero h1.hero-title-friends {
+    font-size: clamp(6rem, 12vw, 11rem); /* «ЛАЙМ ПАДЕЛ» крупнее прежнего ≈ в 1,4 раза (решение владельца) */
+    line-height: .92;
+  }
+}
+
+@media (min-width: 1200px) {
+  .hero h1.hero-title-friends { font-size: clamp(7rem, 11.6vw, 12rem); }
+  .hero-copy > .hero-offer { transform: none; }
+}
+
+/* 900–1199px: билет уже стоит справа внизу — описание не доходит до него */
+@media (min-width: 900px) and (max-width: 1199px) {
+  .hero-offer .hero-description {
+    max-width: min(460px, calc(100vw - 8vw - 350px - 64px));
+  }
+}
+
+@media (max-width: 800px) {
+  .hero-decision { width: min(100%, 320px); margin-left: 1.5vw; }
+}
+
+@media (max-width: 430px) {
+  .hero-decision { width: min(100%, 304px); }
+  .hero-decision .hero-action {
+    min-height: 54px;
+    font-size: .9375rem;
+    padding: 6px 6px 6px 15px;
+  }
+  .hero-action__icon { width: 40px; height: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-decision .hero-action,
+  .hero-action__icon,
+  .hero-action__icon svg,
+  .hero-action__char-current,
+  .hero-action__char-next { animation: none; transition: none; }
+  .hero-decision .hero-action:hover,
+  .hero-decision .hero-action:active,
+  .hero-decision .hero-action--book:hover .hero-action__icon,
+  .hero-decision .hero-action--book:hover .hero-action__icon svg { transform: none; }
+}
+/* Единый вход первого экрана: сначала корт, затем заголовок и описание. */
+@media (prefers-reduced-motion: no-preference) {
+  .home-page .hero .hero-photo {
+    animation: hero-scene-reveal 740ms cubic-bezier(.22, .75, .18, 1) both;
+  }
+
+  .home-page .hero .hero-photo img {
+    animation: hero-scene-settle 850ms cubic-bezier(.22, .75, .18, 1) both;
+  }
+
+  .home-page .hero-title-line,
+  .home-page .hero-description {
+    --hero-entry-offset: 12px;
+    animation: hero-copy-entry 560ms cubic-bezier(.22, .75, .18, 1) 120ms both;
+  }
+
+  .home-page .hero-title-line--two { animation-delay: 200ms; }
+  .home-page .hero-description { animation-delay: 280ms; }
+
+  @media (max-width: 800px) {
+    .home-page .hero-title-line,
+    .home-page .hero-description { --hero-entry-offset: 5px; }
+  }
+}
+
+@keyframes hero-copy-entry {
+  from { opacity: .72; translate: 0 var(--hero-entry-offset); }
+  to { opacity: 1; translate: 0 0; }
+}

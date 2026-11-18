@@ -1,0 +1,115 @@
+/* Первый экран «Первой игры»: текст и вертикальный ролик на поле корта. */
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: url('assets/fonts/firasansextracondensed-normal-900.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+}
+
+.first-game-hero {
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(24px, 5vw, 72px) max(20px, 5vw);
+}
+
+.first-game-hero__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 76px);
+  max-width: 1280px;
+  margin-inline: auto;
+}
+
+.first-game-hero h1 {
+  margin: 0;
+  font: 900 clamp(3.2rem, 7.5vw, 7rem) / .92 var(--font-display);
+  letter-spacing: -.01em;
+}
+
+.first-game-hero h1 em { color: #044785; }
+
+.first-game-hero__intro {
+  max-width: 34ch;
+  margin: 24px 0;
+  font-size: clamp(1rem, 1.65vw, 1.25rem);
+  line-height: 1.5;
+}
+
+.first-game-hero .button {
+  max-inline-size: 100%;
+  border-radius: 999px;
+}
+
+.first-game-film {
+  --court-cut: clamp(20px, 5vw, 72px);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  min-inline-size: 0;
+  padding: clamp(20px, 3vw, 36px) clamp(20px, 5vw, 76px);
+  margin: 0;
+  color: #fff;
+}
+
+.first-game-film::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: #044785;
+  clip-path: polygon(0 0, calc(100% - var(--court-cut)) 0, 100% var(--court-cut), 100% 100%, var(--court-cut) 100%, 0 calc(100% - var(--court-cut)));
+}
+
+.first-game-film::after {
+  content: '';
+  position: absolute;
+  inset: 15% 10%;
+  z-index: -1;
+  border: 1px solid #a2c5e1;
+  background: linear-gradient(#a2c5e1, #a2c5e1) center / 100% 1px no-repeat;
+  pointer-events: none;
+}
+
+.first-game-film video {
+  display: block;
+  width: min(100%, 18rem, max(13rem, 35svh));
+  height: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  border-radius: 15px 4px 15px 4px;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px #e4eff8;
+}
+
+.first-game-film video:focus-visible {
+  outline: 3px solid var(--lime);
+  outline-offset: 5px;
+}
+
+.first-game-film figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 8px;
+  text-align: center;
+  font-size: .875rem;
+  line-height: 1.4;
+}
+
+.first-game-film figcaption span { color: #dceeff; }
+
+.first-game-faq a {
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+@media (max-width: 760px) {
+  .first-game-hero__layout { grid-template-columns: 1fr; }
+  .first-game-hero h1 { font-size: clamp(3rem, 12vw, 5.5rem); }
+  .first-game-hero__intro { margin-block: 16px 20px; }
+  .first-game-film video { width: min(100%, 18rem); }
+}

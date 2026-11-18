@@ -1,0 +1,5 @@
+/* Минимальная правка соседнего блока: его min-content растягивал всю главную на 320 px. */
+@media (max-width: 360px) {
+  .home-page .preview-split > div { min-width: 0; }
+  .home-page .preview-split h2 { font-size: clamp(2.5rem, 13.5vw, 3rem); }
+}

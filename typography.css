@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:ital,wght@0,700;0,800;0,900;1,800;1,900&display=swap');
+
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 100 700;
+  font-display: swap;
+  src: url('assets/fonts/ibm-plex-sans-cyrillic-latin.woff2') format('woff2');
+}
+
+/* Типографика ЛАЙМа — вариант D1, выбран владельцем 11 ноября 2026 (стенд work/type-lab/#d1).
+   Две семьи:
+   --font-display — Fira Sans Extra Condensed: заголовки, крупные числа, название билета;
+                    акцентное слово (em в заголовках, «ИГРАЕМ?») — тот же шрифт курсивом 900.
+   --font-text    — IBM Plex Sans: выбран владельцем 15.11.2026 вместо Golos Text.
+   Локальный variable WOFF2, настоящие веса до 700, включая 650. */
+:root {
+  --font-display: 'Fira Sans Extra Condensed', 'Arial Narrow', sans-serif;
+  --font-text: 'IBM Plex Sans', Arial, sans-serif;
+  --text-body-size: 1.0625rem;
+  --text-detail-size: .875rem;
+  --text-control-size: .9375rem;
+}
+
+body,
+.hero,
+.hero .eyebrow,
+.hero-action,
+.hero-telegram,
+.hero-trial .trial-label,
+.hero-facts {
+  font-family: var(--font-text);
+}
+
+body {
+  font-size: var(--text-body-size);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+button, input, select, textarea { font-family: var(--font-text); }
+
+/* ---------- заголовки ---------- */
+
+h1, h2, h3,
+.hero h1,
+.section-heading h2,
+.club h2,
+.prices h2,
+.booking h2,
+.sub-section h2,
+.sub-booking h2,
+.preview-split h2,
+.reviews-preview h2,
+.path h3,
+.offer-grid h3,
+.coach-grid h3,
+.steps h3 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: normal;
+  font-kerning: normal;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.path h3,
+.offer-grid h3,
+.coach-grid h3,
+.steps h3 {
+  font-weight: 800;
+}
+
+/* Заголовки первых трёх экранов — курсивом, как «РИТМ» (решение владельца 12.11.2026):
+   Hero — правило .hero h1.hero-title-friends ниже, «Клуб» — club.css. */
+.intro .section-heading h2,
+.path h3 {
+  font-style: italic;
+  letter-spacing: -.01em;
+}
+
+/* Акцентное слово — курсив того же шрифта (лаймовый или оливковый цвет задаёт styles.css). */
+h1 em,
+h2 em,
+h3 em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -.01em;
+}
+
+.hero h1.hero-title-friends {
+  display: flex;
+  flex-direction: column;
+  row-gap: .06em;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 9.3vw, 9rem);
+  font-style: italic; /* заголовки первых трёх экранов — курсивом (решение владельца 12.11.2026) */
+  font-weight: 900;
+  font-kerning: normal;
+  letter-spacing: -.01em;
+  line-height: .92; /* меньше — кратка над «Й» упирается в строку выше */
+  margin: .5rem 0 1.2rem;
+}
+
+.hero h1.hero-title-friends .hero-title-line--three {
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -.01em;
+  margin-top: 0;
+  transform: none;
+}
+
+.sub-hero h1 {
+  line-height: .93;
+  letter-spacing: 0; /* styles.css задаёт -.08em под прежний шрифт — с Fira буквы слипаются */
+}
+
+.section-heading h2,
+.club h2,
+.prices h2,
+.booking h2,
+.sub-section h2,
+.sub-booking h2,
+.preview-split h2,
+.reviews-preview h2 {
+  line-height: .94;
+}
+
+/* ---------- лиды и описания ---------- */
+
+.hero-description,
+.section-lead,
+.large-copy,
+.club-copy > p:not(.eyebrow),
+.sub-hero p:not(.eyebrow),
+.booking > p:not(.eyebrow) {
+  font-family: var(--font-text);
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.hero-description {
+  max-width: 460px;
+  margin-top: .1rem;
+  font-size: clamp(1.125rem, 1.4vw, 1.25rem);
+  line-height: 1.42;
+  text-wrap: pretty;
+}
+
+.section-lead,
+.large-copy,
+.sub-hero p:not(.eyebrow) {
+  font-size: clamp(1.2rem, 1.8vw, 1.7rem);
+  line-height: 1.42;
+  letter-spacing: 0;
+}
+
+/* ---------- интерфейс ---------- */
+
+.site-header nav,
+.eyebrow,
+.button,
+.hero-action,
+.hero-telegram,
+.trial-label,
+.hero-facts span,
+.text-link,
+.path-num {
+  font-family: var(--font-text);
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.brand-word {
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.hero-facts strong,
+.facts strong {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.hero .eyebrow,
+.hero-facts span,
+.trial-label,
+.path-num {
+  letter-spacing: .1em;
+}
+
+.hero-action,
+.hero-action:nth-of-type(2) {
+  font-weight: 700;
+  letter-spacing: -.005em;
+}
+
+/* Текстовые роли внутренних страниц. Размеры заголовков не переопределяются. */
+.button, .text-link { font-size: var(--text-control-size); line-height: 1.3; letter-spacing: .01em; }
+.simple-table > div { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr) minmax(0, 1fr); font-size: 1rem; line-height: 1.4; }
+.simple-table > div:first-child { font-size: .875rem; letter-spacing: .02em; }
+.simple-table > div > * { min-width: 0; overflow-wrap: anywhere; }
+.simple-table strong { font-size: 1.25rem; }
+.coach-grid p { font-size: 1rem; line-height: 1.5; min-height: 0; }
+.coach-grid a { font-size: var(--text-control-size); line-height: 1.3; }
+.editorial-note, .offer-grid small { font-size: var(--text-detail-size); line-height: 1.5; }
+.portrait-pending, .empty-state span, .contact-grid span { font-size: .875rem; line-height: 1.4; letter-spacing: .04em; }
+.facts span { font-size: .8125rem; line-height: 1.4; }
+footer span { font-size: .875rem; line-height: 1.5; }
+.site-header nav { font-size: .875rem; line-height: 1.3; letter-spacing: .01em; gap: clamp(12px, 1.8vw, 28px); }
+.faq summary { font-size: 1.25rem; font-weight: 600; line-height: 1.35; }
+.steps p, .sub-section > p, .sub-booking p, .reviews-preview p { line-height: 1.5; }
+
+@media (max-width: 1100px) and (min-width: 801px) {
+  .site-header nav { font-size: .8125rem; gap: 12px; padding-inline: 12px; }
+}
+@media (max-width: 520px) {
+  .simple-table > div { grid-template-columns: minmax(0, 1.1fr) 6rem minmax(0, 1fr); font-size: .875rem; gap: 8px; }
+  .simple-table > div:first-child { font-size: .8125rem; text-transform: none; letter-spacing: 0; }
+  .simple-table strong { font-size: 1rem; }
+}
+
+/* Цены — цифры одинаковой ширины, чтобы столбцы таблиц стояли ровно. */
+.price-row strong,
+.simple-table strong,
+.path-bottom strong,
+.offer-grid strong,
+.hero-trial__price b {
+  font-family: var(--font-text);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.01em;
+}
+
+/* ---------- телефон ---------- */
+
+@media (max-width: 800px) {
+  .hero h1.hero-title-friends {
+    font-size: clamp(6rem, 19vw, 8rem); /* «ЛАЙМ ПАДЕЛ» крупнее прежнего ≈ в 1,4 раза */
+  }
+
+  .hero-description {
+    max-width: 460px;
+    font-size: clamp(1.125rem, 3.2vw, 1.25rem);
+  }
+}
+
+@media (max-width: 430px) {
+  .hero h1.hero-title-friends {
+    font-size: 24vw;
+  }
+
+  .hero-description {
+    font-size: 1.125rem;
+    line-height: 1.45;
+  }
+}
