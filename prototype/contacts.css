@@ -1,0 +1,43 @@
+/* Map and directions: compact reference composition selected by the owner. */
+@font-face{font-family:'Fira Contacts';font-style:normal;font-weight:900;font-display:swap;src:url('assets/fonts/firasansextracondensed-normal-900.woff2') format('woff2')}
+.visit{--contact-bg:#fff;--contact-ink:#071a17;--contact-secondary:#35534a;--contact-rule:#b8c8c1;--contact-focus:#044785;position:relative;isolation:isolate;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start;gap:6vw;padding:72px 4vw 64px;background:var(--contact-bg);color:var(--contact-ink);scroll-margin-top:0}
+.visit *{box-sizing:border-box}
+.visit h2,.visit h3,.visit p,.visit dl,.visit dd{margin:0}
+.visit__copy{min-width:0}
+.visit__title{font:900 clamp(2.25rem,3vw,3rem)/1.06 'Fira Contacts',var(--font-display);letter-spacing:0;text-transform:uppercase;text-wrap:balance}
+.visit__location{margin-top:10px!important;font:400 16px/1.5 var(--font-text);color:var(--contact-secondary)}
+.visit__hours-title{font:500 15px/1.4 var(--font-text);letter-spacing:0;margin-top:28px!important}
+.visit__hours{display:flex;gap:28px;margin-top:10px!important;font:400 16px/1.5 var(--font-text);font-variant-numeric:tabular-nums}
+.visit__hours dt{color:var(--contact-secondary);font-size:14px;margin-bottom:2px}
+.visit__hours dd{font-weight:500;white-space:nowrap}
+.visit__way{margin-top:28px;max-width:520px}
+.visit__way h3{font:500 15px/1.4 var(--font-text);letter-spacing:0;text-transform:none;margin-bottom:12px}
+.visit__steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;font:400 16px/1.5 var(--font-text)}
+.visit__steps li{position:relative;padding-left:24px}
+.visit__steps li::before{content:'';position:absolute;left:0;top:.72em;width:12px;height:1px;background:var(--contact-secondary)}
+.visit__routes{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.visit__route{display:inline-flex;align-items:center;justify-content:space-between;gap:22px;min-height:52px;padding:6px 8px 6px 18px;border:1px solid #7b9286;border-radius:99px;background:#fff;color:var(--contact-ink);font:500 15px/1.3 var(--font-text);text-decoration:none;white-space:nowrap}
+.visit__route>span{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:50%;background:#eaf0ec;color:#071a17}
+.visit__route svg{width:18px;height:18px}
+.visit__map{position:relative;min-width:0;width:100%;height:clamp(400px,30vw,500px);background:#e2e9e1;border-radius:2px;overflow:visible;isolation:isolate}
+.visit__map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
+.visit__map-state{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:28px;background:#e2e9e1;text-align:center;pointer-events:none;transition:opacity .2s}
+.visit__map-status{font:400 16px/1.5 var(--font-text);color:#254b3d;max-width:32ch}
+.visit__map[data-map-loaded] .visit__map-state{opacity:0;visibility:hidden}
+.visit__map-noscript{position:absolute;inset:0;display:grid;place-content:center;padding:24px;background:#e2e9e1;color:#071a17;text-align:center;z-index:2;font:400 16px/1.5 var(--font-text)}
+.visit a:focus-visible{outline:3px solid var(--contact-focus);outline-offset:5px}
+.visit iframe:focus-visible{outline:3px solid var(--contact-focus);outline-offset:-4px}
+@media(hover:hover){.visit__route:hover{background:#efffd6;border-color:#071a17}}
+.visit__route:active{background:#eaf0ec}
+@media(max-width:1100px) and (min-width:801px){.visit{gap:4vw}.visit__title{font-size:clamp(2rem,3.2vw,2.25rem)}.visit__routes{gap:10px}.visit__route{gap:12px;padding-left:14px}}
+@media(max-width:800px){
+ .visit{grid-template-columns:minmax(0,1fr);padding:52px max(16px,5vw) 40px;gap:28px}
+ .visit__title{font-size:clamp(2.25rem,7.4vw,3.6rem);max-width:100%}
+ .visit__location{font-size:16px}.visit__hours{gap:24px}
+ .visit__hours-title,.visit__way{margin-top:24px!important}
+ .visit__routes{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:10px;margin-top:24px}
+ .visit__route{min-width:0;padding-left:14px;gap:8px;font-size:14px}
+ .visit__map{height:360px}
+}
+@media(max-width:359px){.visit__routes{grid-template-columns:minmax(0,1fr)}.visit__hours{gap:20px}}
+@media(prefers-reduced-motion:reduce){.visit *{transition:none;animation:none;scroll-behavior:auto}}

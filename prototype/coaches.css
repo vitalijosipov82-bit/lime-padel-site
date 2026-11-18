@@ -1,0 +1,143 @@
+/* «Тренеры» (#coaches) — пятый экран главной.
+   Раскладка A «Ряд карточек» и механика «Ещё о…» 2 «Оборот» со стенда work/coaches-lab/
+   (выбраны владельцем 12.11.2026). Тексты — COACHES_COPY.md. Только #coaches.
+   Без JS: кнопок оборота нет, обратная сторона идёт списком под карточкой.
+   coaches.js ставит .is-flip-ready, показывает кнопки и переворачивает карточку. */
+#coaches {
+  --coaches-line: #c4cdc8;
+  --coaches-soft: #465c54;
+  --coaches-ease: cubic-bezier(.65, 0, .35, 1);
+  background: #fff;
+  color: var(--ink);
+  padding: 96px max(4vw, 20px) 104px;
+  font: 400 16px/1.5 var(--font-text);
+}
+#coaches ::selection { background: var(--lime); color: var(--ink); }
+#coaches h2, #coaches h3, #coaches p, #coaches ul { margin: 0; }
+#coaches a:focus-visible, #coaches button:focus-visible { outline: 3px solid #044785; outline-offset: 4px; }
+
+.coaches__wrap { max-width: 1560px; margin: auto; }
+/* Белый фон в продолжение «Цен» — решение владельца 13.11.2026. */
+#coaches .coaches__title {
+  color: var(--ink);
+  font: 900 clamp(64px, 9vw, 136px)/.86 var(--font-display);
+  letter-spacing: 0; text-transform: uppercase;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+/* ---------- Сетка: строки карточек выровнены между собой (subgrid) ---------- */
+.coaches__grid {
+  --coaches-gap: clamp(16px, 2vw, 28px);
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--coaches-gap); align-items: start;
+}
+.coaches__card, .coaches__flip, .coaches__front { display: grid; grid-row: span 5; grid-template-rows: subgrid; }
+.coaches__flip, .coaches__front { grid-row: 1 / -1; }
+.coaches__card { perspective: 1600px; }
+.coaches__front > * { min-width: 0; }
+
+.coaches__photo { aspect-ratio: 4 / 5; border-radius: 20px; overflow: hidden; background: var(--paper); }
+.coaches__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+#coaches h3 {
+  font: 800 clamp(30px, 2.6vw, 42px)/.92 var(--font-display);
+  letter-spacing: 0; text-transform: uppercase;
+  margin: 22px 0 14px;
+}
+.coaches__fact { font-size: 17px; font-weight: 600; line-height: 1.35; text-wrap: pretty; }
+#coaches .coaches__exp { margin-top: 8px; font-size: 16px; line-height: 1.5; color: var(--coaches-soft); text-wrap: pretty; }
+.coaches__years { white-space: nowrap; }
+
+/* ---------- Кнопки оборота ---------- */
+.coaches__turn {
+  display: inline-flex; align-items: center; gap: 10px; justify-self: start;
+  min-height: 44px; margin-top: 14px; padding: 0; border: 0; border-radius: 6px;
+  background: none; color: var(--ink); font: 600 15px/1.2 var(--font-text); cursor: pointer;
+}
+.coaches__turn[hidden] { display: none; }
+.coaches__plus, .coaches__arrow { position: relative; flex: 0 0 28px; width: 28px; height: 28px; border: 1px solid var(--coaches-soft); border-radius: 50%; transition: background-color .18s; }
+.coaches__plus::before, .coaches__plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 1.5px; background: currentColor; transform: translate(-50%, -50%); }
+.coaches__plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+.coaches__arrow { display: grid; place-items: center; border-color: currentColor; font-size: 15px; }
+@media (hover: hover) {
+  .coaches__turn:hover .coaches__plus { background: rgba(7, 26, 23, .08); }
+  .coaches__return:hover .coaches__arrow { background: rgba(7, 26, 23, .08); }
+}
+
+/* ---------- Обратная сторона — «карточка игрока» ---------- */
+.coaches__back {
+  display: flex; flex-direction: column; gap: 16px;
+  padding: 26px 24px 18px; border-radius: 20px;
+  background: var(--paper); color: var(--ink);
+}
+.coaches__back-name { font: italic 900 clamp(40px, 3.6vw, 60px)/.86 var(--font-display); text-transform: uppercase; }
+.coaches__back ul { list-style: none; padding: 0; display: grid; gap: 12px; font-size: 15px; line-height: 1.45; }
+.coaches__back li { padding-top: 12px; border-top: 1px solid #c4cdc8; text-wrap: pretty; }
+#coaches .coaches__return { margin-top: auto; color: var(--ink); }
+#coaches .coaches__return:focus-visible { outline-color: #044785; }
+
+/* Без JS: обратная сторона — список под карточкой */
+#coaches:not(.is-flip-ready) .coaches__flip,
+#coaches:not(.is-flip-ready) .coaches__front { display: block; }
+#coaches:not(.is-flip-ready) .coaches__back { margin-top: 18px; padding: 0; background: none; color: var(--coaches-soft); }
+#coaches:not(.is-flip-ready) .coaches__back-name { display: none; }
+#coaches:not(.is-flip-ready) .coaches__back li { border-top-color: var(--coaches-line); }
+
+/* Со скриптом: обе стороны в одной ячейке, поворот по Y */
+.is-flip-ready .coaches__flip { transform-style: preserve-3d; transition: transform .6s var(--coaches-ease); }
+.is-flip-ready .coaches__front,
+.is-flip-ready .coaches__back { grid-row: 1 / -1; grid-column: 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.is-flip-ready .coaches__back { transform: rotateY(180deg); }
+.is-flip-ready .coaches__card.is-flipped .coaches__flip { transform: rotateY(180deg); }
+
+/* ---------- Запись ---------- */
+.coaches__actions {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 40px;
+  margin-top: clamp(40px, 5vw, 64px); padding-top: 28px; border-top: 1px solid var(--coaches-line);
+}
+/* Класс booking-actions подключает логику нижней полосы записи; его общая раскладка сброшена. */
+#coaches .coaches__act.booking-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin: 0 0 0 auto; }
+.coaches__btn {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 56px; padding: 6px 6px 6px 22px; border-radius: 999px;
+  background: var(--lime); color: var(--ink);
+  font-size: 16px; font-weight: 600; line-height: 1.2; text-decoration: none;
+  transition: transform .18s ease-out;
+}
+.coaches__icon { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: var(--lime); }
+.coaches__icon svg { width: 20px; height: 20px; }
+@media (hover: hover) { .coaches__btn:hover { transform: translateY(-2px); } }
+.coaches__btn:active { transform: translateY(1px); }
+.coaches__phone { font-size: 15px; color: var(--coaches-soft); }
+.coaches__phone a { font-size: 18px; font-weight: 600; color: var(--ink); white-space: nowrap; text-decoration: none; }
+
+/* ---------- Планшет: 2 × 2 ---------- */
+@media (max-width: 1100px) {
+  .coaches__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .coaches__photo { aspect-ratio: 1 / 1; }
+  .coaches__front > .coaches__turn, .is-flip-ready .coaches__back { margin-bottom: 36px; }
+  #coaches:not(.is-flip-ready) .coaches__card { margin-bottom: 36px; }
+}
+
+/* ---------- Телефон ---------- */
+@media (max-width: 700px) {
+  #coaches { padding: 72px max(5vw, 16px) 80px; }
+  #coaches .coaches__title { font-size: clamp(56px, 17vw, 76px); }
+  .coaches__grid { --coaches-gap: 14px; }
+  .coaches__photo { aspect-ratio: 4 / 5; border-radius: 14px; }
+  #coaches h3 { font-size: clamp(24px, 7.4vw, 30px); margin: 14px 0 8px; }
+  .coaches__fact { font-size: 16px; line-height: 1.4; }
+  #coaches .coaches__exp, .coaches__turn { font-size: 15px; }
+  .coaches__front > .coaches__turn, .is-flip-ready .coaches__back { margin-bottom: 28px; }
+  #coaches:not(.is-flip-ready) .coaches__card { margin-bottom: 28px; }
+  .coaches__back { padding: 16px 12px 12px; gap: 10px; border-radius: 14px; }
+  .coaches__back-name { font-size: 28px; }
+  .coaches__back ul { font-size: 15px; line-height: 1.45; gap: 8px; }
+  .coaches__back li { padding-top: 8px; }
+  .coaches__actions, #coaches .coaches__act.booking-actions { flex-direction: column; align-items: stretch; }
+  #coaches .coaches__act.booking-actions { margin-left: 0; }
+  .coaches__btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-flip-ready .coaches__flip, .coaches__btn, .coaches__plus, .coaches__arrow { transition: none; }
+}

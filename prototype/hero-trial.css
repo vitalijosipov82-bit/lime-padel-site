@@ -1,0 +1,141 @@
+/* ---------- Первый экран · значок пробного занятия ----------
+   Выбран владельцем 12.11.2026 на стендах work/ticket-lab/ (вариант C «Мяч-значок»)
+   и work/ticket-lab/ball.html (мяч 4 «С обводкой»). Заменил билет с вырубкой, стеклом
+   и фото-мячом: тот выбивался из плоской графики сайта.
+   — мяч — плоский из знака логотипа ЛАЙМ (assets/ball-flat.svg: круг #d3ef30 и белый шов);
+   — вокруг тонкое лаймовое кольцо, по внешнему кругу медленно бежит надпись
+     «Пробное занятие · 800 ₽ с человека · для новичков» (длина подогнана под окружность);
+   — стрелка — тёмный круг с лаймовой стрелкой (лаймовая сливалась бы с мячом);
+   — весь значок — одна прямая ссылка в календарь групповых занятий YCLIENTS.
+   При prefers-reduced-motion надпись стоит. Позиция: справа внизу первого экрана (≥900px),
+   на телефоне — в потоке после «Забронировать корт». */
+
+.hero-badge {
+  position: relative;
+  display: block;
+  flex: none;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+}
+
+.hero-badge__ring {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero-badge__ring text {
+  font-family: var(--font-text);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 3.11912px; /* IBM Plex Sans: измеренная длина надписи ≈552px при окружности565px. */
+  text-transform: uppercase;
+  fill: #fff;
+}
+
+.hero-badge__ring .hero-badge__lime {
+  fill: var(--lime);
+}
+
+.hero-badge__line {
+  fill: none;
+  stroke: rgba(211, 239, 48, .85);
+  stroke-width: 1.5;
+}
+
+.hero-badge__ball {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: block;
+  width: 112px;
+  height: 112px;
+  transform: translate(-50%, -50%);
+}
+
+/* Стрелка — внутри кольца, на углу мяча, не закрывает надпись */
+.hero-badge__arrow {
+  position: absolute;
+  right: 51px;
+  bottom: 51px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--deep);
+  color: var(--lime);
+  box-shadow: 0 0 0 2px #d3ef30;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+
+.hero-badge__arrow svg {
+  width: 18px;
+  height: 18px;
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+
+.hero-badge:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 6px;
+}
+
+@media (hover: hover) {
+  .hero-badge:hover .hero-badge__arrow { transform: scale(1.08); }
+  .hero-badge:hover .hero-badge__arrow svg { transform: translate(2px, -2px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-badge__ring { animation: hero-badge-spin 22s linear infinite; }
+  .hero-badge:hover .hero-badge__ring,
+  .hero-badge:focus-visible .hero-badge__ring { animation-duration: 8s; }
+}
+
+@keyframes hero-badge-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Позиция: отдельно в правом нижнем углу первого экрана, вдали от описания и кнопки */
+@media (min-width: 900px) {
+  .home-page .hero-bottom {
+    position: absolute;
+    z-index: 3;
+    top: auto;
+    right: 4vw;
+    bottom: clamp(40px, 11vh, 120px);
+    left: auto;
+    width: auto;
+    padding: 0;
+  }
+}
+
+/* Телефон: в потоке после кнопки, чуть меньше */
+@media (max-width: 899px) {
+  .home-page .hero-bottom {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero-badge {
+    width: 180px;
+    height: 180px;
+  }
+
+  .hero-badge__ball { width: 96px; height: 96px; }
+  .hero-badge__arrow { right: 44px; bottom: 44px; width: 36px; height: 36px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge__ring,
+  .hero-badge__arrow,
+  .hero-badge__arrow svg { animation: none; transition: none; }
+  .hero-badge:hover .hero-badge__arrow,
+  .hero-badge:hover .hero-badge__arrow svg { transform: none; }
+}

@@ -1,0 +1,135 @@
+/* «Цены» · выбранная сетка А из work/spacing-lab (13.11.2026).
+   Общие поля и свободное начало; карточки по содержимому, без растяжения до высоты экрана.
+   По решению владельца правое верхнее фото убрано. Только #prices. */
+#prices {
+  --prices-line: #c4cdc8;
+  --prices-secondary: #465c54;
+  --prices-name-size: 18.5px;
+  --prices-sum-size: 24px;
+  --prices-detail-size: 14px;
+  --prices-edge: max(24px, calc((100vw - min(88.8888vw, 1280px)) / 2));
+  background: #fff;
+  color: var(--ink);
+  padding: 112px var(--prices-edge);
+  font: 400 16px/1.5 var(--font-text);
+  font-variant-numeric: tabular-nums;
+}
+#prices ::selection { background: var(--lime); color: var(--ink); }
+#prices a:focus-visible { outline: 3px solid #044785; outline-offset: 4px; }
+#prices a[href^="tel:"] { text-decoration: none; }
+#prices h2, #prices h3, #prices h4, #prices p, #prices ul, #prices figure { margin: 0; }
+.prices__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.prices__wrap {
+  max-width: 1280px; margin: auto;
+  display: grid; gap: 24px; align-items: start;
+  grid-template-columns: minmax(220px, .6fr) repeat(3, minmax(0, 1fr));
+  min-height: 0;
+}
+.prices__col { display: flex; flex-direction: column; gap: 24px; min-width: 0; }
+
+/* Заголовок */
+.prices__lead { display: flex; flex-direction: column; gap: 24px; padding: 4px 8px 6px 0; }
+#prices .prices__title { font: italic 900 92px/.88 var(--font-display); letter-spacing: 0; text-transform: uppercase; }
+.prices__lead > p { font-size: 18px; line-height: 1.45; max-width: 24ch; text-wrap: pretty; }
+.prices__deal strong { font: 900 clamp(26px, 2.2vw, 34px)/1.05 var(--font-display); color: #044785; white-space: nowrap; }
+
+/* Фото */
+.prices__photo { position: relative; flex: none; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; background: var(--paper); }
+.prices__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.prices__photo--lead img { object-position: 50% 45%; }
+
+/* Карточки */
+.prices__card { display: flex; flex-direction: column; min-width: 0; background: var(--paper); border-radius: 22px; padding: 24px 20px 22px; }
+#prices .prices__card h3 { font: 800 36px/1 var(--font-display); letter-spacing: 0; text-transform: uppercase; margin-bottom: 14px; text-wrap: balance; }
+.prices__court, .prices__train { flex: 2 1 auto; }
+.prices__court { container-type: inline-size; }
+#prices .prices__extra { flex: none; padding-block: 16px; background: #fff; border: 1.5px solid var(--prices-line); }
+#prices .prices__extra h3 { font-size: 28px; margin-bottom: 6px; }
+.prices__train > .prices__list { flex: 1 1 auto; }
+
+/* Строки прайса */
+.prices__list { display: flex; flex-direction: column; list-style: none; padding: 0; }
+.prices__list li { flex: 1 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--prices-line); }
+.prices__name { font-size: var(--prices-name-size); font-weight: 600; line-height: 1.25; }
+.prices__name small, .prices__sum small { display: block; margin-top: 4px; font-size: var(--prices-detail-size); font-weight: 400; line-height: 1.35; color: var(--prices-secondary); letter-spacing: 0; text-wrap: pretty; }
+.prices__sum { font-size: var(--prices-sum-size); font-weight: 600; line-height: 1.1; letter-spacing: -.02em; white-space: nowrap; text-align: right; }
+.prices__sum small { white-space: normal; }
+.prices__group-size { white-space: nowrap; }
+.prices__list--mini li { padding: 9px 0; }
+.prices__list--mini li:last-child { border-bottom: 0; }
+#prices .prices__extra .prices__list li { flex-wrap: nowrap; gap: 12px; padding-block: 7px; }
+#prices .prices__extra .prices__list li:last-child { padding-bottom: 0; }
+.prices__court .prices__list--mini .prices__name { font-weight: 500; }
+
+/* Общая шкала текста и сумм для всех карточек; компактные отступы сохраняют три колонки корта. */
+.prices__table { flex: 1 1 auto; width: 100%; border-collapse: collapse; table-layout: auto; }
+.prices__table th, .prices__table td { text-align: right; border-bottom: 1px solid var(--prices-line); }
+.prices__table th:first-child { text-align: left; }
+.prices__table thead th { padding: 0 0 8px; font-size: clamp(13px, 6.5cqi, 15px); font-weight: 500; color: var(--prices-secondary); }
+.prices__table tbody th { padding: 12px 0; font-size: var(--prices-name-size); font-weight: 600; line-height: 1.25; vertical-align: middle; }
+.prices__table tbody th span { display: block; margin-top: 4px; font-size: var(--prices-detail-size); font-weight: 400; color: var(--prices-secondary); white-space: nowrap; }
+.prices__table td { width: 1%; padding: 12px 0 12px clamp(8px, 3cqi, 12px); font-size: var(--prices-sum-size); font-weight: 600; letter-spacing: -.02em; white-space: nowrap; vertical-align: middle; }
+
+/* Пояснения */
+#prices .prices__sub { margin-top: 16px; font: 600 15px/1.3 var(--font-text); letter-spacing: 0; color: var(--prices-secondary); }
+#prices .prices__plus { position: relative; margin-top: 14px; padding-left: 32px; color: var(--ink); font-size: 16px; line-height: 1.55; font-weight: 500; text-wrap: pretty; }
+/* Фактурный мяч из блока пробного занятия; прозрачные поля изображения учтены в размере и позиции. */
+.prices__plus::before { content: ""; position: absolute; left: -3px; top: -1px; width: 28px; height: 28px; background: url("assets/trial-ball.webp") center / contain no-repeat; }
+.prices__booking { grid-column: 1 / -1; border-top: 1px solid var(--prices-line); padding-top: 16px; font-size: clamp(16px, 1.5vw, 20px); text-wrap: pretty; }
+#prices .prices__booking a { color: #044785; text-decoration: underline; text-underline-offset: .17em; white-space: nowrap; }
+#prices .prices__train .prices__actions { padding-top: 18px; }
+
+/* Ноутбуки */
+@media (max-width: 1400px) and (min-width: 1101px) {
+  #prices { --prices-name-size: clamp(14px, calc(1vw + 3px), 16px); --prices-sum-size: clamp(16px, calc(2vw - 6px), 22px); --prices-detail-size: 13px; }
+  .prices__card:not(.prices__train) .prices__list li { flex-wrap: wrap; column-gap: 10px; row-gap: 8px; }
+  .prices__card:not(.prices__train) .prices__list .prices__sum { margin-left: auto; }
+  .prices__wrap { grid-template-columns: minmax(232px, .66fr) repeat(3, minmax(0, 1fr)); }
+  #prices .prices__title { font-size: 76px; }
+  .prices__lead > p { font-size: 16px; }
+  .prices__card { padding: 20px 18px 18px; }
+  #prices .prices__card h3 { font-size: 28px; }
+}
+
+/* Планшеты: заголовок сверху, корт и тренировки рядом, абонементы внизу. */
+@media (max-width: 1100px) {
+  #prices { padding: 88px var(--prices-edge); --prices-name-size: 18px; --prices-sum-size: 22px; }
+  .prices__wrap { grid-template-columns: 1fr 1fr; min-height: 0; }
+  .prices__col--lead { grid-column: 1 / -1; margin-bottom: 16px; }
+  .prices__lead { flex-direction: row; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; padding: 0; }
+  #prices .prices__title { flex-basis: 100%; font-size: 88px; }
+  #prices .prices__lead .prices__actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .prices__photo--lead { display: none; }
+  .prices__col--subs { grid-column: 1 / -1; }
+}
+@media (max-width: 800px) { #prices { --prices-edge: 32px; } }
+@media (max-width: 900px) and (min-width: 701px) {
+  #prices { --prices-name-size: 16px; --prices-sum-size: 20px; --prices-detail-size: 14px; }
+}
+
+/* Телефоны: одна колонка, фото скрыты, «Ещё в клубе» в конце */
+@media (max-width: 700px) {
+  .prices__wrap { grid-template-columns: 1fr; }
+  .prices__col { display: contents; }
+  .prices__lead { order: 1; flex-direction: column; flex-wrap: nowrap; align-items: stretch; margin-bottom: 8px; }
+  #prices .prices__title { font-size: 76px; }
+  #prices .prices__lead .prices__actions { grid-template-columns: minmax(0, 1fr); max-width: none; }
+  .prices__court { order: 2; } .prices__train { order: 3; } .prices__subs { order: 4; } .prices__extra { order: 5; }
+  .prices__booking { order: 6; }
+  .prices__photo { display: none; }
+  .prices__card { padding: 22px 18px 20px; border-radius: 18px; }
+  #prices .prices__card h3 { font-size: 30px; }
+  #prices .prices__train .prices__actions { flex-direction: column; align-items: stretch; }
+}
+@media (max-width: 560px) {
+  #prices { --prices-edge: 24px; padding-block: 72px; }
+  .prices__col--lead { margin-bottom: 0; }
+}
+@media (max-width: 400px) {
+  #prices { --prices-name-size: 16px; --prices-sum-size: 21px; --prices-detail-size: 14px; }
+}
+@media (max-width: 350px) {
+  #prices { --prices-name-size: 16px; --prices-sum-size: 19px; --prices-detail-size: 13px; }
+  .prices__card { padding-inline: 14px; }
+}

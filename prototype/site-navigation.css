@@ -1,0 +1,99 @@
+/* Навигация главной: native details работает и без JavaScript. */
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 12px;
+  left: 4vw;
+  padding: 14px 20px;
+  border-radius: 8px;
+  background: var(--lime);
+  color: var(--ink);
+  font-weight: 700;
+  transform: translateY(-180%);
+}
+.skip-link:focus { transform: none; }
+.mobile-menu { display: none; }
+
+.home-page .site-header.is-scroll-nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 40;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 36, 31, .72),
+    rgba(6, 36, 31, .70) 77%,
+    rgba(6, 36, 31, 0)
+  );
+  color: #fff;
+  transform: translateY(-110%);
+}
+
+.home-page .site-header.is-scroll-nav.has-revealed-scroll-nav {
+  transition: transform 200ms cubic-bezier(.22, .75, .18, 1);
+}
+
+.home-page .site-header.is-scroll-nav:is(.is-scroll-nav-visible, :has(:focus-visible, .mobile-menu[open])) { transform: none; }
+.home-page .site-header.is-scroll-nav:has(:focus-visible) { transition: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page .site-header.is-scroll-nav.has-revealed-scroll-nav { transition: none; }
+}
+
+@media (max-width: 800px) {
+  .home-page .site-header { justify-content: space-between; }
+  .mobile-menu { display: block; }
+  .mobile-menu summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 44px;
+    padding: 8px 16px;
+    border: 1px solid #e2f7c7;
+    border-radius: 999px;
+    color: #fff;
+    font-size: .9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+  .mobile-menu summary::-webkit-details-marker { display: none; }
+  .mobile-menu summary svg { flex: none; }
+  .mobile-menu[open] summary svg { transform: rotate(45deg); }
+  .mobile-menu summary:focus-visible { outline: 3px solid #ff6b00; outline-offset: 4px; }
+  .home-page .mobile-menu nav {
+    position: absolute;
+    z-index: 30;
+    top: 72px;
+    left: 5vw;
+    right: 5vw;
+    display: grid;
+    gap: 0;
+    max-height: calc(100svh - 96px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    margin: 0;
+    padding: 12px 20px;
+    border: 1px solid #91c745;
+    border-radius: 16px;
+    background: #06241f;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .mobile-menu nav a {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 10px 4px;
+  }
+  .mobile-menu nav a + a { border-top: 1px solid #315449; }
+  .mobile-menu nav .mobile-menu__booking { color: var(--lime); font-weight: 700; }
+
+}
+
+@media (min-width: 801px) {
+  .home-page .site-header nav { font-size: .875rem; }
+  .home-page .site-header > nav a { display: flex; align-items: center; min-height: 44px; }
+}

@@ -1,0 +1,28 @@
+/* Selected magnetic whole-button feedback. The native hit area never moves.
+   Existing component styles remain the source of resting geometry and colors. */
+[data-button-motion]{transform:none!important;translate:none!important;transition:none!important}
+[data-button-motion].is-motion-ready{box-sizing:border-box!important;display:var(--button-display)!important;width:var(--button-width)!important;height:var(--button-height)!important;min-width:0!important;min-height:0!important;padding:0!important;border:0!important;gap:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important;align-items:stretch!important;justify-items:stretch!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:minmax(0,1fr)!important}
+.button-motion__face{position:relative;box-sizing:border-box;flex:1 1 auto;min-width:0;margin:0;pointer-events:auto;transform:translate(var(--button-x,0px),var(--button-y,0px)) scale(var(--button-scale,1));transform-origin:50% 50%;transition:transform 300ms cubic-bezier(.22,.75,.18,1)}
+[data-button-motion].is-button-following>.button-motion__face{transition-duration:140ms;will-change:transform}
+[data-button-motion]:focus-visible{--button-y:-4px;--button-scale:1.055}
+[data-button-motion].is-button-pressing>.button-motion__face,[data-button-motion]:active>.button-motion__face{animation:none!important;transform:translateY(2px) scale(.95)!important}
+@keyframes button-magnetic-release{0%{transform:translateY(2px) scale(.95)}45%{transform:translateY(-4px) scale(1.025)}75%{transform:translateY(1px) scale(.99)}100%{transform:translate(var(--button-x,0px),var(--button-y,0px)) scale(var(--button-scale,1))}}
+[data-button-motion].is-button-releasing>.button-motion__face{animation:button-magnetic-release 600ms cubic-bezier(.22,.75,.18,1)}
+/* Freeze the older independent icon/letter reactions. Menu open/close is a state. */
+[data-button-motion]:not(summary) svg,[data-button-motion] :is(.hero-action__icon,.path-cta__icon,.coaches__icon,.club-life__signup-icon,.benefits__button-icon,.hero-badge__arrow){transform:none!important;transition:none!important}
+[data-button-motion] .hero-badge__ring{animation:none!important}
+[data-button-motion] .hero-action__icon{background:var(--ink)!important;color:var(--lime)!important}
+[data-button-motion] :is(.coaches__plus,.coaches__arrow){background:transparent!important;transition:none!important}
+[data-button-motion] .scene-label-front{transform:none!important;transition:none!important}
+[data-button-motion] .scene-label-back{display:none!important}
+/* A direct-child icon keeps its approved shape after the contents get a face. */
+.visit__route .button-motion__route-icon{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:50%;background:#eaf0ec;color:#071a17}
+/* Resting paint while measuring, and the static no-JS fallback. */
+.hero-decision .hero-action[data-button-motion]:not(.is-motion-ready){background:var(--lime)!important;border-color:var(--lime)!important;color:var(--ink)!important;box-shadow:none!important;padding-left:19px!important}
+.path-cta[data-button-motion]:not(.is-motion-ready){background:transparent!important;color:#f6fff0!important}
+.club-life__signup[data-button-motion]:not(.is-motion-ready){background:transparent!important;border-color:#f6fff0!important;color:#f6fff0!important}
+#loyalty-gift .benefits__button--line[data-button-motion]:not(.is-motion-ready){background:transparent!important}
+#loyalty-gift .benefits__button--fill[data-button-motion]:not(.is-motion-ready),.site-footer .site-footer__book[data-button-motion]:not(.is-motion-ready){background:var(--lime)!important;border-color:var(--lime)!important;color:var(--ink)!important}
+.visit__route[data-button-motion]:not(.is-motion-ready),.site-footer .site-footer__social[data-button-motion]:not(.is-motion-ready){background:#fff!important;border-color:#7b9286!important;color:#071a17!important}
+@media(max-width:430px){.hero-decision .hero-action[data-button-motion]:not(.is-motion-ready){padding-left:15px!important}}
+@media(prefers-reduced-motion:reduce){[data-button-motion].is-motion-ready>.button-motion__face{animation:none!important;transition:none!important;transform:none!important}}

@@ -1,0 +1,63 @@
+/* Выбор владельца 14.11.2026: раскрытие клуба до краёв, остальные стыки — срез корта.
+   Подключается последним; действует только на главной с page-flow-selected. */
+.home-page.page-flow-selected { --frame-edge: 0px; --frame-radius: 0px; --flow-cut: 40px; --flow-air: var(--section-air,112px); }
+.home-page.page-flow-selected main {
+  background: #044785;
+  background-image: image-set(url('assets/court-texture-1x.webp') 1x,url('assets/court-texture.webp') 2x);
+  background-size: 768px 768px;
+}
+.home-page.page-flow-selected .hero::after,
+.home-page.page-flow-selected .intro::after,
+.home-page.page-flow-selected .intro::before,
+.home-page.page-flow-selected .scene__photos picture:first-child::before,
+.home-page.page-flow-selected .scene__photos picture:last-child::before { content: none; }
+.home-page.page-flow-selected .hero {
+  clip-path: polygon(0 0,100% 0,100% 100%,0 calc(100% - var(--flow-cut)));
+}
+/* Нижнее поле учитывает высоту среза и оставляет 40px для кнопки и её фокуса.
+   На низком окне Hero растёт по содержимому, поэтому срез не догоняет кнопку. */
+@media (min-width: 801px) {
+  .home-page.page-flow-selected .hero-main { padding-bottom: calc(var(--flow-cut) + 40px); }
+}
+.home-page.page-flow-selected .intro { background: transparent; padding-bottom: var(--flow-air); }
+.home-page.page-flow-selected .scene-club { background: transparent; }
+.home-page.page-flow-selected .scene__photos picture { height: 100svh; clip-path: none; }
+.home-page.page-flow-selected .scene__pin::before,
+.home-page.page-flow-selected .scene__pin::after { content: none; }
+.home-page.page-flow-selected .scene__photos picture::after {
+  background: linear-gradient(180deg,rgba(6,36,31,.72),transparent 150px,transparent calc(100% - 170px),rgba(6,36,31,.72)),rgba(6,36,31,.42);
+}
+/* В финале inset и radius равны нулю: вся фотолента доходит до краёв окна. */
+.home-page.page-flow-selected.is-window-motion .scene__photos picture:first-child {
+  clip-path: inset(var(--window-y,0px) var(--window-x,0px) round var(--window-radius,0px));
+}
+.home-page.page-flow-selected.is-window-motion .scene__fact:nth-child(1) {
+  transform: translate(var(--fact-shift-x,0px),var(--window-y,0px));
+}
+.home-page.page-flow-selected.is-window-motion .scene__fact:nth-child(2) {
+  transform: translate(calc(-1 * var(--fact-shift-x,0px)),var(--window-y,0px));
+}
+.home-page.page-flow-selected #prices {
+  position: relative;
+  z-index: 3;
+  margin-top: -48px;
+  border-radius: 0;
+  background: #fff;
+  clip-path: polygon(0 0,100% var(--flow-cut),100% 100%,0 100%);
+}
+/* Без движения — открытый список с читаемыми заголовками и маршрутом. */
+.home-page.page-flow-selected .scene-club:not(.is-scene) { padding-bottom: 144px; }
+.home-page.page-flow-selected .scene-club:not(.is-scene) .scene__frames { padding-inline: 0; }
+.home-page.page-flow-selected .scene-club:not(.is-scene) .scene__words { font-size: clamp(2.1rem,10vw,7.5rem); }
+.home-page.page-flow-selected .scene-club:not(.is-scene) .club-route__label { min-width: 0; white-space: normal; }
+@media (max-width: 800px) {
+  .home-page.page-flow-selected { --flow-cut: 24px; --flow-air: var(--section-air,72px); }
+  .home-page.page-flow-selected #prices { margin-top: -24px; }
+  .home-page.page-flow-selected .scene__photos picture::after {
+    background: linear-gradient(180deg,rgba(6,36,31,.72),transparent 130px,transparent calc(100% - 260px),rgba(6,36,31,.82)),rgba(6,36,31,.42);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page.page-flow-selected.is-window-motion .scene__photos picture:first-child { clip-path: none; }
+  .home-page.page-flow-selected.is-window-motion .scene__fact { transform: none; }
+}

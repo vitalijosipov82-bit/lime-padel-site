@@ -1,0 +1,70 @@
+/* «Крупнее афиши» выбрано владельцем 17.11.2026. Единое покрытие с лояльностью, без линии корта. */
+@font-face{font-family:'Fira Club Life';src:url('assets/fonts/firasansextracondensed-normal-900.woff2') format('woff2');font-weight:900;font-display:swap}
+.club-life{--life-ink:#f6fff0;--life-quiet:#e1eee7;--life-ease:cubic-bezier(.22,.75,.18,1);--poster-width:360px;position:relative;isolation:isolate;z-index:1;padding:36px 5vw 32px;margin:0;overflow:visible;color:var(--life-ink);background:#044785 url('assets/court-texture-1x.webp') center/768px 768px;scroll-margin-top:24px}
+.club-life *{box-sizing:border-box}
+.club-life ::selection{background:#d9f21e;color:#071a17}
+.club-life__inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:22px 24px;max-width:1280px;margin-inline:auto}
+.club-life h2{grid-row:1;grid-column:1/-1;font:900 clamp(46px,5.3vw,76px)/.95 'Fira Club Life',var(--font-display);letter-spacing:-.015em;margin:0}
+.club-life__events{grid-row:2;grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:center}
+.club-life__event{min-width:0;position:relative;display:grid;grid-template-columns:minmax(0,var(--poster-width)) minmax(0,1fr);align-items:center;gap:54px}
+.club-life__poster-stage{min-width:0;position:relative;perspective:850px;width:100%;padding:18px 10px}
+.club-life__print{--base-angle:-1.5deg;--mx:0px;--my:0px;--rx:0deg;--ry:0deg;--lift:0px;--depth:0px;--rz:0deg;position:relative;display:block;background:#fff;padding:7px;box-shadow:none;transform:translate3d(var(--mx),calc(var(--my) + var(--lift)),var(--depth)) rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(calc(var(--base-angle) + var(--rz)));transition:transform 500ms var(--life-ease);transform-style:preserve-3d}
+.club-life__print.is-following{transition-duration:180ms;--lift:-12px;--depth:58px;will-change:transform}
+.club-life__event:nth-child(2) .club-life__print{--base-angle:2deg}
+.club-life__poster{display:block;width:100%;height:auto}
+.club-life__signup{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;min-width:240px;min-height:58px;padding:7px 7px 7px 22px;border:1px solid var(--life-ink);border-radius:999px;background:transparent;color:var(--life-ink);font:600 16px/1.2 var(--font-text);letter-spacing:-.015em;text-decoration:none;transition:transform 180ms var(--life-ease),border-color 180ms}
+.club-life__signup-icon{display:grid;place-items:center;flex:none;width:42px;height:42px;border-radius:50%;background:#d9f21e;color:var(--life-ink);transition:transform 200ms var(--life-ease)}
+.club-life__signup-icon svg{width:19px;height:19px;transition:transform 200ms var(--life-ease)}
+.club-life__signup:active{transform:translateY(1px)}
+.club-life__print{padding:5px}
+.club-life__info{min-width:0}
+.club-life h3{font:900 clamp(34px,3.2vw,48px)/1.04 'Fira Club Life',var(--font-display);letter-spacing:0;margin:0 0 12px;text-wrap:balance}
+.club-life__info p{font-size:18px;line-height:1.4;margin:0 0 10px;text-wrap:pretty}
+.club-life__time{white-space:nowrap}
+.club-life__note{color:var(--life-quiet)}
+.club-life__actions{position:relative;z-index:2;grid-column:2;grid-row:2;align-self:end;justify-self:end;margin:0 0 18px}
+.club-life__signup{width:210px;min-width:210px;gap:16px;border-color:#f6fff0;background:transparent;color:#f6fff0}
+.club-life__signup-icon{color:#071a17}
+.club-life__signup:focus-visible{outline:3px solid #d9f21e;outline-offset:5px}
+/* Светлые волокна покрытия не прерывают контур букв. */
+.club-life h2,.club-life h3,.club-life__info p,.club-life__signup>span:first-child{text-shadow:-1px -1px 0 #00345f,0 -1px 0 #00345f,1px -1px 0 #00345f,1px 0 0 #00345f,1px 1px 0 #00345f,0 1px 0 #00345f,-1px 1px 0 #00345f,-1px 0 0 #00345f}
+/* Только стыки своего блока; содержимое тренеров и лояльности сохранено. */
+.home-page #coaches{padding-bottom:48px}
+.club-life + #loyalty-gift{--court-exit-cut:28px;padding-top:70px;clip-path:polygon(0 0,100% 0,100% 100%,0 calc(100% - var(--court-exit-cut)))}
+@media(hover:hover) and (pointer:fine){.club-life__signup:hover{transform:translateY(-2px);border-color:#d9f21e}.club-life__signup:hover .club-life__signup-icon svg{transform:translate(2px,-2px)}}
+@media(max-width:1379px) and (min-width:701px){
+ .club-life{--poster-width:330px}
+ .club-life h3{font-size:clamp(34px,2.8vw,40px)}
+ .club-life__info p{font-size:17px}
+ .club-life__actions{grid-row:3;grid-column:1/-1;margin:0}
+}
+@media(max-width:1250px) and (min-width:701px){
+ .club-life{--poster-width:315px}
+ .club-life__events{gap:28px}
+ .club-life__event{grid-template-columns:minmax(0,min(var(--poster-width),58%)) minmax(0,1fr);gap:32px}
+}
+@media(max-width:1100px){
+ .club-life__events{grid-template-rows:auto auto;gap:12px 24px;align-items:start}
+ .club-life__event{grid-row:span 2;grid-template-columns:minmax(0,1fr);grid-template-rows:subgrid;gap:12px;align-items:start}
+ .club-life__poster-stage{max-width:330px;margin-inline:auto;align-self:end;padding:12px 10px 18px}
+}
+@media(max-width:800px){.club-life + #loyalty-gift{--court-exit-cut:18px}}
+@media(max-width:700px){
+ .home-page #coaches{padding-bottom:32px}
+ .club-life{padding:28px 20px}
+ .club-life__inner{grid-template-columns:minmax(0,1fr);row-gap:18px}
+ .club-life h2{font-size:46px;grid-column:1}
+ .club-life__events{grid-column:1;grid-template-columns:minmax(0,1fr);grid-template-rows:none;gap:20px}
+ .club-life__event{grid-row:auto;display:block}
+ .club-life__poster-stage{max-width:330px;padding:8px 5px}
+ .club-life__print{padding:4px;--base-angle:-1deg}
+ .club-life__event:nth-child(2) .club-life__print{--base-angle:1deg}
+ .club-life h3{font-size:clamp(32px,9.6vw,38px);line-height:1.08;margin-bottom:10px}
+ .club-life__info p{font-size:16px;margin-bottom:8px}
+ .club-life__actions{grid-row:3;grid-column:1;margin:0;align-self:start;justify-self:end}
+ .club-life__signup{width:220px;min-width:220px}
+ .club-life + #loyalty-gift{padding-top:64px}
+ .club-life + #loyalty-gift .benefits__brand-ball{top:20px}
+}
+@media(max-width:350px){.club-life h2{font-size:42px}}
+@media(prefers-reduced-motion:reduce){.club-life__print,.club-life__print.is-following{transform:none;transition:none}.club-life__signup,.club-life__signup-icon,.club-life__signup-icon svg{transition:none}.club-life__signup:hover,.club-life__signup:active,.club-life__signup:hover .club-life__signup-icon svg{transform:none}}
