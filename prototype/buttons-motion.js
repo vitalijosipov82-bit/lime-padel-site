@@ -8,7 +8,8 @@
  function refresh(){
   refreshFrame=0;reset();const all=[...document.querySelectorAll(selector)];const items=[];
   // Restore all native layouts together, then read, then write: no per-button thrash.
-  for(const target of all){target.setAttribute('data-button-motion','');if(!target.getClientRects().length||target.matches('[hidden]'))continue;const face=faces.get(target);clearTimeout(releaseTimers.get(target));target.classList.remove('is-button-releasing','is-motion-ready');if(face)face.style.setProperty('display','contents','important');items.push({target,face})}
+  // Opening a menu refreshes sizes, but must not cancel the release just triggered by touch.
+  for(const target of all){target.setAttribute('data-button-motion','');if(!target.getClientRects().length||target.matches('[hidden]'))continue;const face=faces.get(target);target.classList.remove('is-motion-ready');if(face)face.style.setProperty('display','contents','important');items.push({target,face})}
   const snapshots=items.map(item=>{const s=getComputedStyle(item.target),r=item.target.getBoundingClientRect(),values={};for(const name of paint)values[name]=s[name];return{...item,values,display:s.display,width:parseFloat(s.width)||item.target.offsetWidth,height:parseFloat(s.height)||item.target.offsetHeight,visible:r.width>0&&r.height>0}});
   for(const item of snapshots){
    const {target,values}=item;let face=item.face;if(!item.visible)continue;

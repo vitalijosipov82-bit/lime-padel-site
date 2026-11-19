@@ -1243,6 +1243,21 @@ footer span { font-size: .875rem; line-height: 1.5; }
 
 </style>
   <style data-preview-source="prototype/club.css">
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("prototype/assets/fonts/firasansextracondensed-normal-900.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url("prototype/assets/fonts/firasansextracondensed-italic-900.woff2") format('woff2');
+}
+
 /* ---------- Блок «Клуб и пространство» (#club) ----------
    Единственное место стилей блока. В styles.css остались старые правила .club, .club-image,
    .club-copy (двухколоночная раскладка, фон-исходник 7 МБ) — разметки под них больше нет,
@@ -1670,84 +1685,76 @@ footer span { font-size: .875rem; line-height: 1.5; }
   transform: translateY(1px);
 }
 
-/* ---------- телефон ---------- */
+/* ---------- Утверждённая мобильная сцена, 19.11.2026 ---------- */
 
-@media (max-width: 800px) {
-  .is-scene .scene__pin {
-    --f: clamp(2.2rem, 12vw, 4.2rem); /* «СО ШКАФЧИКАМИ» помещается и на 320 */
+@media (max-width: 800px), (max-width: 950px) and (max-height: 479px) {
+  .scene-club {
+    --club-edge: max(16px, 5vw);
+    --club-header: 96px;
   }
 
-  .is-scene .scene__pin::before { height: 130px; }
-  .is-scene .scene__pin::after { height: 260px; background: linear-gradient(0deg, rgba(6, 36, 31, .82), rgba(6, 36, 31, 0)); }
+  .scene-club .scene__fact { font-size: .75rem; letter-spacing: .08em; }
+  .scene-club .scene__fact strong { font-size: 1rem; line-height: 1.25; }
 
-  .is-scene .scene__fact { max-width: 44vw; }
-  .is-scene .scene__fact:nth-child(1),
-  .is-scene .scene__fact:nth-child(2) { top: 24px; }
-  /* адрес над кнопками маршрута, всё — над нижней полосой «Записаться» */
-  .is-scene .scene__fact:nth-child(3) { bottom: 156px; max-width: 90vw; }
-
-  .is-scene .scene__routes {
-    left: 5vw;
-    right: 5vw;
-    bottom: 84px;
-    gap: 8px;
+  .scene-club.is-scene .scene__fact:nth-child(1),
+  .scene-club.is-scene .scene__fact:nth-child(2) { top: var(--club-header); max-width: calc(45vw - 8px); }
+  .scene-club.is-scene .scene__fact:nth-child(1) { left: var(--club-edge); }
+  .scene-club.is-scene .scene__fact:nth-child(2) { right: var(--club-edge); }
+  .scene-club.is-scene .scene__fact:nth-child(3) {
+    left: var(--club-edge);
+    bottom: max(84px, calc(env(safe-area-inset-bottom) + 64px));
+    max-width: calc(100% - 2 * var(--club-edge));
   }
 
-  .is-scene .scene__routes .club-route,
-  .scene__routes .club-route {
-    flex: 1;
-    min-width: 0;
-    min-height: 52px;
-    gap: 10px;
-    padding: 6px 6px 6px 14px;
-    font-size: .9rem;
+  .scene-club.is-scene .scene__pin {
+    --f: clamp(2rem, 12vw, 4.2rem);
+    --words-top: calc(52svh - var(--title-h) / 2);
+  }
+  .scene-club.is-scene .scene__titles { left: var(--club-edge); right: var(--club-edge); }
+  /* Keep small facts legible even when a bright window passes beneath them. */
+  .home-page.page-flow-selected .scene-club .scene__photos picture::after {
+    background: linear-gradient(180deg,
+      rgba(6,36,31,.82), rgba(6,36,31,.7) 160px, transparent 240px,
+      transparent calc(100% - 280px), rgba(6,36,31,.7) calc(100% - 160px), rgba(6,36,31,.82)),
+      rgba(6,36,31,.5);
   }
 
-  .scene__routes .club-route__icon {
-    width: 38px;
-    height: 38px;
+  /* Static alternative: the same photo/title relationship, with every chapter visible. */
+  .home-page.page-flow-selected .scene-club:not(.is-scene) .scene__facts {
+    padding: var(--club-header) var(--club-edge) 32px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 20px 16px;
   }
-
-  .scene__routes .club-route__long { display: none; }
-  .scene__routes .club-route__short { display: inline; }
-
-  .scene-club:not(.is-scene) .scene__routes {
-    flex-wrap: nowrap;
+  .scene-club:not(.is-scene) .scene__fact { min-width: 0; }
+  .home-page.page-flow-selected .scene-club:not(.is-scene) .scene__frame {
+    position: relative;
+    display: grid;
+    padding: 0;
+    isolation: isolate;
   }
-}
-
-/* Телефон: чуть меньше, чем на широком экране */
-@media (max-width: 560px) {
-  .scene-club:not(.is-scene) .scene__facts {
-    grid-template-columns: minmax(0, 1fr) max-content;
-    column-gap: 16px;
+  .scene-club:not(.is-scene) .scene__frame > * { grid-area: 1 / 1; }
+  .home-page.page-flow-selected .scene-club:not(.is-scene) .scene__words {
+    z-index: 1;
+    align-self: center;
+    padding-inline: var(--club-edge);
+    font-size: clamp(2rem, 12vw, 4.2rem);
   }
-  .scene__fact { font-size: .8rem; }
-  .scene__fact strong { font-size: 1.1rem; }
-}
-
-/* Узкий телефон: две кнопки рядом не помещаются — одна под другой */
-@media (max-width: 359px) {
-  .is-scene .scene__routes,
-  .scene-club:not(.is-scene) .scene__routes {
-    flex-direction: column;
-  }
-
-  .is-scene .scene__routes .club-route,
-  .scene__routes .club-route {
-    flex: none;
+  .scene-club:not(.is-scene) .scene__photo {
+    position: relative;
     width: 100%;
-    min-height: 48px;
+    margin: 0;
   }
-
-  .is-scene .scene__fact:nth-child(3) { bottom: 204px; }
-
-  /* Подписи чуть меньше, чтобы «08:00–23:00» не ломалось, а адрес не наезжал на заголовок */
-  .scene__fact { font-size: .76rem; }
-  .scene__fact strong { font-size: 1.04rem; }
-
-  .is-scene .scene__pin {
-    --words-top: calc(42svh - var(--title-h) / 2); /* заголовок чуть выше центра: снизу адрес и две кнопки */
+  .scene-club:not(.is-scene) .scene__photo img {
+    height: max(100svh, 420px);
+    aspect-ratio: auto;
+    border-radius: 0;
+  }
+  .scene-club:not(.is-scene) .scene__photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+    background: rgba(6, 36, 31, .5);
   }
 }
 
@@ -2174,6 +2181,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
 .club-life__poster-stage{min-width:0;position:relative;perspective:850px;width:100%;padding:18px 10px}
 .club-life__print{--base-angle:-1.5deg;--mx:0px;--my:0px;--rx:0deg;--ry:0deg;--lift:0px;--depth:0px;--rz:0deg;position:relative;display:block;background:#fff;padding:7px;box-shadow:none;transform:translate3d(var(--mx),calc(var(--my) + var(--lift)),var(--depth)) rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(calc(var(--base-angle) + var(--rz)));transition:transform 500ms var(--life-ease);transform-style:preserve-3d}
 .club-life__print.is-following{transition-duration:180ms;--lift:-12px;--depth:58px;will-change:transform}
+.club-life__print.is-following.is-touch-following{--lift:-6px;--depth:22px}
 .club-life__event:nth-child(2) .club-life__print{--base-angle:2deg}
 .club-life__poster{display:block;width:100%;height:auto}
 .club-life__signup{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;min-width:240px;min-height:58px;padding:7px 7px 7px 22px;border:1px solid var(--life-ink);border-radius:999px;background:transparent;color:var(--life-ink);font:600 16px/1.2 var(--font-text);letter-spacing:-.015em;text-decoration:none;transition:transform 180ms var(--life-ease),border-color 180ms}
@@ -2510,9 +2518,9 @@ footer span { font-size: .875rem; line-height: 1.5; }
 #start .path-photo img { opacity: 1; }
 #start .path:hover .path-photo img { transform: scale(1.02); }
 #start .path:has(.path-cta:focus-visible) { outline: 3px solid #d9f21e; outline-offset: 4px; }
-/* JS opts in only if every card fits the viewport. The default is a readable list. */
+/* Tall mobile cards scroll to their bottom before they pin. No JS: readable list. */
 #start.is-stack .paths { gap: clamp(44px, 6svh, 72px); padding-bottom: 32px; }
-#start.is-stack .path-stage { position: sticky; top: var(--stack-top); align-self: start; }
+#start.is-stack .path-stage { position: sticky; top: var(--card-stack-top, var(--stack-top)); align-self: start; }
 #start.is-stack .path-stage:nth-child(1) { z-index: 1; }
 #start.is-stack .path-stage:nth-child(2) { z-index: 2; }
 #start.is-stack .path-stage:nth-child(3) { z-index: 3; }
@@ -2655,7 +2663,8 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 .button-motion__face{position:relative;box-sizing:border-box;flex:1 1 auto;min-width:0;margin:0;pointer-events:auto;transform:translate(var(--button-x,0px),var(--button-y,0px)) scale(var(--button-scale,1));transform-origin:50% 50%;transition:transform 300ms cubic-bezier(.22,.75,.18,1)}
 [data-button-motion].is-button-following>.button-motion__face{transition-duration:140ms;will-change:transform}
 [data-button-motion]:focus-visible{--button-y:-4px;--button-scale:1.055}
-[data-button-motion].is-button-pressing>.button-motion__face,[data-button-motion]:active>.button-motion__face{animation:none!important;transform:translateY(2px) scale(.95)!important}
+/* JS tracks pointer/key release; native :active can linger after a touch opens details. */
+[data-button-motion].is-button-pressing>.button-motion__face{animation:none!important;transform:translateY(2px) scale(.95)!important}
 @keyframes button-magnetic-release{0%{transform:translateY(2px) scale(.95)}45%{transform:translateY(-4px) scale(1.025)}75%{transform:translateY(1px) scale(.99)}100%{transform:translate(var(--button-x,0px),var(--button-y,0px)) scale(var(--button-scale,1))}}
 [data-button-motion].is-button-releasing>.button-motion__face{animation:button-magnetic-release 600ms cubic-bezier(.22,.75,.18,1)}
 /* Freeze the older independent icon/letter reactions. Menu open/close is a state. */
@@ -3036,13 +3045,14 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   </footer>
 
 <script data-preview-source="prototype/paths-stack.js">
-// Закрепление выполняет CSS. JS лишь проверяет, что карточки помещаются целиком.
+// Закрепление выполняет CSS. Высокая карточка сначала прокручивается до кнопки.
 (() => {
   const section = document.querySelector('#start');
   const cards = [...(section?.querySelectorAll('.path-stage > .path') ?? [])];
   if (cards.length < 2) return;
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const narrow = matchMedia('(max-width: 800px)');
   let queued = false;
   let interacted = false;
 
@@ -3051,8 +3061,13 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
     const top = parseFloat(getComputedStyle(section).getPropertyValue('--stack-top'));
     const height = window.visualViewport?.height ?? innerHeight;
     const available = height - top - 16;
-    const fits = cards.every(card => card.offsetHeight <= available);
-    section.classList.toggle('is-stack', !reduce.matches && fits);
+    const heights = cards.map(card => card.offsetHeight);
+    const fits = heights.every(value => value <= available);
+    // On a phone, pin the card only after its bottom has reached the viewport.
+    // A negative sticky top lets the whole tall card pass naturally before stacking.
+    cards.forEach((card, index) => card.parentElement.style.setProperty('--card-stack-top',
+      `${narrow.matches ? Math.min(top, height - heights[index] - 16) : top}px`));
+    section.classList.toggle('is-stack', !reduce.matches && (fits || narrow.matches));
   }
 
   function schedule() {
@@ -3169,13 +3184,15 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
    слой с заголовками, фактами и маршрутом. Поэтому нет отставания от прокрутки.
    Скрипт только переключает заголовок, когда кадр пересекает середину экрана,
    и гасит нижние углы, когда к низу экрана подходит белый стык с «Ценами».
-   Прокрутку не перехватываем. На узких или низких экранах, без JS
+   Прокрутку не перехватываем. На очень низких экранах, без JS
    и при prefers-reduced-motion остаётся список кадров. */
 (() => {
   const club = document.querySelector('.scene-club');
   if (!club) return;
-  const wideScene = window.matchMedia('(min-width: 801px) and (min-height: 620px) and (prefers-reduced-motion: no-preference)');
+  // A phone gets the same scene. Only a short viewport or reduced motion needs a list.
+  const sceneAllowed = window.matchMedia('(max-width: 800px) and (min-height: 480px) and (prefers-reduced-motion: no-preference), (min-width: 801px) and (min-height: 620px) and (prefers-reduced-motion: no-preference)');
   const scene = club.querySelector('.scene');
+  const pin = club.querySelector('.scene__pin');
   const frames = [...club.querySelectorAll('.scene__frame')];
   let photos = null;
   let frameRequest = 0;
@@ -3204,12 +3221,15 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 
   const sync = () => {
     frameRequest = 0;
-    const { bottom } = photos.getBoundingClientRect();
-    const midpoint = window.innerHeight / 2;
+    const { top, bottom } = photos.getBoundingClientRect();
+    const height = pin.clientHeight;
+    // svh is stable while Safari's address bar changes size. Match the actual title layer.
+    const midpoint = height / 2;
+    if (bottom < 0 || top > window.innerHeight) return;
     // Середина окна выбирает главу даже после резкого прыжка.
     const index = [...photos.children].findIndex(picture => picture.getBoundingClientRect().bottom > midpoint);
     if (photos.children.length) show(index < 0 ? photos.children.length - 1 : index);
-    club.classList.toggle('is-ending', bottom - window.innerHeight < window.innerHeight * 0.3);
+    club.classList.toggle('is-ending', bottom - height < height * 0.3);
   };
 
   const schedule = () => {
@@ -3217,7 +3237,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   };
 
   const configure = () => {
-    if (wideScene.matches) {
+    if (sceneAllowed.matches) {
       if (!photos) build();
       club.classList.add('is-scene');
       window.addEventListener('scroll', schedule, { passive: true });
@@ -3233,7 +3253,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   };
 
   configure();
-  wideScene.addEventListener('change', configure);
+  sceneAllowed.addEventListener('change', configure);
 })();
 
 </script>
@@ -3330,17 +3350,19 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   const resets = [];
   document.querySelectorAll('.club-life__poster-stage').forEach(stage => {
     const sheet = stage.querySelector('.club-life__print');
-    let frame = 0, clientX = 0, clientY = 0;
+    let frame = 0, clientX = 0, clientY = 0, touchId = null, touchStartY = 0;
     const clear = () => {
       cancelAnimationFrame(frame); frame = 0;
-      sheet.classList.remove('is-following');
+      touchId = null;
+      sheet.classList.remove('is-following', 'is-touch-following');
       ['--mx', '--my', '--rx', '--ry', '--rz'].forEach(p => sheet.style.removeProperty(p));
     };
     const draw = () => {
       frame = 0;
       const rect = stage.getBoundingClientRect();
-      const x = Math.max(-1, Math.min(1, (clientX - rect.left) / rect.width * 2 - 1));
-      const y = Math.max(-1, Math.min(1, (clientY - rect.top) / rect.height * 2 - 1));
+      const strength = touchId === null ? 1 : .55;
+      const x = Math.max(-1, Math.min(1, (clientX - rect.left) / rect.width * 2 - 1)) * strength;
+      const y = Math.max(-1, Math.min(1, (clientY - rect.top) / rect.height * 2 - 1)) * strength;
       const values = {
         '--mx': x * 16 + 'px', '--my': y * 10 + 'px',
         '--rx': -y * 12 + 'deg', '--ry': x * 16 + 'deg', '--rz': x * 2 + 'deg'
@@ -3352,13 +3374,30 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
       sheet.classList.add('is-following');
     };
     stage.addEventListener('pointerenter', start);
+    stage.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'touch' || !event.isPrimary || reduced.matches) return;
+      touchId = event.pointerId;
+      touchStartY = clientY = event.clientY;
+      clientX = event.clientX;
+      sheet.classList.add('is-following', 'is-touch-following');
+      if (!frame) frame = requestAnimationFrame(draw);
+    });
     stage.addEventListener('pointermove', event => {
+      // Yield to the native vertical gesture; never capture or cancel a touch.
+      if (event.pointerType === 'touch' && (event.pointerId !== touchId || Math.abs(event.clientY - touchStartY) > 8)) {
+        if (event.pointerId === touchId) clear();
+        return;
+      }
       if (!sheet.classList.contains('is-following')) start(event);
       if (!sheet.classList.contains('is-following')) return;
       clientX = event.clientX; clientY = event.clientY;
       if (!frame) frame = requestAnimationFrame(draw);
     });
     stage.addEventListener('pointerleave', clear); stage.addEventListener('pointercancel', clear);
+    const release = event => { if (event.pointerId === touchId) clear(); };
+    addEventListener('pointerup', release);
+    addEventListener('pointercancel', release);
+    addEventListener('scroll', () => { if (touchId !== null) clear(); }, { passive: true });
     resets.push(clear);
   });
   const reset = () => resets.forEach(clear => clear());
@@ -3553,7 +3592,8 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
  function refresh(){
   refreshFrame=0;reset();const all=[...document.querySelectorAll(selector)];const items=[];
   // Restore all native layouts together, then read, then write: no per-button thrash.
-  for(const target of all){target.setAttribute('data-button-motion','');if(!target.getClientRects().length||target.matches('[hidden]'))continue;const face=faces.get(target);clearTimeout(releaseTimers.get(target));target.classList.remove('is-button-releasing','is-motion-ready');if(face)face.style.setProperty('display','contents','important');items.push({target,face})}
+  // Opening a menu refreshes sizes, but must not cancel the release just triggered by touch.
+  for(const target of all){target.setAttribute('data-button-motion','');if(!target.getClientRects().length||target.matches('[hidden]'))continue;const face=faces.get(target);target.classList.remove('is-motion-ready');if(face)face.style.setProperty('display','contents','important');items.push({target,face})}
   const snapshots=items.map(item=>{const s=getComputedStyle(item.target),r=item.target.getBoundingClientRect(),values={};for(const name of paint)values[name]=s[name];return{...item,values,display:s.display,width:parseFloat(s.width)||item.target.offsetWidth,height:parseFloat(s.height)||item.target.offsetHeight,visible:r.width>0&&r.height>0}});
   for(const item of snapshots){
    const {target,values}=item;let face=item.face;if(!item.visible)continue;

@@ -4,17 +4,19 @@
   const resets = [];
   document.querySelectorAll('.club-life__poster-stage').forEach(stage => {
     const sheet = stage.querySelector('.club-life__print');
-    let frame = 0, clientX = 0, clientY = 0;
+    let frame = 0, clientX = 0, clientY = 0, touchId = null, touchStartY = 0;
     const clear = () => {
       cancelAnimationFrame(frame); frame = 0;
-      sheet.classList.remove('is-following');
+      touchId = null;
+      sheet.classList.remove('is-following', 'is-touch-following');
       ['--mx', '--my', '--rx', '--ry', '--rz'].forEach(p => sheet.style.removeProperty(p));
     };
     const draw = () => {
       frame = 0;
       const rect = stage.getBoundingClientRect();
-      const x = Math.max(-1, Math.min(1, (clientX - rect.left) / rect.width * 2 - 1));
-      const y = Math.max(-1, Math.min(1, (clientY - rect.top) / rect.height * 2 - 1));
+      const strength = touchId === null ? 1 : .55;
+      const x = Math.max(-1, Math.min(1, (clientX - rect.left) / rect.width * 2 - 1)) * strength;
+      const y = Math.max(-1, Math.min(1, (clientY - rect.top) / rect.height * 2 - 1)) * strength;
       const values = {
         '--mx': x * 16 + 'px', '--my': y * 10 + 'px',
         '--rx': -y * 12 + 'deg', '--ry': x * 16 + 'deg', '--rz': x * 2 + 'deg'
@@ -26,13 +28,30 @@
       sheet.classList.add('is-following');
     };
     stage.addEventListener('pointerenter', start);
+    stage.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'touch' || !event.isPrimary || reduced.matches) return;
+      touchId = event.pointerId;
+      touchStartY = clientY = event.clientY;
+      clientX = event.clientX;
+      sheet.classList.add('is-following', 'is-touch-following');
+      if (!frame) frame = requestAnimationFrame(draw);
+    });
     stage.addEventListener('pointermove', event => {
+      // Yield to the native vertical gesture; never capture or cancel a touch.
+      if (event.pointerType === 'touch' && (event.pointerId !== touchId || Math.abs(event.clientY - touchStartY) > 8)) {
+        if (event.pointerId === touchId) clear();
+        return;
+      }
       if (!sheet.classList.contains('is-following')) start(event);
       if (!sheet.classList.contains('is-following')) return;
       clientX = event.clientX; clientY = event.clientY;
       if (!frame) frame = requestAnimationFrame(draw);
     });
     stage.addEventListener('pointerleave', clear); stage.addEventListener('pointercancel', clear);
+    const release = event => { if (event.pointerId === touchId) clear(); };
+    addEventListener('pointerup', release);
+    addEventListener('pointercancel', release);
+    addEventListener('scroll', () => { if (touchId !== null) clear(); }, { passive: true });
     resets.push(clear);
   });
   const reset = () => resets.forEach(clear => clear());

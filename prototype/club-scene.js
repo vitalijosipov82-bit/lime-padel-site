@@ -4,13 +4,15 @@
    слой с заголовками, фактами и маршрутом. Поэтому нет отставания от прокрутки.
    Скрипт только переключает заголовок, когда кадр пересекает середину экрана,
    и гасит нижние углы, когда к низу экрана подходит белый стык с «Ценами».
-   Прокрутку не перехватываем. На узких или низких экранах, без JS
+   Прокрутку не перехватываем. На очень низких экранах, без JS
    и при prefers-reduced-motion остаётся список кадров. */
 (() => {
   const club = document.querySelector('.scene-club');
   if (!club) return;
-  const wideScene = window.matchMedia('(min-width: 801px) and (min-height: 620px) and (prefers-reduced-motion: no-preference)');
+  // A phone gets the same scene. Only a short viewport or reduced motion needs a list.
+  const sceneAllowed = window.matchMedia('(max-width: 800px) and (min-height: 480px) and (prefers-reduced-motion: no-preference), (min-width: 801px) and (min-height: 620px) and (prefers-reduced-motion: no-preference)');
   const scene = club.querySelector('.scene');
+  const pin = club.querySelector('.scene__pin');
   const frames = [...club.querySelectorAll('.scene__frame')];
   let photos = null;
   let frameRequest = 0;
@@ -39,12 +41,15 @@
 
   const sync = () => {
     frameRequest = 0;
-    const { bottom } = photos.getBoundingClientRect();
-    const midpoint = window.innerHeight / 2;
+    const { top, bottom } = photos.getBoundingClientRect();
+    const height = pin.clientHeight;
+    // svh is stable while Safari's address bar changes size. Match the actual title layer.
+    const midpoint = height / 2;
+    if (bottom < 0 || top > window.innerHeight) return;
     // Середина окна выбирает главу даже после резкого прыжка.
     const index = [...photos.children].findIndex(picture => picture.getBoundingClientRect().bottom > midpoint);
     if (photos.children.length) show(index < 0 ? photos.children.length - 1 : index);
-    club.classList.toggle('is-ending', bottom - window.innerHeight < window.innerHeight * 0.3);
+    club.classList.toggle('is-ending', bottom - height < height * 0.3);
   };
 
   const schedule = () => {
@@ -52,7 +57,7 @@
   };
 
   const configure = () => {
-    if (wideScene.matches) {
+    if (sceneAllowed.matches) {
       if (!photos) build();
       club.classList.add('is-scene');
       window.addEventListener('scroll', schedule, { passive: true });
@@ -68,5 +73,5 @@
   };
 
   configure();
-  wideScene.addEventListener('change', configure);
+  sceneAllowed.addEventListener('change', configure);
 })();

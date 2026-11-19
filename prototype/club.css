@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('assets/fonts/firasansextracondensed-normal-900.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url('assets/fonts/firasansextracondensed-italic-900.woff2') format('woff2');
+}
+
 /* ---------- Блок «Клуб и пространство» (#club) ----------
    Единственное место стилей блока. В styles.css остались старые правила .club, .club-image,
    .club-copy (двухколоночная раскладка, фон-исходник 7 МБ) — разметки под них больше нет,
@@ -425,84 +440,76 @@
   transform: translateY(1px);
 }
 
-/* ---------- телефон ---------- */
+/* ---------- Утверждённая мобильная сцена, 19.11.2026 ---------- */
 
-@media (max-width: 800px) {
-  .is-scene .scene__pin {
-    --f: clamp(2.2rem, 12vw, 4.2rem); /* «СО ШКАФЧИКАМИ» помещается и на 320 */
+@media (max-width: 800px), (max-width: 950px) and (max-height: 479px) {
+  .scene-club {
+    --club-edge: max(16px, 5vw);
+    --club-header: 96px;
   }
 
-  .is-scene .scene__pin::before { height: 130px; }
-  .is-scene .scene__pin::after { height: 260px; background: linear-gradient(0deg, rgba(6, 36, 31, .82), rgba(6, 36, 31, 0)); }
+  .scene-club .scene__fact { font-size: .75rem; letter-spacing: .08em; }
+  .scene-club .scene__fact strong { font-size: 1rem; line-height: 1.25; }
 
-  .is-scene .scene__fact { max-width: 44vw; }
-  .is-scene .scene__fact:nth-child(1),
-  .is-scene .scene__fact:nth-child(2) { top: 24px; }
-  /* адрес над кнопками маршрута, всё — над нижней полосой «Записаться» */
-  .is-scene .scene__fact:nth-child(3) { bottom: 156px; max-width: 90vw; }
-
-  .is-scene .scene__routes {
-    left: 5vw;
-    right: 5vw;
-    bottom: 84px;
-    gap: 8px;
+  .scene-club.is-scene .scene__fact:nth-child(1),
+  .scene-club.is-scene .scene__fact:nth-child(2) { top: var(--club-header); max-width: calc(45vw - 8px); }
+  .scene-club.is-scene .scene__fact:nth-child(1) { left: var(--club-edge); }
+  .scene-club.is-scene .scene__fact:nth-child(2) { right: var(--club-edge); }
+  .scene-club.is-scene .scene__fact:nth-child(3) {
+    left: var(--club-edge);
+    bottom: max(84px, calc(env(safe-area-inset-bottom) + 64px));
+    max-width: calc(100% - 2 * var(--club-edge));
   }
 
-  .is-scene .scene__routes .club-route,
-  .scene__routes .club-route {
-    flex: 1;
-    min-width: 0;
-    min-height: 52px;
-    gap: 10px;
-    padding: 6px 6px 6px 14px;
-    font-size: .9rem;
+  .scene-club.is-scene .scene__pin {
+    --f: clamp(2rem, 12vw, 4.2rem);
+    --words-top: calc(52svh - var(--title-h) / 2);
+  }
+  .scene-club.is-scene .scene__titles { left: var(--club-edge); right: var(--club-edge); }
+  /* Keep small facts legible even when a bright window passes beneath them. */
+  .home-page.page-flow-selected .scene-club .scene__photos picture::after {
+    background: linear-gradient(180deg,
+      rgba(6,36,31,.82), rgba(6,36,31,.7) 160px, transparent 240px,
+      transparent calc(100% - 280px), rgba(6,36,31,.7) calc(100% - 160px), rgba(6,36,31,.82)),
+      rgba(6,36,31,.5);
   }
 
-  .scene__routes .club-route__icon {
-    width: 38px;
-    height: 38px;
+  /* Static alternative: the same photo/title relationship, with every chapter visible. */
+  .home-page.page-flow-selected .scene-club:not(.is-scene) .scene__facts {
+    padding: var(--club-header) var(--club-edge) 32px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 20px 16px;
   }
-
-  .scene__routes .club-route__long { display: none; }
-  .scene__routes .club-route__short { display: inline; }
-
-  .scene-club:not(.is-scene) .scene__routes {
-    flex-wrap: nowrap;
+  .scene-club:not(.is-scene) .scene__fact { min-width: 0; }
+  .home-page.page-flow-selected .scene-club:not(.is-scene) .scene__frame {
+    position: relative;
+    display: grid;
+    padding: 0;
+    isolation: isolate;
   }
-}
-
-/* Телефон: чуть меньше, чем на широком экране */
-@media (max-width: 560px) {
-  .scene-club:not(.is-scene) .scene__facts {
-    grid-template-columns: minmax(0, 1fr) max-content;
-    column-gap: 16px;
+  .scene-club:not(.is-scene) .scene__frame > * { grid-area: 1 / 1; }
+  .home-page.page-flow-selected .scene-club:not(.is-scene) .scene__words {
+    z-index: 1;
+    align-self: center;
+    padding-inline: var(--club-edge);
+    font-size: clamp(2rem, 12vw, 4.2rem);
   }
-  .scene__fact { font-size: .8rem; }
-  .scene__fact strong { font-size: 1.1rem; }
-}
-
-/* Узкий телефон: две кнопки рядом не помещаются — одна под другой */
-@media (max-width: 359px) {
-  .is-scene .scene__routes,
-  .scene-club:not(.is-scene) .scene__routes {
-    flex-direction: column;
-  }
-
-  .is-scene .scene__routes .club-route,
-  .scene__routes .club-route {
-    flex: none;
+  .scene-club:not(.is-scene) .scene__photo {
+    position: relative;
     width: 100%;
-    min-height: 48px;
+    margin: 0;
   }
-
-  .is-scene .scene__fact:nth-child(3) { bottom: 204px; }
-
-  /* Подписи чуть меньше, чтобы «08:00–23:00» не ломалось, а адрес не наезжал на заголовок */
-  .scene__fact { font-size: .76rem; }
-  .scene__fact strong { font-size: 1.04rem; }
-
-  .is-scene .scene__pin {
-    --words-top: calc(42svh - var(--title-h) / 2); /* заголовок чуть выше центра: снизу адрес и две кнопки */
+  .scene-club:not(.is-scene) .scene__photo img {
+    height: max(100svh, 420px);
+    aspect-ratio: auto;
+    border-radius: 0;
+  }
+  .scene-club:not(.is-scene) .scene__photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+    background: rgba(6, 36, 31, .5);
   }
 }
 

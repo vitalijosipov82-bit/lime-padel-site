@@ -1,10 +1,11 @@
-// Закрепление выполняет CSS. JS лишь проверяет, что карточки помещаются целиком.
+// Закрепление выполняет CSS. Высокая карточка сначала прокручивается до кнопки.
 (() => {
   const section = document.querySelector('#start');
   const cards = [...(section?.querySelectorAll('.path-stage > .path') ?? [])];
   if (cards.length < 2) return;
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const narrow = matchMedia('(max-width: 800px)');
   let queued = false;
   let interacted = false;
 
@@ -13,8 +14,13 @@
     const top = parseFloat(getComputedStyle(section).getPropertyValue('--stack-top'));
     const height = window.visualViewport?.height ?? innerHeight;
     const available = height - top - 16;
-    const fits = cards.every(card => card.offsetHeight <= available);
-    section.classList.toggle('is-stack', !reduce.matches && fits);
+    const heights = cards.map(card => card.offsetHeight);
+    const fits = heights.every(value => value <= available);
+    // On a phone, pin the card only after its bottom has reached the viewport.
+    // A negative sticky top lets the whole tall card pass naturally before stacking.
+    cards.forEach((card, index) => card.parentElement.style.setProperty('--card-stack-top',
+      `${narrow.matches ? Math.min(top, height - heights[index] - 16) : top}px`));
+    section.classList.toggle('is-stack', !reduce.matches && (fits || narrow.matches));
   }
 
   function schedule() {

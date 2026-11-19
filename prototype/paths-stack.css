@@ -77,9 +77,9 @@
 #start .path-photo img { opacity: 1; }
 #start .path:hover .path-photo img { transform: scale(1.02); }
 #start .path:has(.path-cta:focus-visible) { outline: 3px solid #d9f21e; outline-offset: 4px; }
-/* JS opts in only if every card fits the viewport. The default is a readable list. */
+/* Tall mobile cards scroll to their bottom before they pin. No JS: readable list. */
 #start.is-stack .paths { gap: clamp(44px, 6svh, 72px); padding-bottom: 32px; }
-#start.is-stack .path-stage { position: sticky; top: var(--stack-top); align-self: start; }
+#start.is-stack .path-stage { position: sticky; top: var(--card-stack-top, var(--stack-top)); align-self: start; }
 #start.is-stack .path-stage:nth-child(1) { z-index: 1; }
 #start.is-stack .path-stage:nth-child(2) { z-index: 2; }
 #start.is-stack .path-stage:nth-child(3) { z-index: 3; }

@@ -10,6 +10,7 @@
 .club-life__poster-stage{min-width:0;position:relative;perspective:850px;width:100%;padding:18px 10px}
 .club-life__print{--base-angle:-1.5deg;--mx:0px;--my:0px;--rx:0deg;--ry:0deg;--lift:0px;--depth:0px;--rz:0deg;position:relative;display:block;background:#fff;padding:7px;box-shadow:none;transform:translate3d(var(--mx),calc(var(--my) + var(--lift)),var(--depth)) rotateX(var(--rx)) rotateY(var(--ry)) rotateZ(calc(var(--base-angle) + var(--rz)));transition:transform 500ms var(--life-ease);transform-style:preserve-3d}
 .club-life__print.is-following{transition-duration:180ms;--lift:-12px;--depth:58px;will-change:transform}
+.club-life__print.is-following.is-touch-following{--lift:-6px;--depth:22px}
 .club-life__event:nth-child(2) .club-life__print{--base-angle:2deg}
 .club-life__poster{display:block;width:100%;height:auto}
 .club-life__signup{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;min-width:240px;min-height:58px;padding:7px 7px 7px 22px;border:1px solid var(--life-ink);border-radius:999px;background:transparent;color:var(--life-ink);font:600 16px/1.2 var(--font-text);letter-spacing:-.015em;text-decoration:none;transition:transform 180ms var(--life-ease),border-color 180ms}
