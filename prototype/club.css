@@ -444,7 +444,7 @@
 
 @media (max-width: 800px), (max-width: 950px) and (max-height: 479px) {
   .scene-club {
-    --club-edge: max(16px, 5vw);
+    --club-edge: 16px;
     --club-header: 96px;
   }
 
@@ -452,20 +452,26 @@
   .scene-club .scene__fact strong { font-size: 1rem; line-height: 1.25; }
 
   .scene-club.is-scene .scene__fact:nth-child(1),
-  .scene-club.is-scene .scene__fact:nth-child(2) { top: var(--club-header); max-width: calc(45vw - 8px); }
+  .scene-club.is-scene .scene__fact:nth-child(2) { top: 20px; max-width: calc(50% - 28px); }
   .scene-club.is-scene .scene__fact:nth-child(1) { left: var(--club-edge); }
   .scene-club.is-scene .scene__fact:nth-child(2) { right: var(--club-edge); }
   .scene-club.is-scene .scene__fact:nth-child(3) {
     left: var(--club-edge);
-    bottom: max(84px, calc(env(safe-area-inset-bottom) + 64px));
+    bottom: max(24px, env(safe-area-inset-bottom));
     max-width: calc(100% - 2 * var(--club-edge));
   }
 
   .scene-club.is-scene .scene__pin {
     --f: clamp(2rem, 12vw, 4.2rem);
-    --words-top: calc(52svh - var(--title-h) / 2);
+    --words-top: calc(50svh - var(--title-h) / 2);
   }
   .scene-club.is-scene .scene__titles { left: var(--club-edge); right: var(--club-edge); }
+  /* Full-width entry; the text stays attached to the frame corners. */
+  .home-page.page-flow-selected.is-window-motion .scene-club .scene__photos picture:first-child { clip-path: inset(var(--window-y, 0px) 0 0); }
+  .home-page.page-flow-selected.is-window-motion .scene-club .scene__fact:nth-child(1),
+  .home-page.page-flow-selected.is-window-motion .scene-club .scene__fact:nth-child(2) { transform: none; }
+  .home-page:has(> .site-header.is-scroll-nav-visible) .scene-club.is-scene .scene__fact:nth-child(1),
+  .home-page:has(> .site-header.is-scroll-nav-visible) .scene-club.is-scene .scene__fact:nth-child(2) { top: 92px; }
   /* Keep small facts legible even when a bright window passes beneath them. */
   .home-page.page-flow-selected .scene-club .scene__photos picture::after {
     background: linear-gradient(180deg,

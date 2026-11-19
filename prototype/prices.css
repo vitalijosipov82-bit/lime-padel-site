@@ -122,8 +122,12 @@
   #prices .prices__card h3 { font-size: 30px; }
   #prices .prices__train .prices__actions { flex-direction: column; align-items: stretch; }
 }
+@media (max-width: 800px) {
+  #prices { padding-block: 104px; }
+  #prices .prices__wrap { gap: 40px; }
+}
 @media (max-width: 560px) {
-  #prices { --prices-edge: 24px; padding-block: 72px; }
+  #prices { --prices-edge: 24px; }
   .prices__col--lead { margin-bottom: 0; }
 }
 @media (max-width: 400px) {

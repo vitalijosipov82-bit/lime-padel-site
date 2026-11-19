@@ -118,9 +118,15 @@
   #coaches:not(.is-flip-ready) .coaches__card { margin-bottom: 36px; }
 }
 
+/* Mobile rhythm selected on 19.11.2026; subgrid's internal rows stay compact. */
+@media (max-width: 800px) {
+  #coaches { padding-block: 104px; }
+  #coaches .coaches__title { margin-bottom: 48px; }
+  #coaches .coaches__actions { margin-top: 48px; }
+}
 /* ---------- Телефон ---------- */
 @media (max-width: 700px) {
-  #coaches { padding: 72px max(5vw, 16px) 80px; }
+  #coaches { padding: 104px max(5vw, 16px); }
   #coaches .coaches__title { font-size: clamp(56px, 17vw, 76px); }
   .coaches__grid { --coaches-gap: 14px; }
   .coaches__photo { aspect-ratio: 4 / 5; border-radius: 14px; }

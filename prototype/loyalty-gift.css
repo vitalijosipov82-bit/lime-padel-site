@@ -106,10 +106,10 @@
   #loyalty-gift .benefits__bots { grid-area: 1 / 2; }
 }
 @media (max-width:800px) {
-  #loyalty-gift { --benefit-ball-size: 68px; clip-path: polygon(0 0,100% 18px,100% 100%,0 calc(100% - 18px)); }
-  #loyalty-gift.benefits { padding-inline: 5vw; }
+  #loyalty-gift { --benefit-ball-size: 68px; --benefit-ball-top: 60px; clip-path: polygon(0 0,100% 18px,100% 100%,0 calc(100% - 18px)); }
+  #loyalty-gift.benefits { padding-inline: 5vw; padding-block: 104px; }
   #loyalty-gift.benefits .benefits__brand-ball { left: auto; right: 7vw; transform: none; }
-  #loyalty-gift .benefits__offers { grid-template-columns: minmax(0,1fr); row-gap: 16px; }
+  #loyalty-gift .benefits__offers { grid-template-columns: minmax(0,1fr); row-gap: 40px; }
   #loyalty-gift .benefits__offer { display: block; grid-row: auto; }
 }
 @media (max-width:480px) {

@@ -6,20 +6,32 @@
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 800px)');
+  // A stable viewport keeps Safari toolbar changes from retiming the stack.
+  const measure = document.createElement('span');
+  measure.setAttribute('aria-hidden', 'true');
+  measure.style.cssText = 'position:absolute;width:0;height:100svh;visibility:hidden;pointer-events:none';
+  section.prepend(measure);
   let queued = false;
   let interacted = false;
+  let configuration = '';
 
   function configure() {
     queued = false;
     const top = parseFloat(getComputedStyle(section).getPropertyValue('--stack-top'));
-    const height = window.visualViewport?.height ?? innerHeight;
+    const height = narrow.matches ? measure.getBoundingClientRect().height : (window.visualViewport?.height ?? innerHeight);
     const available = height - top - 16;
     const heights = cards.map(card => card.offsetHeight);
+    const key = [narrow.matches, reduce.matches, section.clientWidth, height, ...heights].join('|');
+    if (key === configuration) return;
+    configuration = key;
     const fits = heights.every(value => value <= available);
     // On a phone, pin the card only after its bottom has reached the viewport.
     // A negative sticky top lets the whole tall card pass naturally before stacking.
-    cards.forEach((card, index) => card.parentElement.style.setProperty('--card-stack-top',
-      `${narrow.matches ? Math.min(top, height - heights[index] - 16) : top}px`));
+    cards.forEach((card, index) => {
+      const pin = narrow.matches ? Math.min(top, height - heights[index] - 16) : top;
+      card.parentElement.style.setProperty('--card-stack-top', `${pin}px`);
+      card.parentElement.style.setProperty('--card-stack-fill', `${narrow.matches ? Math.max(0, height - pin - heights[index]) : 0}px`);
+    });
     section.classList.toggle('is-stack', !reduce.matches && (fits || narrow.matches));
   }
 

@@ -13,15 +13,16 @@
     if (!enabled) { lastProgress = null; return; }
     const top = club.getBoundingClientRect().top;
     // Fractional card heights can leave the section <1px from the native scroll target.
-    const p = top <= 1 ? 0 : Math.min(1,top / (innerHeight * .85));
+    const height = club.querySelector('.scene__pin').clientHeight;
+    const p = top <= 1 ? 0 : Math.min(1,top / (height * .85));
     if (p === lastProgress) return;
     lastProgress = p;
     const narrow = innerWidth <= 800;
-    const inset = document.documentElement.clientWidth * (narrow ? .12 : .18) * p;
+    const inset = narrow ? 0 : document.documentElement.clientWidth * .18 * p;
     club.style.setProperty('--window-x',`${inset}px`);
-    club.style.setProperty('--window-y',`${innerHeight * .08 * p}px`);
-    club.style.setProperty('--window-radius',`${16 * p}px`);
-    club.style.setProperty('--fact-shift-x',`${Math.max(0,inset + (narrow ? 12 : 24) - factEdge)}px`);
+    club.style.setProperty('--window-y',`${(narrow ? Math.min(16, height * .025) : innerHeight * .08) * p}px`);
+    club.style.setProperty('--window-radius',`${narrow ? 0 : 16 * p}px`);
+    club.style.setProperty('--fact-shift-x',`${narrow ? 0 : Math.max(0,inset + 24 - factEdge)}px`);
   };
   const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
   const measure = () => {

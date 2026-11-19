@@ -29,6 +29,7 @@
   let referenceY = Math.max(0, window.scrollY);
   let visible = false;
   let frame = 0;
+  let resizeUntil = 0;
 
   function updateHeader() {
     frame = 0;
@@ -39,7 +40,9 @@
     if (!floating || heldOpen) {
       referenceY = y;
       visible = floating && heldOpen;
-    } else if (Math.abs(y - referenceY) >= 12) {
+    } else if (mobile.matches && performance.now() < resizeUntil) {
+      referenceY = y;
+    } else if (Math.abs(y - referenceY) >= (mobile.matches ? (y < referenceY ? 72 : 120) : 12)) {
       visible = y < referenceY;
       referenceY = y;
     }
@@ -55,7 +58,10 @@
   }
 
   window.addEventListener('scroll', scheduleHeader, { passive: true });
-  window.addEventListener('resize', scheduleHeader, { passive: true });
+  window.addEventListener('resize', () => {
+    if (mobile.matches) { resizeUntil = performance.now() + 220; referenceY = Math.max(0, scrollY); }
+    scheduleHeader();
+  }, { passive: true });
   window.addEventListener('pageshow', scheduleHeader);
   header.addEventListener('focusin', scheduleHeader);
   header.addEventListener('focusout', scheduleHeader);

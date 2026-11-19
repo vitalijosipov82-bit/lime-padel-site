@@ -9,8 +9,8 @@
 }
 #start .intro-head { margin-bottom: var(--paths-heading-gap); }
 @media (max-width: 1100px) { #start { --paths-air: 88px; --paths-heading-gap: 40px; } }
-@media (max-width: 800px) { #start { --paths-edge: 32px; } }
-@media (max-width: 560px) { #start { --paths-edge: 24px; --paths-air: 72px; --paths-top: 56px; --paths-heading-gap: 32px; } }
+@media (max-width: 800px) { #start { --paths-edge: 32px; --paths-air: 104px; --paths-top: 104px; --paths-heading-gap: 48px; } }
+@media (max-width: 560px) { #start { --paths-edge: 24px; } }
 /* A bounded interpretation of GDP's stacked cards, in LAYM's existing colours and type. */
 #start {
   --card-height: 440px;
@@ -84,7 +84,14 @@
 #start.is-stack .path-stage:nth-child(2) { z-index: 2; }
 #start.is-stack .path-stage:nth-child(3) { z-index: 3; }
 #start.is-stack .paths:has(:focus-visible) .path-stage { position: relative; top: auto; }
-@media (max-width: 800px) { #start { --stack-top: 78px; } }
+/* Owner selected the reading runway and 104 px rhythm on 19.11.2026. */
+@media (max-width: 800px) {
+  #start { --stack-top: 78px; --paths-list-gap: 64px; --paths-read-hold: clamp(200px, 34svh, 340px); }
+  #start.is-stack .paths { gap: 80px; padding-bottom: 0; }
+  #start.is-stack .path-stage:not(:last-child) { padding-bottom: calc(var(--card-stack-fill, 0px) + var(--paths-read-hold)); }
+  #start.is-stack .path-stage { scroll-margin-top: 24px; }
+  #start.is-stack .paths:has(:focus-visible) .path-stage { padding-bottom: 0; }
+}
 @media (max-width: 1100px) {
   #start .path h3 { font-size: 44px; padding: 28px 28px 0; }
   #start .path-num { padding: 12px 28px 0; }
@@ -92,7 +99,7 @@
   #start .path-bottom { padding: 22px 28px 28px; }
 }
 @media (max-width: 700px) {
-  #start { --paths-list-gap: 40px; }
+  #start { --paths-list-gap: 64px; }
   #start .path { display: flex; flex-direction: column; min-height: 0; }
   #start .path-photo { order: -1; width: auto; aspect-ratio: 4 / 3; margin: 10px 10px 0; }
   #start .path h3 { padding: 24px 24px 0; font-size: clamp(36px, 10.5vw, 48px); }

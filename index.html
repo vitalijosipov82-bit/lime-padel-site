@@ -1689,7 +1689,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
 
 @media (max-width: 800px), (max-width: 950px) and (max-height: 479px) {
   .scene-club {
-    --club-edge: max(16px, 5vw);
+    --club-edge: 16px;
     --club-header: 96px;
   }
 
@@ -1697,20 +1697,26 @@ footer span { font-size: .875rem; line-height: 1.5; }
   .scene-club .scene__fact strong { font-size: 1rem; line-height: 1.25; }
 
   .scene-club.is-scene .scene__fact:nth-child(1),
-  .scene-club.is-scene .scene__fact:nth-child(2) { top: var(--club-header); max-width: calc(45vw - 8px); }
+  .scene-club.is-scene .scene__fact:nth-child(2) { top: 20px; max-width: calc(50% - 28px); }
   .scene-club.is-scene .scene__fact:nth-child(1) { left: var(--club-edge); }
   .scene-club.is-scene .scene__fact:nth-child(2) { right: var(--club-edge); }
   .scene-club.is-scene .scene__fact:nth-child(3) {
     left: var(--club-edge);
-    bottom: max(84px, calc(env(safe-area-inset-bottom) + 64px));
+    bottom: max(24px, env(safe-area-inset-bottom));
     max-width: calc(100% - 2 * var(--club-edge));
   }
 
   .scene-club.is-scene .scene__pin {
     --f: clamp(2rem, 12vw, 4.2rem);
-    --words-top: calc(52svh - var(--title-h) / 2);
+    --words-top: calc(50svh - var(--title-h) / 2);
   }
   .scene-club.is-scene .scene__titles { left: var(--club-edge); right: var(--club-edge); }
+  /* Full-width entry; the text stays attached to the frame corners. */
+  .home-page.page-flow-selected.is-window-motion .scene-club .scene__photos picture:first-child { clip-path: inset(var(--window-y, 0px) 0 0); }
+  .home-page.page-flow-selected.is-window-motion .scene-club .scene__fact:nth-child(1),
+  .home-page.page-flow-selected.is-window-motion .scene-club .scene__fact:nth-child(2) { transform: none; }
+  .home-page:has(> .site-header.is-scroll-nav-visible) .scene-club.is-scene .scene__fact:nth-child(1),
+  .home-page:has(> .site-header.is-scroll-nav-visible) .scene-club.is-scene .scene__fact:nth-child(2) { top: 92px; }
   /* Keep small facts legible even when a bright window passes beneath them. */
   .home-page.page-flow-selected .scene-club .scene__photos picture::after {
     background: linear-gradient(180deg,
@@ -2009,8 +2015,12 @@ footer span { font-size: .875rem; line-height: 1.5; }
   #prices .prices__card h3 { font-size: 30px; }
   #prices .prices__train .prices__actions { flex-direction: column; align-items: stretch; }
 }
+@media (max-width: 800px) {
+  #prices { padding-block: 104px; }
+  #prices .prices__wrap { gap: 40px; }
+}
 @media (max-width: 560px) {
-  #prices { --prices-edge: 24px; padding-block: 72px; }
+  #prices { --prices-edge: 24px; }
   .prices__col--lead { margin-bottom: 0; }
 }
 @media (max-width: 400px) {
@@ -2143,9 +2153,15 @@ footer span { font-size: .875rem; line-height: 1.5; }
   #coaches:not(.is-flip-ready) .coaches__card { margin-bottom: 36px; }
 }
 
+/* Mobile rhythm selected on 19.11.2026; subgrid's internal rows stay compact. */
+@media (max-width: 800px) {
+  #coaches { padding-block: 104px; }
+  #coaches .coaches__title { margin-bottom: 48px; }
+  #coaches .coaches__actions { margin-top: 48px; }
+}
 /* ---------- Телефон ---------- */
 @media (max-width: 700px) {
-  #coaches { padding: 72px max(5vw, 16px) 80px; }
+  #coaches { padding: 104px max(5vw, 16px); }
   #coaches .coaches__title { font-size: clamp(56px, 17vw, 76px); }
   .coaches__grid { --coaches-gap: 14px; }
   .coaches__photo { aspect-ratio: 4 / 5; border-radius: 14px; }
@@ -2201,7 +2217,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
 /* Светлые волокна покрытия не прерывают контур букв. */
 .club-life h2,.club-life h3,.club-life__info p,.club-life__signup>span:first-child{text-shadow:-1px -1px 0 #00345f,0 -1px 0 #00345f,1px -1px 0 #00345f,1px 0 0 #00345f,1px 1px 0 #00345f,0 1px 0 #00345f,-1px 1px 0 #00345f,-1px 0 0 #00345f}
 /* Только стыки своего блока; содержимое тренеров и лояльности сохранено. */
-.home-page #coaches{padding-bottom:48px}
+@media(min-width:801px){.home-page #coaches{padding-bottom:48px}}
 .club-life + #loyalty-gift{--court-exit-cut:28px;padding-top:70px;clip-path:polygon(0 0,100% 0,100% 100%,0 calc(100% - var(--court-exit-cut)))}
 @media(hover:hover) and (pointer:fine){.club-life__signup:hover{transform:translateY(-2px);border-color:#d9f21e}.club-life__signup:hover .club-life__signup-icon svg{transform:translate(2px,-2px)}}
 @media(max-width:1379px) and (min-width:701px){
@@ -2220,9 +2236,14 @@ footer span { font-size: .875rem; line-height: 1.5; }
  .club-life__event{grid-row:span 2;grid-template-columns:minmax(0,1fr);grid-template-rows:subgrid;gap:12px;align-items:start}
  .club-life__poster-stage{max-width:330px;margin-inline:auto;align-self:end;padding:12px 10px 18px}
 }
-@media(max-width:800px){.club-life + #loyalty-gift{--court-exit-cut:18px}}
+@media(max-width:800px){
+ #club-life{padding-top:104px;padding-bottom:104px}
+ #club-life .club-life__inner{row-gap:40px}
+ #club-life .club-life__events{gap:64px}
+ #club-life .club-life__info{padding-top:24px}
+ .club-life + #loyalty-gift{--court-exit-cut:18px}
+}
 @media(max-width:700px){
- .home-page #coaches{padding-bottom:32px}
  .club-life{padding:28px 20px}
  .club-life__inner{grid-template-columns:minmax(0,1fr);row-gap:18px}
  .club-life h2{font-size:46px;grid-column:1}
@@ -2235,8 +2256,6 @@ footer span { font-size: .875rem; line-height: 1.5; }
  .club-life__info p{font-size:16px;margin-bottom:8px}
  .club-life__actions{grid-row:3;grid-column:1;margin:0;align-self:start;justify-self:end}
  .club-life__signup{width:220px;min-width:220px}
- .club-life + #loyalty-gift{padding-top:64px}
- .club-life + #loyalty-gift .benefits__brand-ball{top:20px}
 }
 @media(max-width:350px){.club-life h2{font-size:42px}}
 @media(prefers-reduced-motion:reduce){.club-life__print,.club-life__print.is-following{transform:none;transition:none}.club-life__signup,.club-life__signup-icon,.club-life__signup-icon svg{transition:none}.club-life__signup:hover,.club-life__signup:active,.club-life__signup:hover .club-life__signup-icon svg{transform:none}}
@@ -2417,10 +2436,10 @@ footer span { font-size: .875rem; line-height: 1.5; }
   #loyalty-gift .benefits__bots { grid-area: 1 / 2; }
 }
 @media (max-width:800px) {
-  #loyalty-gift { --benefit-ball-size: 68px; clip-path: polygon(0 0,100% 18px,100% 100%,0 calc(100% - 18px)); }
-  #loyalty-gift.benefits { padding-inline: 5vw; }
+  #loyalty-gift { --benefit-ball-size: 68px; --benefit-ball-top: 60px; clip-path: polygon(0 0,100% 18px,100% 100%,0 calc(100% - 18px)); }
+  #loyalty-gift.benefits { padding-inline: 5vw; padding-block: 104px; }
   #loyalty-gift.benefits .benefits__brand-ball { left: auto; right: 7vw; transform: none; }
-  #loyalty-gift .benefits__offers { grid-template-columns: minmax(0,1fr); row-gap: 16px; }
+  #loyalty-gift .benefits__offers { grid-template-columns: minmax(0,1fr); row-gap: 40px; }
   #loyalty-gift .benefits__offer { display: block; grid-row: auto; }
 }
 @media (max-width:480px) {
@@ -2450,8 +2469,8 @@ footer span { font-size: .875rem; line-height: 1.5; }
 }
 #start .intro-head { margin-bottom: var(--paths-heading-gap); }
 @media (max-width: 1100px) { #start { --paths-air: 88px; --paths-heading-gap: 40px; } }
-@media (max-width: 800px) { #start { --paths-edge: 32px; } }
-@media (max-width: 560px) { #start { --paths-edge: 24px; --paths-air: 72px; --paths-top: 56px; --paths-heading-gap: 32px; } }
+@media (max-width: 800px) { #start { --paths-edge: 32px; --paths-air: 104px; --paths-top: 104px; --paths-heading-gap: 48px; } }
+@media (max-width: 560px) { #start { --paths-edge: 24px; } }
 /* A bounded interpretation of GDP's stacked cards, in LAYM's existing colours and type. */
 #start {
   --card-height: 440px;
@@ -2525,7 +2544,14 @@ footer span { font-size: .875rem; line-height: 1.5; }
 #start.is-stack .path-stage:nth-child(2) { z-index: 2; }
 #start.is-stack .path-stage:nth-child(3) { z-index: 3; }
 #start.is-stack .paths:has(:focus-visible) .path-stage { position: relative; top: auto; }
-@media (max-width: 800px) { #start { --stack-top: 78px; } }
+/* Owner selected the reading runway and 104 px rhythm on 19.11.2026. */
+@media (max-width: 800px) {
+  #start { --stack-top: 78px; --paths-list-gap: 64px; --paths-read-hold: clamp(200px, 34svh, 340px); }
+  #start.is-stack .paths { gap: 80px; padding-bottom: 0; }
+  #start.is-stack .path-stage:not(:last-child) { padding-bottom: calc(var(--card-stack-fill, 0px) + var(--paths-read-hold)); }
+  #start.is-stack .path-stage { scroll-margin-top: 24px; }
+  #start.is-stack .paths:has(:focus-visible) .path-stage { padding-bottom: 0; }
+}
 @media (max-width: 1100px) {
   #start .path h3 { font-size: 44px; padding: 28px 28px 0; }
   #start .path-num { padding: 12px 28px 0; }
@@ -2533,7 +2559,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
   #start .path-bottom { padding: 22px 28px 28px; }
 }
 @media (max-width: 700px) {
-  #start { --paths-list-gap: 40px; }
+  #start { --paths-list-gap: 64px; }
   #start .path { display: flex; flex-direction: column; min-height: 0; }
   #start .path-photo { order: -1; width: auto; aspect-ratio: 4 / 3; margin: 10px 10px 0; }
   #start .path h3 { padding: 24px 24px 0; font-size: clamp(36px, 10.5vw, 48px); }
@@ -2591,7 +2617,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
 .visit__route:active{background:#eaf0ec}
 @media(max-width:1100px) and (min-width:801px){.visit{gap:4vw}.visit__title{font-size:clamp(2rem,3.2vw,2.25rem)}.visit__routes{gap:10px}.visit__route{gap:12px;padding-left:14px}}
 @media(max-width:800px){
- .visit{grid-template-columns:minmax(0,1fr);padding:52px max(16px,5vw) 40px;gap:28px}
+ .visit{grid-template-columns:minmax(0,1fr);padding:104px max(16px,5vw);gap:28px}
  .visit__title{font-size:clamp(2.25rem,7.4vw,3.6rem);max-width:100%}
  .visit__location{font-size:16px}.visit__hours{gap:24px}
  .visit__hours-title,.visit__way{margin-top:24px!important}
@@ -2642,7 +2668,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 .site-footer .site-footer__social:active{background:#efffd6;color:#071a17}
 @media(max-width:1100px) and (min-width:801px){.site-footer .site-footer__body{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4vw}.site-footer .site-footer__nav{gap:20px}}
 @media(max-width:800px){
- footer.site-footer{padding:24px max(16px,5vw) calc(24px + env(safe-area-inset-bottom,0px))}
+ footer.site-footer{padding:56px max(16px,5vw) calc(24px + env(safe-area-inset-bottom,0px))}
  .site-footer .site-footer__head{padding-bottom:20px}.site-footer .site-footer__booking{display:none}
  .site-footer .site-footer__brand img{width:48px;height:35px}.site-footer .site-footer__name{font-size:36px}
  .site-footer .site-footer__body{grid-template-columns:minmax(0,1fr);gap:22px;padding:18px 0 22px}
@@ -3053,20 +3079,32 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const narrow = matchMedia('(max-width: 800px)');
+  // A stable viewport keeps Safari toolbar changes from retiming the stack.
+  const measure = document.createElement('span');
+  measure.setAttribute('aria-hidden', 'true');
+  measure.style.cssText = 'position:absolute;width:0;height:100svh;visibility:hidden;pointer-events:none';
+  section.prepend(measure);
   let queued = false;
   let interacted = false;
+  let configuration = '';
 
   function configure() {
     queued = false;
     const top = parseFloat(getComputedStyle(section).getPropertyValue('--stack-top'));
-    const height = window.visualViewport?.height ?? innerHeight;
+    const height = narrow.matches ? measure.getBoundingClientRect().height : (window.visualViewport?.height ?? innerHeight);
     const available = height - top - 16;
     const heights = cards.map(card => card.offsetHeight);
+    const key = [narrow.matches, reduce.matches, section.clientWidth, height, ...heights].join('|');
+    if (key === configuration) return;
+    configuration = key;
     const fits = heights.every(value => value <= available);
     // On a phone, pin the card only after its bottom has reached the viewport.
     // A negative sticky top lets the whole tall card pass naturally before stacking.
-    cards.forEach((card, index) => card.parentElement.style.setProperty('--card-stack-top',
-      `${narrow.matches ? Math.min(top, height - heights[index] - 16) : top}px`));
+    cards.forEach((card, index) => {
+      const pin = narrow.matches ? Math.min(top, height - heights[index] - 16) : top;
+      card.parentElement.style.setProperty('--card-stack-top', `${pin}px`);
+      card.parentElement.style.setProperty('--card-stack-fill', `${narrow.matches ? Math.max(0, height - pin - heights[index]) : 0}px`);
+    });
     section.classList.toggle('is-stack', !reduce.matches && (fits || narrow.matches));
   }
 
@@ -3142,6 +3180,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   let referenceY = Math.max(0, window.scrollY);
   let visible = false;
   let frame = 0;
+  let resizeUntil = 0;
 
   function updateHeader() {
     frame = 0;
@@ -3152,7 +3191,9 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
     if (!floating || heldOpen) {
       referenceY = y;
       visible = floating && heldOpen;
-    } else if (Math.abs(y - referenceY) >= 12) {
+    } else if (mobile.matches && performance.now() < resizeUntil) {
+      referenceY = y;
+    } else if (Math.abs(y - referenceY) >= (mobile.matches ? (y < referenceY ? 72 : 120) : 12)) {
       visible = y < referenceY;
       referenceY = y;
     }
@@ -3168,7 +3209,10 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   }
 
   window.addEventListener('scroll', scheduleHeader, { passive: true });
-  window.addEventListener('resize', scheduleHeader, { passive: true });
+  window.addEventListener('resize', () => {
+    if (mobile.matches) { resizeUntil = performance.now() + 220; referenceY = Math.max(0, scrollY); }
+    scheduleHeader();
+  }, { passive: true });
   window.addEventListener('pageshow', scheduleHeader);
   header.addEventListener('focusin', scheduleHeader);
   header.addEventListener('focusout', scheduleHeader);
@@ -3273,15 +3317,16 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
     if (!enabled) { lastProgress = null; return; }
     const top = club.getBoundingClientRect().top;
     // Fractional card heights can leave the section <1px from the native scroll target.
-    const p = top <= 1 ? 0 : Math.min(1,top / (innerHeight * .85));
+    const height = club.querySelector('.scene__pin').clientHeight;
+    const p = top <= 1 ? 0 : Math.min(1,top / (height * .85));
     if (p === lastProgress) return;
     lastProgress = p;
     const narrow = innerWidth <= 800;
-    const inset = document.documentElement.clientWidth * (narrow ? .12 : .18) * p;
+    const inset = narrow ? 0 : document.documentElement.clientWidth * .18 * p;
     club.style.setProperty('--window-x',`${inset}px`);
-    club.style.setProperty('--window-y',`${innerHeight * .08 * p}px`);
-    club.style.setProperty('--window-radius',`${16 * p}px`);
-    club.style.setProperty('--fact-shift-x',`${Math.max(0,inset + (narrow ? 12 : 24) - factEdge)}px`);
+    club.style.setProperty('--window-y',`${(narrow ? Math.min(16, height * .025) : innerHeight * .08) * p}px`);
+    club.style.setProperty('--window-radius',`${narrow ? 0 : 16 * p}px`);
+    club.style.setProperty('--fact-shift-x',`${narrow ? 0 : Math.max(0,inset + 24 - factEdge)}px`);
   };
   const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
   const measure = () => {
