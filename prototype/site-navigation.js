@@ -22,49 +22,5 @@
   });
   mobile.addEventListener('change', () => { if (!mobile.matches) closeMenu(); });
 
-  const header = document.querySelector('.home-page > .site-header');
-  if (!header) return;
-
-  // requestAnimationFrame groups scroll reads. CSS handles prefers-reduced-motion for transitions.
-  let referenceY = Math.max(0, window.scrollY);
-  let visible = false;
-  let frame = 0;
-  let resizeUntil = 0;
-
-  function updateHeader() {
-    frame = 0;
-    const y = Math.max(0, window.scrollY);
-    const floating = y > header.offsetHeight;
-    const heldOpen = menu?.open || header.querySelector(':focus-visible');
-
-    if (!floating || heldOpen) {
-      referenceY = y;
-      visible = floating && heldOpen;
-    } else if (mobile.matches && performance.now() < resizeUntil) {
-      referenceY = y;
-    } else if (Math.abs(y - referenceY) >= (mobile.matches ? (y < referenceY ? 72 : 120) : 12)) {
-      visible = y < referenceY;
-      referenceY = y;
-    }
-
-    header.classList.toggle('is-scroll-nav', floating);
-    header.classList.toggle('is-scroll-nav-visible', visible);
-    if (!floating) header.classList.remove('has-revealed-scroll-nav');
-    else if (visible) header.classList.add('has-revealed-scroll-nav');
-  }
-
-  function scheduleHeader() {
-    if (!frame) frame = requestAnimationFrame(updateHeader);
-  }
-
-  window.addEventListener('scroll', scheduleHeader, { passive: true });
-  window.addEventListener('resize', () => {
-    if (mobile.matches) { resizeUntil = performance.now() + 220; referenceY = Math.max(0, scrollY); }
-    scheduleHeader();
-  }, { passive: true });
-  window.addEventListener('pageshow', scheduleHeader);
-  header.addEventListener('focusin', scheduleHeader);
-  header.addEventListener('focusout', scheduleHeader);
-  menu?.addEventListener('toggle', scheduleHeader);
-  updateHeader();
+  // Header visibility is fixed in CSS; scrolling never toggles its state.
 })();

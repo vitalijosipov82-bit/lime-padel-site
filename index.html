@@ -571,7 +571,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
    и work/ticket-lab/ball.html (мяч 4 «С обводкой»). Заменил билет с вырубкой, стеклом
    и фото-мячом: тот выбивался из плоской графики сайта.
    — мяч — плоский из знака логотипа ЛАЙМ (assets/ball-flat.svg: круг #d3ef30 и белый шов);
-   — вокруг тонкое лаймовое кольцо, по внешнему кругу медленно бежит надпись
+   — вокруг мяча медленно вращается надпись без видимого кольца
      «Пробное занятие · 800 ₽ с человека · для новичков» (длина подогнана под окружность);
    — стрелка — тёмный круг с лаймовой стрелкой (лаймовая сливалась бы с мячом);
    — весь значок — одна прямая ссылка в календарь групповых занятий YCLIENTS.
@@ -587,6 +587,29 @@ footer span { font-size: .875rem; line-height: 1.5; }
   border-radius: 50%;
   color: #fff;
   text-decoration: none;
+}
+
+/* Independent ball drift and text rotation; the booking hit area stays still. */
+.hero-bottom.is-ball-floating .hero-badge__ball {
+  animation: hero-ball-float 7.2s cubic-bezier(.45, 0, .55, 1) infinite;
+  animation-play-state: paused;
+}
+.hero-bottom.is-ball-floating .hero-badge__orbit {
+  transform-origin: 105px 105px;
+  animation: hero-badge-spin 22s linear infinite;
+  animation-play-state: paused;
+}
+.hero-bottom.is-ball-running .hero-badge__ball,
+.hero-bottom.is-ball-running .hero-badge__orbit {
+  animation-play-state: running;
+  will-change: transform;
+}
+@keyframes hero-ball-float {
+  0%, 100% { transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(0deg); }
+  16% { transform: translate(-50%, -50%) translate3d(-7px, -5px, 0) rotate(-4deg); }
+  36% { transform: translate(-50%, -50%) translate3d(6px, -8px, 0) rotate(4deg); }
+  58% { transform: translate(-50%, -50%) translate3d(8px, 5px, 0) rotate(2deg); }
+  80% { transform: translate(-50%, -50%) translate3d(-5px, 7px, 0) rotate(-3deg); }
 }
 
 .hero-badge__ring {
@@ -611,12 +634,6 @@ footer span { font-size: .875rem; line-height: 1.5; }
   fill: var(--lime);
 }
 
-.hero-badge__line {
-  fill: none;
-  stroke: rgba(211, 239, 48, .85);
-  stroke-width: 1.5;
-}
-
 .hero-badge__ball {
   position: absolute;
   left: 50%;
@@ -627,7 +644,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
   transform: translate(-50%, -50%);
 }
 
-/* Стрелка — внутри кольца, на углу мяча, не закрывает надпись */
+/* Стрелка — на углу мяча, не закрывает надпись */
 .hero-badge__arrow {
   position: absolute;
   right: 51px;
@@ -657,12 +674,6 @@ footer span { font-size: .875rem; line-height: 1.5; }
 @media (hover: hover) {
   .hero-badge:hover .hero-badge__arrow { transform: scale(1.08); }
   .hero-badge:hover .hero-badge__arrow svg { transform: translate(2px, -2px); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .hero-badge__ring { animation: hero-badge-spin 22s linear infinite; }
-  .hero-badge:hover .hero-badge__ring,
-  .hero-badge:focus-visible .hero-badge__ring { animation-duration: 8s; }
 }
 
 @keyframes hero-badge-spin {
@@ -701,6 +712,11 @@ footer span { font-size: .875rem; line-height: 1.5; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-bottom.is-ball-floating .hero-badge__ball {
+    animation: none;
+    transform: translate(-50%, -50%);
+  }
+  .hero-bottom.is-ball-floating .hero-badge__orbit { animation: none; transform: none; }
   .hero-badge__ring,
   .hero-badge__arrow,
   .hero-badge__arrow svg { animation: none; transition: none; }
@@ -1468,8 +1484,8 @@ footer span { font-size: .875rem; line-height: 1.5; }
   max-width: 30vw;
 }
 
-.is-scene .scene__fact:nth-child(1) { top: 36px; left: 4vw; }
-.is-scene .scene__fact:nth-child(2) { top: 36px; right: 4vw; text-align: right; align-items: flex-end; }
+.is-scene .scene__fact:nth-child(1) { top: 102px; left: 4vw; }
+.is-scene .scene__fact:nth-child(2) { top: 102px; right: 4vw; text-align: right; align-items: flex-end; }
 .is-scene .scene__fact:nth-child(3) { bottom: 38px; left: 4vw; max-width: calc(92vw - 580px); } /* до кнопок маршрута (~520px) с зазором */
 
 /* У белого стыка внизу гаснут нижние углы и тёмная полоса под ними (класс .is-ending
@@ -1697,7 +1713,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
   .scene-club .scene__fact strong { font-size: 1rem; line-height: 1.25; }
 
   .scene-club.is-scene .scene__fact:nth-child(1),
-  .scene-club.is-scene .scene__fact:nth-child(2) { top: 20px; max-width: calc(50% - 28px); }
+  .scene-club.is-scene .scene__fact:nth-child(2) { top: 92px; max-width: calc(50% - 28px); }
   .scene-club.is-scene .scene__fact:nth-child(1) { left: var(--club-edge); }
   .scene-club.is-scene .scene__fact:nth-child(2) { right: var(--club-edge); }
   .scene-club.is-scene .scene__fact:nth-child(3) {
@@ -1715,8 +1731,6 @@ footer span { font-size: .875rem; line-height: 1.5; }
   .home-page.page-flow-selected.is-window-motion .scene-club .scene__photos picture:first-child { clip-path: inset(var(--window-y, 0px) 0 0); }
   .home-page.page-flow-selected.is-window-motion .scene-club .scene__fact:nth-child(1),
   .home-page.page-flow-selected.is-window-motion .scene-club .scene__fact:nth-child(2) { transform: none; }
-  .home-page:has(> .site-header.is-scroll-nav-visible) .scene-club.is-scene .scene__fact:nth-child(1),
-  .home-page:has(> .site-header.is-scroll-nav-visible) .scene-club.is-scene .scene__fact:nth-child(2) { top: 92px; }
   /* Keep small facts legible even when a bright window passes beneath them. */
   .home-page.page-flow-selected .scene-club .scene__photos picture::after {
     background: linear-gradient(180deg,
@@ -1797,7 +1811,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
 .skip-link:focus { transform: none; }
 .mobile-menu { display: none; }
 
-.home-page .site-header.is-scroll-nav {
+.home-page .site-header {
   position: fixed;
   inset: 0 0 auto;
   z-index: 40;
@@ -1808,21 +1822,18 @@ footer span { font-size: .875rem; line-height: 1.5; }
     rgba(6, 36, 31, 0)
   );
   color: #fff;
-  transform: translateY(-110%);
+  transform: none;
+  transition: none;
 }
 
-.home-page .site-header.is-scroll-nav.has-revealed-scroll-nav {
-  transition: transform 200ms cubic-bezier(.22, .75, .18, 1);
-}
-
-.home-page .site-header.is-scroll-nav:is(.is-scroll-nav-visible, :has(:focus-visible, .mobile-menu[open])) { transform: none; }
-.home-page .site-header.is-scroll-nav:has(:focus-visible) { transition: none; }
-
+/* Always visible, including before scripts start and under reduced motion. */
+html:has(body.home-page) { scroll-padding-top: 98px; }
 @media (prefers-reduced-motion: reduce) {
-  .home-page .site-header.is-scroll-nav.has-revealed-scroll-nav { transition: none; }
+  .home-page .site-header { transition: none; animation: none; }
 }
 
 @media (max-width: 800px) {
+  html:has(body.home-page) { scroll-padding-top: 84px; }
   .home-page .site-header { justify-content: space-between; }
   .mobile-menu { display: block; }
   .mobile-menu summary {
@@ -2547,6 +2558,8 @@ footer span { font-size: .875rem; line-height: 1.5; }
 /* Owner selected the reading runway and 104 px rhythm on 19.11.2026. */
 @media (max-width: 800px) {
   #start { --stack-top: 78px; --paths-list-gap: 64px; --paths-read-hold: clamp(200px, 34svh, 340px); }
+  #start.is-stack .path { min-height: var(--paths-stack-height, var(--card-height)); }
+  #start.is-stack .path-bottom { margin-top: auto; }
   #start.is-stack .paths { gap: 80px; padding-bottom: 0; }
   #start.is-stack .path-stage:not(:last-child) { padding-bottom: calc(var(--card-stack-fill, 0px) + var(--paths-read-hold)); }
   #start.is-stack .path-stage { scroll-margin-top: 24px; }
@@ -2754,8 +2767,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
         <a class="hero-badge" href="https://n1437757.yclients.ru/company/1301052/activity/select" aria-label="Пробное занятие для новичков: 800 рублей с человека — записаться" data-button-motion>
           <svg class="hero-badge__ring" viewBox="0 0 210 210" aria-hidden="true" focusable="false">
             <defs><path id="hero-badge-circle" d="M105,105 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0"/></defs>
-            <circle class="hero-badge__line" cx="105" cy="105" r="74"/>
-            <text><textPath href="#hero-badge-circle">Пробное занятие · <tspan class="hero-badge__lime">800&nbsp;₽</tspan> с&nbsp;человека · для&nbsp;новичков ·</textPath></text>
+            <g class="hero-badge__orbit"><text><textPath href="#hero-badge-circle">Пробное занятие · <tspan class="hero-badge__lime">800&nbsp;₽</tspan> с&nbsp;человека · для&nbsp;новичков ·</textPath></text></g>
           </svg>
           <img class="hero-badge__ball" src="prototype/assets/ball-flat.svg" width="298" height="298" alt="">
           <span class="hero-badge__arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -3087,23 +3099,39 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   let queued = false;
   let interacted = false;
   let configuration = '';
+  let geometry = '';
+  let contentDirty = true;
 
   function configure() {
     queued = false;
     const top = parseFloat(getComputedStyle(section).getPropertyValue('--stack-top'));
     const height = narrow.matches ? measure.getBoundingClientRect().height : (window.visualViewport?.height ?? innerHeight);
+    const signature = [narrow.matches, reduce.matches, section.clientWidth, height].join('|');
+    // A toolbar-only resize must not briefly remove equal heights above the reader.
+    if (!contentDirty && signature === geometry) return;
+    geometry = signature;
+    contentDirty = false;
     const available = height - top - 16;
-    const heights = cards.map(card => card.offsetHeight);
+    // Measure natural content without the previous equal-height constraint.
+    const previousHeight = section.style.getPropertyValue('--paths-stack-height');
+    section.style.removeProperty('--paths-stack-height');
+    const heights = cards.map(card => card.getBoundingClientRect().height);
+    if (previousHeight) section.style.setProperty('--paths-stack-height', previousHeight);
     const key = [narrow.matches, reduce.matches, section.clientWidth, height, ...heights].join('|');
     if (key === configuration) return;
     configuration = key;
     const fits = heights.every(value => value <= available);
-    // On a phone, pin the card only after its bottom has reached the viewport.
-    // A negative sticky top lets the whole tall card pass naturally before stacking.
+    const commonHeight = Math.ceil(Math.max(...heights));
+    if (narrow.matches) section.style.setProperty('--paths-stack-height', `${commonHeight}px`);
+    else section.style.removeProperty('--paths-stack-height');
+    const headerHeight = document.querySelector('.site-header')?.offsetHeight ?? top;
+    const commonPin = Math.min(top, headerHeight, height - commonHeight - 16);
+    // Equal mobile heights and a common top align both edges during complete coverage.
+    // A negative sticky top still lets the whole tall card pass before it pins.
     cards.forEach((card, index) => {
-      const pin = narrow.matches ? Math.min(top, height - heights[index] - 16) : top;
+      const pin = narrow.matches ? commonPin : top;
       card.parentElement.style.setProperty('--card-stack-top', `${pin}px`);
-      card.parentElement.style.setProperty('--card-stack-fill', `${narrow.matches ? Math.max(0, height - pin - heights[index]) : 0}px`);
+      card.parentElement.style.setProperty('--card-stack-fill', `${narrow.matches ? Math.max(0, height - pin - commonHeight) : 0}px`);
     });
     section.classList.toggle('is-stack', !reduce.matches && (fits || narrow.matches));
   }
@@ -3119,7 +3147,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   window.visualViewport?.addEventListener('resize', schedule, { passive: true });
   reduce.addEventListener('change', schedule);
   if ('ResizeObserver' in window) {
-    const observer = new ResizeObserver(schedule);
+    const observer = new ResizeObserver(() => { contentDirty = true; schedule(); });
     cards.forEach(card => observer.observe(card));
   }
   section.addEventListener('focusin', event => {
@@ -3138,6 +3166,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   }
   configure();
   document.fonts.ready.then(() => {
+    contentDirty = true;
     configure();
     if (interacted || !location.hash) return;
     let id;
@@ -3173,51 +3202,50 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
   });
   mobile.addEventListener('change', () => { if (!mobile.matches) closeMenu(); });
 
-  const header = document.querySelector('.home-page > .site-header');
-  if (!header) return;
+  // Header visibility is fixed in CSS; scrolling never toggles its state.
+})();
 
-  // requestAnimationFrame groups scroll reads. CSS handles prefers-reduced-motion for transitions.
-  let referenceY = Math.max(0, window.scrollY);
-  let visible = false;
-  let frame = 0;
-  let resizeUntil = 0;
+</script>
+<script data-preview-source="prototype/hero-ball.js">
+// Ball and circular lettering move independently inside a stable booking target.
+(() => {
+  const badge = document.querySelector('.hero-badge');
+  const root = badge?.closest('.hero-bottom');
+  if (!badge || !root) return;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let visible = false, focused = false, hovered = false, pressed = false;
 
-  function updateHeader() {
-    frame = 0;
-    const y = Math.max(0, window.scrollY);
-    const floating = y > header.offsetHeight;
-    const heldOpen = menu?.open || header.querySelector(':focus-visible');
+  const sync = () => {
+    root.classList.toggle('is-ball-running', visible && !reduced.matches && !document.hidden && !focused && !hovered && !pressed);
+  };
+  root.classList.add('is-ball-floating');
+  badge.addEventListener('focusin', () => { focused = true; sync(); });
+  badge.addEventListener('focusout', () => { focused = false; sync(); });
+  badge.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') { hovered = true; sync(); } });
+  badge.addEventListener('pointerleave', () => { hovered = false; pressed = false; sync(); });
+  badge.addEventListener('pointerdown', () => { pressed = true; sync(); });
+  const release = () => { pressed = false; sync(); };
+  addEventListener('pointerup', release);
+  addEventListener('pointercancel', release);
+  reduced.addEventListener('change', sync);
+  document.addEventListener('visibilitychange', sync);
 
-    if (!floating || heldOpen) {
-      referenceY = y;
-      visible = floating && heldOpen;
-    } else if (mobile.matches && performance.now() < resizeUntil) {
-      referenceY = y;
-    } else if (Math.abs(y - referenceY) >= (mobile.matches ? (y < referenceY ? 72 : 120) : 12)) {
-      visible = y < referenceY;
-      referenceY = y;
-    }
-
-    header.classList.toggle('is-scroll-nav', floating);
-    header.classList.toggle('is-scroll-nav-visible', visible);
-    if (!floating) header.classList.remove('has-revealed-scroll-nav');
-    else if (visible) header.classList.add('has-revealed-scroll-nav');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(entries => {
+      visible = entries[0].isIntersecting;
+      sync();
+    }, {threshold: 0}).observe(badge);
+  } else {
+    const measure = () => {
+      const r = badge.getBoundingClientRect();
+      visible = r.bottom > 0 && r.top < innerHeight;
+      sync();
+    };
+    addEventListener('scroll', measure, {passive:true});
+    addEventListener('resize', measure, {passive:true});
+    measure();
   }
-
-  function scheduleHeader() {
-    if (!frame) frame = requestAnimationFrame(updateHeader);
-  }
-
-  window.addEventListener('scroll', scheduleHeader, { passive: true });
-  window.addEventListener('resize', () => {
-    if (mobile.matches) { resizeUntil = performance.now() + 220; referenceY = Math.max(0, scrollY); }
-    scheduleHeader();
-  }, { passive: true });
-  window.addEventListener('pageshow', scheduleHeader);
-  header.addEventListener('focusin', scheduleHeader);
-  header.addEventListener('focusout', scheduleHeader);
-  menu?.addEventListener('toggle', scheduleHeader);
-  updateHeader();
+  sync();
 })();
 
 </script>

@@ -14,7 +14,7 @@
 .skip-link:focus { transform: none; }
 .mobile-menu { display: none; }
 
-.home-page .site-header.is-scroll-nav {
+.home-page .site-header {
   position: fixed;
   inset: 0 0 auto;
   z-index: 40;
@@ -25,21 +25,18 @@
     rgba(6, 36, 31, 0)
   );
   color: #fff;
-  transform: translateY(-110%);
+  transform: none;
+  transition: none;
 }
 
-.home-page .site-header.is-scroll-nav.has-revealed-scroll-nav {
-  transition: transform 200ms cubic-bezier(.22, .75, .18, 1);
-}
-
-.home-page .site-header.is-scroll-nav:is(.is-scroll-nav-visible, :has(:focus-visible, .mobile-menu[open])) { transform: none; }
-.home-page .site-header.is-scroll-nav:has(:focus-visible) { transition: none; }
-
+/* Always visible, including before scripts start and under reduced motion. */
+html:has(body.home-page) { scroll-padding-top: 98px; }
 @media (prefers-reduced-motion: reduce) {
-  .home-page .site-header.is-scroll-nav.has-revealed-scroll-nav { transition: none; }
+  .home-page .site-header { transition: none; animation: none; }
 }
 
 @media (max-width: 800px) {
+  html:has(body.home-page) { scroll-padding-top: 84px; }
   .home-page .site-header { justify-content: space-between; }
   .mobile-menu { display: block; }
   .mobile-menu summary {

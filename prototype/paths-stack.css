@@ -87,6 +87,8 @@
 /* Owner selected the reading runway and 104 px rhythm on 19.11.2026. */
 @media (max-width: 800px) {
   #start { --stack-top: 78px; --paths-list-gap: 64px; --paths-read-hold: clamp(200px, 34svh, 340px); }
+  #start.is-stack .path { min-height: var(--paths-stack-height, var(--card-height)); }
+  #start.is-stack .path-bottom { margin-top: auto; }
   #start.is-stack .paths { gap: 80px; padding-bottom: 0; }
   #start.is-stack .path-stage:not(:last-child) { padding-bottom: calc(var(--card-stack-fill, 0px) + var(--paths-read-hold)); }
   #start.is-stack .path-stage { scroll-margin-top: 24px; }

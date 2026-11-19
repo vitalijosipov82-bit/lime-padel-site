@@ -3,7 +3,7 @@
    и work/ticket-lab/ball.html (мяч 4 «С обводкой»). Заменил билет с вырубкой, стеклом
    и фото-мячом: тот выбивался из плоской графики сайта.
    — мяч — плоский из знака логотипа ЛАЙМ (assets/ball-flat.svg: круг #d3ef30 и белый шов);
-   — вокруг тонкое лаймовое кольцо, по внешнему кругу медленно бежит надпись
+   — вокруг мяча медленно вращается надпись без видимого кольца
      «Пробное занятие · 800 ₽ с человека · для новичков» (длина подогнана под окружность);
    — стрелка — тёмный круг с лаймовой стрелкой (лаймовая сливалась бы с мячом);
    — весь значок — одна прямая ссылка в календарь групповых занятий YCLIENTS.
@@ -19,6 +19,29 @@
   border-radius: 50%;
   color: #fff;
   text-decoration: none;
+}
+
+/* Independent ball drift and text rotation; the booking hit area stays still. */
+.hero-bottom.is-ball-floating .hero-badge__ball {
+  animation: hero-ball-float 7.2s cubic-bezier(.45, 0, .55, 1) infinite;
+  animation-play-state: paused;
+}
+.hero-bottom.is-ball-floating .hero-badge__orbit {
+  transform-origin: 105px 105px;
+  animation: hero-badge-spin 22s linear infinite;
+  animation-play-state: paused;
+}
+.hero-bottom.is-ball-running .hero-badge__ball,
+.hero-bottom.is-ball-running .hero-badge__orbit {
+  animation-play-state: running;
+  will-change: transform;
+}
+@keyframes hero-ball-float {
+  0%, 100% { transform: translate(-50%, -50%) translate3d(0, 0, 0) rotate(0deg); }
+  16% { transform: translate(-50%, -50%) translate3d(-7px, -5px, 0) rotate(-4deg); }
+  36% { transform: translate(-50%, -50%) translate3d(6px, -8px, 0) rotate(4deg); }
+  58% { transform: translate(-50%, -50%) translate3d(8px, 5px, 0) rotate(2deg); }
+  80% { transform: translate(-50%, -50%) translate3d(-5px, 7px, 0) rotate(-3deg); }
 }
 
 .hero-badge__ring {
@@ -43,12 +66,6 @@
   fill: var(--lime);
 }
 
-.hero-badge__line {
-  fill: none;
-  stroke: rgba(211, 239, 48, .85);
-  stroke-width: 1.5;
-}
-
 .hero-badge__ball {
   position: absolute;
   left: 50%;
@@ -59,7 +76,7 @@
   transform: translate(-50%, -50%);
 }
 
-/* Стрелка — внутри кольца, на углу мяча, не закрывает надпись */
+/* Стрелка — на углу мяча, не закрывает надпись */
 .hero-badge__arrow {
   position: absolute;
   right: 51px;
@@ -89,12 +106,6 @@
 @media (hover: hover) {
   .hero-badge:hover .hero-badge__arrow { transform: scale(1.08); }
   .hero-badge:hover .hero-badge__arrow svg { transform: translate(2px, -2px); }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .hero-badge__ring { animation: hero-badge-spin 22s linear infinite; }
-  .hero-badge:hover .hero-badge__ring,
-  .hero-badge:focus-visible .hero-badge__ring { animation-duration: 8s; }
 }
 
 @keyframes hero-badge-spin {
@@ -133,6 +144,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-bottom.is-ball-floating .hero-badge__ball {
+    animation: none;
+    transform: translate(-50%, -50%);
+  }
+  .hero-bottom.is-ball-floating .hero-badge__orbit { animation: none; transform: none; }
   .hero-badge__ring,
   .hero-badge__arrow,
   .hero-badge__arrow svg { animation: none; transition: none; }
