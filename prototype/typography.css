@@ -8,15 +8,19 @@
   src: url('assets/fonts/ibm-plex-sans-cyrillic-latin.woff2') format('woff2');
 }
 
-/* Типографика ЛАЙМа — вариант D1, выбран владельцем 11 ноября 2026 (стенд work/type-lab/#d1).
-   Две семьи:
-   --font-display — Fira Sans Extra Condensed: заголовки, крупные числа, название билета;
-                    акцентное слово (em в заголовках, «ИГРАЕМ?») — тот же шрифт курсивом 900.
-   --font-text    — IBM Plex Sans: выбран владельцем 15.11.2026 вместо Golos Text.
-   Локальный variable WOFF2, настоящие веса до 700, включая 650. */
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url('assets/fonts/inter-cyrillic-latin.woff2') format('woff2');
+}
+
+/* Роли шрифтов утверждены 22.11.2026. Подробности в TYPOGRAPHY.md. */
 :root {
   --font-display: 'Fira Sans Extra Condensed', 'Arial Narrow', sans-serif;
   --font-text: 'IBM Plex Sans', Arial, sans-serif;
+  --font-prose: Inter, var(--font-text);
   --text-body-size: 1.0625rem;
   --text-detail-size: .875rem;
   --text-control-size: .9375rem;
@@ -133,9 +137,38 @@ h3 em {
 .section-lead,
 .large-copy,
 .club-copy > p:not(.eyebrow),
+.sub-hero > p:not(.eyebrow),
+.booking > p:not(.eyebrow),
+.sub-booking > p:not(.eyebrow),
+.sub-section > p:not(.eyebrow),
+.coach-grid p,
+.contact-grid p,
+.offer-grid p,
+.empty-state p,
+.steps p,
+.faq p,
+.path-what,
+.first-game-hero__intro,
+.first-game-steps__text p,
+.coaches__fact,
+.coaches__exp,
+.coaches__back ul,
+.club-life__note,
+.benefits__lead,
+.benefits__redeem,
+.benefits__terms,
+.benefits__details p:not(.benefits__contact),
+.prices__plus,
+.prices__booking {
+  font-family: var(--font-prose);
+}
+
+.hero-description,
+.section-lead,
+.large-copy,
+.club-copy > p:not(.eyebrow),
 .sub-hero p:not(.eyebrow),
 .booking > p:not(.eyebrow) {
-  font-family: var(--font-text);
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -171,6 +204,9 @@ h3 em {
   font-weight: 700;
   letter-spacing: .02em;
 }
+
+.contact-grid p a,
+.prices__booking a { font-family: var(--font-text); }
 
 .brand-word {
   font-family: var(--font-display);

@@ -1,96 +1,76 @@
-/* Навигация главной: native details работает и без JavaScript. */
+/* Общая шапка: логотип — меню по центру — телефон и бронирование. */
 .skip-link {
-  position: fixed;
-  z-index: 100;
-  top: 12px;
-  left: 4vw;
-  padding: 14px 20px;
-  border-radius: 8px;
-  background: var(--lime);
-  color: var(--ink);
-  font-weight: 700;
+  position: fixed; z-index: 100; top: 12px; left: 4vw;
+  padding: 14px 20px; border-radius: 8px;
+  background: var(--lime); color: var(--ink); font-weight: 700;
   transform: translateY(-180%);
 }
 .skip-link:focus { transform: none; }
+.site-header {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center; column-gap: clamp(20px, 2vw, 32px); padding-inline: 4vw;
+}
+.site-header > .brand { grid-column: 1; grid-row: 1; justify-self: start; min-height: 44px; }
+.site-header > nav.site-header__nav {
+  display: flex; grid-column: 2; grid-row: 1; justify-content: center; align-items: center;
+  margin: 0; padding: 0; gap: clamp(14px, 1.4vw, 24px);
+  font: 600 13px/1.3 var(--font-text); letter-spacing: .01em;
+}
+.site-header > nav.site-header__nav a { display: flex; align-items: center; min-height: 44px; }
+.site-header__actions { grid-column: 3; grid-row: 1; justify-self: end; display: flex; align-items: center; gap: 16px; white-space: nowrap; }
+.site-header__phone { display: inline-flex; align-items: center; min-height: 44px; font: 500 14px/1.2 var(--font-text); }
+.site-header .site-header__book {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 14px;
+  min-height: 44px; padding: 5px 6px 5px 16px; border: 1px solid var(--lime);
+  border-radius: 999px; background: var(--lime); color: var(--ink);
+  font: 600 14px/1.2 var(--font-text); letter-spacing: 0; text-transform: none;
+}
+.site-header__book-icon {
+  display: grid; place-items: center; flex: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--ink); color: var(--lime);
+}
+.site-header__book-icon svg { display: block; width: 19px; height: 19px; }
+body .site-header :is(a, summary):focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.site-header a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--lime); text-underline-offset: .35em; }
 .mobile-menu { display: none; }
-
-.home-page .site-header {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 40;
-  background: linear-gradient(
-    to bottom,
-    rgba(6, 36, 31, .72),
-    rgba(6, 36, 31, .70) 77%,
-    rgba(6, 36, 31, 0)
-  );
-  color: #fff;
-  transform: none;
-  transition: none;
+:is(.home-page, .first-game-page) .site-header {
+  position: fixed; inset: 0 0 auto; z-index: 40;
+  background: linear-gradient(to bottom, rgba(6,36,31,.72), rgba(6,36,31,.70) 77%, rgba(6,36,31,0));
+  color: #fff; transform: none; transition: none;
 }
-
-/* Always visible, including before scripts start and under reduced motion. */
-html:has(body.home-page) { scroll-padding-top: 98px; }
-@media (prefers-reduced-motion: reduce) {
-  .home-page .site-header { transition: none; animation: none; }
-}
-
-@media (max-width: 800px) {
-  html:has(body.home-page) { scroll-padding-top: 84px; }
-  .home-page .site-header { justify-content: space-between; }
-  .mobile-menu { display: block; }
+html:has(body:is(.home-page, .first-game-page)) { scroll-padding-top: 98px; }
+@media (max-width: 1199px) {
+  .site-header { grid-template-columns: auto minmax(0, 1fr) auto; gap: 20px; }
+  .site-header > nav.site-header__nav { display: none; }
+  .site-header__actions { grid-column: 2; }
+  .mobile-menu { display: block; grid-column: 3; grid-row: 1; justify-self: end; }
   .mobile-menu summary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    min-height: 44px;
-    padding: 8px 16px;
-    border: 1px solid #e2f7c7;
-    border-radius: 999px;
-    color: #fff;
-    font-size: .9375rem;
-    font-weight: 600;
-    cursor: pointer;
-    list-style: none;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    min-height: 44px; padding: 8px 16px; border: 1px solid #e2f7c7; border-radius: 999px;
+    color: #fff; font-size: .9375rem; font-weight: 600; cursor: pointer; list-style: none;
   }
   .mobile-menu summary::-webkit-details-marker { display: none; }
   .mobile-menu summary svg { flex: none; }
   .mobile-menu[open] summary svg { transform: rotate(45deg); }
-  .mobile-menu summary:focus-visible { outline: 3px solid #ff6b00; outline-offset: 4px; }
-  .home-page .mobile-menu nav {
-    position: absolute;
-    z-index: 30;
-    top: 72px;
-    left: 5vw;
-    right: 5vw;
-    display: grid;
-    gap: 0;
-    max-height: calc(100svh - 96px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    margin: 0;
-    padding: 12px 20px;
-    border: 1px solid #91c745;
-    border-radius: 16px;
-    background: #06241f;
-    font-size: 1rem;
-    font-weight: 500;
-    text-transform: none;
-    letter-spacing: 0;
+  .site-header .mobile-menu nav {
+    position: absolute; z-index: 30; top: calc(100% + 4px); left: 4vw; right: 4vw;
+    display: grid; gap: 0; max-height: calc(100svh - 104px); overflow-y: auto; overscroll-behavior: contain;
+    margin: 0; padding: 12px 20px; border: 1px solid #91c745; border-radius: 16px; background: #06241f;
+    font: 500 16px/1.4 var(--font-text); text-transform: none; letter-spacing: 0;
   }
-  .mobile-menu nav a {
-    display: flex;
-    align-items: center;
-    min-height: 48px;
-    padding: 10px 4px;
-  }
+  .mobile-menu nav a { display: flex; align-items: center; min-height: 48px; padding: 10px 4px; }
   .mobile-menu nav a + a { border-top: 1px solid #315449; }
-  .mobile-menu nav .mobile-menu__booking { color: var(--lime); font-weight: 700; }
-
+  .mobile-menu nav .mobile-menu__booking { justify-content: space-between; gap: 14px; color: var(--lime); font-weight: 700; }
 }
-
-@media (min-width: 801px) {
-  .home-page .site-header nav { font-size: .875rem; }
-  .home-page .site-header > nav a { display: flex; align-items: center; min-height: 44px; }
+@media (max-width: 740px) {
+  .site-header { padding-inline: 5vw; }
+  .site-header__actions { display: none; }
+  .site-header .mobile-menu nav { left: 5vw; right: 5vw; }
+}
+@media (max-width: 800px) {
+  html:has(body:is(.home-page, .first-game-page)) { scroll-padding-top: 84px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.home-page, .first-game-page) .site-header { transition: none; animation: none; }
 }

@@ -1,58 +1,118 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Первая игра — ЛАЙМ Падел</title><meta name="description" content="Первая игра в клубе ЛАЙМ Падел, Казань"><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="typography.css"><link rel="stylesheet" href="buttons-motion.css">
-  <link rel="stylesheet" href="first-game-hero.css">
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Пробное групповое занятие по паделу в клубе ЛАЙМ в Казани. Что входит в 800&nbsp;₽ и как записаться.">
+  <title>Первая игра — ЛАЙМ Падел</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="typography.css">
+  <link rel="stylesheet" href="site-navigation.css">
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="paths.css">
+  <link rel="stylesheet" href="buttons-motion.css">
+  <link rel="stylesheet" href="first-game.css">
+  <link rel="stylesheet" href="inner-cover.css">
   <link rel="stylesheet" href="first-game-steps.css">
+  <script src="site-navigation.js" defer></script>
   <script src="buttons-motion.js" defer></script>
-  <script src="first-game-hero.js" defer></script>
   <script src="first-game-steps.js" defer></script>
-</head><body><header class="site-header"><a class="brand" href="index.html" aria-label="ЛАЙМ Падел — главная"><img src="../images/logo/lime-padel-logo-mark.svg" alt=""><span class="brand-word">ЛАЙМ</span></a><nav aria-label="Основное меню"><a href="first-game.html">Первая игра</a><a href="prices.html">Цены</a><a href="coaches.html">Тренеры</a><a href="events.html">События</a><a href="contacts.html">Контакты</a></nav></header><main>
-<section class="first-game-hero" aria-labelledby="first-game-title">
-  <div class="first-game-hero__layout">
-    <div>
-      <h1 id="first-game-title">НАЧНИ<br><em>С ИГРЫ.</em></h1>
-      <p class="first-game-hero__intro">Пробное групповое занятие — 800&nbsp;₽ с&nbsp;человека. За час познакомишься с&nbsp;паделом и выйдешь на корт вместе с&nbsp;тренером.</p>
-      <a class="button button-lime" href="https://n1437757.yclients.ru/company/1301052/activity/select" data-button-motion>Записаться на пробное →</a>
+</head>
+<body class="first-game-page">
+  <a class="skip-link" href="#top">К&nbsp;содержимому</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="ЛАЙМ Падел — главная"><img src="../images/logo/lime-padel-logo-mark.svg" alt="" width="1000" height="720"><span class="brand-word">ЛАЙМ</span></a>
+    <nav class="site-header__nav" aria-label="Основное меню"><a href="first-game.html" aria-current="page">Первая игра</a><a href="prices.html">Цены</a><a href="coaches.html">Тренеры</a><a href="contacts.html">Контакты</a></nav>
+    <div class="site-header__actions">
+      <a class="site-header__phone" href="tel:+79027112003">8&nbsp;(902)&nbsp;711-20-03</a>
+      <a class="site-header__book button" href="https://n1437757.yclients.ru/company/1301052/record-type?o=" data-button-motion>Забронировать<span class="site-header__book-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
     </div>
-    <figure class="first-game-film">
-      <video controls playsinline muted preload="none" width="720" height="1280"
-             poster="assets/lime-game-v3-poster.webp" aria-labelledby="first-game-film-caption">
-        <source src="assets/lime-game-v3-720.mp4" type="video/mp4">
-        <a href="assets/lime-game-v3-720.mp4">Открыть видео</a>
-      </video>
-      <figcaption id="first-game-film-caption">Игра в ЛАЙМе <span>30&nbsp;секунд · без звука</span></figcaption>
-    </figure>
-  </div>
-</section>
-<section class="sub-section first-game-steps" aria-labelledby="first-game-steps-title">
-  <div class="first-game-steps__inner">
-    <h2 id="first-game-steps-title">ТРИ ШАГА<br>ДО ПЕРВОЙ ИГРЫ</h2>
-    <div class="first-game-steps__switch" role="group" aria-label="Выбери шаг" hidden>
-      <button type="button" aria-controls="first-game-step-book" aria-pressed="true">1. Выбери время</button>
-      <button type="button" aria-controls="first-game-step-arrive" aria-pressed="false">2. Приходи налегке</button>
-      <button type="button" aria-controls="first-game-step-play" aria-pressed="false">3. Сыграй с тренером</button>
+    <details class="mobile-menu">
+      <summary data-button-motion>Меню <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true" focusable="false"><path d="M4 10h12M10 4v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></summary>
+      <nav aria-label="Мобильное меню">
+        <a href="first-game.html" aria-current="page">Первая игра</a><a href="prices.html">Цены</a><a href="coaches.html">Тренеры</a><a href="contacts.html">Контакты</a>
+        <a href="tel:+79027112003" aria-label="Позвонить в клуб">8&nbsp;(902)&nbsp;711-20-03</a>
+        <a class="mobile-menu__booking" href="https://n1437757.yclients.ru/company/1301052/record-type?o=">Забронировать<span class="site-header__book-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      </nav>
+    </details>
+  </header>
+
+  <main id="top" tabindex="-1">
+    <section class="inner-cover inner-cover--page first-game-cover" aria-labelledby="first-game-title">
+      <div class="inner-cover__frame">
+        <nav class="inner-cover__breadcrumb" aria-label="Хлебные крошки">
+          <ol role="list">
+            <li><a href="../index.html">Главная</a></li>
+            <li><span aria-hidden="true">/</span> <span aria-current="page">Первая игра</span></li>
+          </ol>
+        </nav>
+        <h1 id="first-game-title">Первая игра</h1>
+        <div class="first-game-cover__details">
+          <p class="inner-cover__lead">Познакомься с&nbsp;паделом за&nbsp;час в&nbsp;группе с&nbsp;тренером.</p>
+          <div class="first-game-cover__booking">
+            <p class="first-game-cover__rate"><strong>800&nbsp;₽</strong> <span>с&nbsp;человека</span></p>
+            <a class="path-cta first-game-hero__action" href="https://n1437757.yclients.ru/company/1301052/activity/select" data-button-motion>
+              <span class="path-cta__label">Записаться на пробное</span>
+              <span class="path-cta__icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="first-game-steps" aria-labelledby="first-game-steps-title">
+      <div class="first-game-frame">
+        <h2 id="first-game-steps-title">Три шага <em>до&nbsp;первой игры</em></h2>
+        <div class="first-game-steps__route">
+          <svg class="first-game-steps__track" viewBox="0 0 28 360" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path d="M14 2 C22 22 18 44 14 60 S5 101 14 120 S20 160 14 180 S7 220 14 240 S19 280 14 300 S10 338 14 358"/>
+          </svg>
+          <ol class="first-game-steps__list" role="list">
+            <li id="first-game-step-book" data-step-active>
+              <span class="first-game-steps__mark" aria-hidden="true">1</span>
+              <div class="first-game-steps__text">
+                <h3>Выбери время</h3>
+                <p>Пробное занятие стоит 800&nbsp;₽ с&nbsp;человека. Прийти на&nbsp;пробное можно один раз.</p>
+              </div>
+            </li>
+            <li id="first-game-step-arrive">
+              <span class="first-game-steps__mark" aria-hidden="true">2</span>
+              <div class="first-game-steps__text">
+                <h3>Приходи налегке</h3>
+                <p>Аренда корта и&nbsp;инвентарь входят в&nbsp;стоимость. ЛАЙМ находится на&nbsp;3‑м&nbsp;этаже ТЦ «Франт».</p>
+              </div>
+            </li>
+            <li id="first-game-step-play">
+              <span class="first-game-steps__mark" aria-hidden="true">3</span>
+              <div class="first-game-steps__text">
+                <h3>Сыграй с тренером</h3>
+                <p>Час занятия с&nbsp;тренером входит в&nbsp;стоимость. В&nbsp;группе четыре участника.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="site-footer__head">
+      <div><a class="site-footer__brand" href="index.html#top" aria-label="ЛАЙМ Падел — главная"><img src="../images/logo/lime-padel-logo-mark.svg" width="1000" height="720" alt=""><span class="site-footer__name" aria-hidden="true">ЛАЙМ</span></a><p class="site-footer__description">ЛАЙМ Падел · Казань</p></div>
     </div>
-    <ol class="first-game-steps__panels">
-      <li class="first-game-steps__panel" id="first-game-step-book">
-        <div>
-          <h3>Выбери время</h3>
-          <p>Посмотри свободные места в <a href="https://n1437757.yclients.ru/company/1301052/activity/select">календаре YCLIENTS</a>.</p>
-        </div>
-        <img src="assets/path-court-wide.webp" width="960" height="480" loading="lazy" alt="Синий корт ЛАЙМа с сеткой">
-      </li>
-      <li class="first-game-steps__panel" id="first-game-step-arrive">
-        <div>
-          <h3>Приходи налегке</h3>
-          <p>Корт и инвентарь уже включены. Адрес: ТЦ «Франт», 3-й этаж.</p>
-        </div>
-        <img src="assets/path-trial-stack-wide.webp" width="1248" height="832" loading="lazy" alt="Ракетка, мяч и кроссовки на корте">
-      </li>
-      <li class="first-game-steps__panel" id="first-game-step-play">
-        <div>
-          <h3>Сыграй с тренером</h3>
-          <p>В группе четыре участника и тренер. Занятие длится один час.</p>
-        </div>
-        <img src="assets/path-training-wide.webp" width="960" height="480" loading="lazy" alt="Тренер ЛАЙМа Руслан Алиуллов на корте">
-      </li>
-    </ol>
-  </div>
-</section>
-<section class="sub-section soft"><h2>ЧТО ВХОДИТ<br>В 800 ₽</h2><p class="large-copy">Работа тренера, аренда корта и весь необходимый инвентарь. Пробное занятие доступно один раз на человека.</p><div class="faq first-game-faq"><details><summary>Можно ли прийти без опыта?</summary><p>Да. Пробное занятие рассчитано на знакомство с паделом.</p></details><details><summary>Нужна ли своя ракетка?</summary><p>Нет, инвентарь включён в стоимость.</p></details><details><summary>Где посмотреть свободное время?</summary><p>В <a href="https://n1437757.yclients.ru/company/1301052/activity/select">календаре групповых занятий YCLIENTS</a>.</p></details></div></section><section class="sub-booking" id="booking"><h2>ВЫБЕРИ ВРЕМЯ<br><em>В YCLIENTS</em></h2><a class="button button-lime" href="https://n1437757.yclients.ru/company/1301052/activity/select" data-button-motion>Открыть календарь занятий →</a></section></main><footer><a class="brand" href="index.html" aria-label="ЛАЙМ Падел — главная"><img src="../images/logo/lime-padel-logo-mark.svg" alt=""><span class="brand-word">ЛАЙМ</span></a><div><strong>Казань, Юлиуса Фучика, 90</strong><span>ТЦ «Франт», 3 этаж<br>Пн–пт 08:00–23:00<br>Сб–вс 08:00–22:00</span></div><a href="tel:+79027112003">8 (902) 711-20-03</a></footer></body></html>
+    <div class="site-footer__body">
+      <nav class="site-footer__nav" aria-label="Навигация в подвале"><div class="site-footer__nav-group"><h2 class="site-footer__heading">Навигация</h2><ul><li><a href="#top" aria-current="page">Первая игра</a></li><li><a href="index.html#prices">Цены</a></li><li><a href="index.html#coaches">Тренеры</a></li></ul></div><div class="site-footer__nav-group"><h2 class="site-footer__heading">Клуб</h2><ul><li><a href="index.html#club">О клубе</a></li><li><a href="index.html#loyalty-gift">Лояльность и&nbsp;сертификаты</a></li><li><a href="index.html#contacts">Контакты</a></li></ul></div></nav>
+      <div class="site-footer__contact">
+        <h2 class="site-footer__heading">Контакты</h2>
+        <address class="site-footer__address">Казань, ул.&nbsp;Юлиуса Фучика,&nbsp;90<br>ТЦ «Франт», 3‑й&nbsp;этаж</address>
+        <a class="site-footer__phone" href="tel:+79027112003">8&nbsp;(902)&nbsp;711-20-03</a>
+        <p class="site-footer__hours"><span>Пн–пт&nbsp;08:00–23:00</span><span>Сб–вс&nbsp;08:00–22:00</span></p>
+        <div class="site-footer__socials"><a class="site-footer__social" href="https://t.me/lime_padel" target="_blank" rel="noopener" aria-label="Написать клубу в Telegram, новая вкладка" title="Telegram" data-button-motion><svg viewBox="38 65 160 140" width="20" height="20" aria-hidden="true" focusable="false"><path d="M57.94,126.6476 C95.26,110.3916 120.14,99.6736 132.58,94.4956 C168.14,79.7096 175.52,77.1416 180.34,77.0547542 C181.4,77.0376 183.76,77.2996 185.3,78.5456 C186.58,79.5956 186.94,81.0156 187.12,82.0116 C187.28,83.0076 187.5,85.2776 187.32,87.0496 C185.4,107.2896 177.06,156.4056 172.82,179.0756 C171.04,188.668 167.5,191.884 164.08,192.198 C156.64,192.882 151,187.286 143.8,182.5676 C132.54,175.1816 126.18,170.5856 115.24,163.3796 C102.6,155.0516 110.8,150.4736 118,142.9936 C119.88,141.0356 152.64,111.2456 153.26,108.5436 C153.34,108.2056 153.42,106.9456 152.66,106.2816 C151.92,105.6156 150.82,105.8436 150.02,106.0236 C148.88,106.2796 130.9,118.1756 96.02,141.7096 C90.92,145.2176 86.3,146.9276 82.14,146.8376 C77.58,146.7396 68.78,144.2536 62.24,142.1296 C54.24,139.5236 47.86,138.1456 48.42,133.7196 C48.7,131.4156 51.88,129.0576 57.94,126.6476 L57.94,126.6476 Z"/></svg></a><a class="site-footer__social" href="https://wa.me/79027112003" target="_blank" rel="noopener" aria-label="Написать клубу в WhatsApp, новая вкладка" title="WhatsApp" data-button-motion><svg viewBox="0 0 256 258" width="20" height="20" aria-hidden="true" focusable="false"><path d="M1.07062531,127.416078 C1.06284837,149.873286 6.93054909,171.796478 18.0839762,191.11958 L18.0839762,191.11958 L0,257.147091 L67.5712334,239.429927 C86.1892261,249.581425 107.15067,254.933255 128.481518,254.941032 L128.481518,254.941032 L128.535957,254.941032 C198.783754,254.941032 255.970181,197.772751 256,127.518474 L256,127.518474 C256.011658,93.4697375 242.763642,61.4533745 218.700495,37.3681934 L218.700495,37.3681934 C194.63346,13.2856047 162.632651,0.0142577221 128.535957,0 L128.535957,0 C58.2751986,0 1.09914076,57.1592078 1.07062531,127.416078 L1.07062531,127.416078 Z M41.3098055,187.792346 L38.7874848,183.787222 C28.1810358,166.922929 22.5829356,147.435216 22.5907045,127.423855 L22.5907045,127.423855 C22.6140434,69.0294095 70.1376234,21.5213834 128.576138,21.5213834 L128.576138,21.5213834 C156.875124,21.5330488 183.472256,32.5646372 203.47584,52.5811829 L203.47584,52.5811829 C223.479424,72.5990247 234.486386,99.2091187 234.478613,127.510697 L234.478613,127.510697 C234.452686,185.906438 186.92781,233.420945 128.535957,233.420945 L128.535957,233.420945 L128.49448,233.420945 C109.481159,233.410576 90.8346512,228.305015 74.571775,218.656426 L74.571775,218.656426 L70.7014515,216.360933 L30.6035524,226.874058 L41.3098055,187.792346 Z"/><path d="M96.6782434,74.1484502 C94.2920192,68.8445776 91.781364,68.7382928 89.5117939,68.6449695 C87.6544015,68.565904 85.5300009,68.5710189 83.4081926,68.5710189 C81.2837921,68.5710189 77.8334233,69.369521 74.9157749,72.5554738 C71.9955342,75.7427228 63.7675324,83.4470773 63.7675324,99.1163139 C63.7675324,114.786847 75.181487,129.928547 76.7718711,132.05554 C78.3648475,134.178645 98.8052363,167.362845 131.176746,180.128691 C158.081068,190.737732 163.556033,188.627589 169.395218,188.096165 C175.234404,187.566037 188.238742,180.394403 190.891975,172.957057 C193.546503,165.521006 193.546503,159.146509 192.750663,157.815356 C191.954823,156.488091 189.830423,155.690955 186.645766,154.099275 C183.459813,152.506298 167.802242,144.800648 164.883297,143.737799 C161.963057,142.676247 159.839952,142.146119 157.715552,145.334664 C155.592447,148.519321 149.492734,155.690955 147.634046,157.815356 C145.776654,159.943645 143.917965,160.209357 140.733309,158.61638 C137.547356,157.018219 127.289573,153.658582 115.121255,142.809751 C105.652831,134.367884 99.2614834,123.942897 97.4027949,120.754351 C95.5454026,117.569695 97.204483,115.84451 98.8013479,114.256719 C100.232305,112.82965 101.987301,110.538045 103.580277,108.679357 C105.169365,106.819372 105.699493,105.492108 106.761045,103.367707 C107.823894,101.242011 107.292469,99.382026 106.496629,97.7890496 C105.699493,96.1960732 99.5103455,80.4464749 96.6782434,74.1484502"/></svg></a></div>
+      </div>
+    </div>
+    <div class="site-footer__bottom">
+      <p class="site-footer__legal"><span>ООО «СМЭШ»</span><span>ИНН&nbsp;1684001996</span><span>КПП&nbsp;168401001</span><span>ОГРН&nbsp;1221600008288</span><span class="site-footer__legal-address">Юр.&nbsp;адрес: 420059, РТ, г.&nbsp;Казань, ул.&nbsp;Павлюхина, д.&nbsp;91, офис&nbsp;58</span></p>
+    </div>
+  </footer>
+</body>
+</html>

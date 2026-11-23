@@ -1,7 +1,7 @@
 (() => {
   const menu = document.querySelector('.mobile-menu');
   const summary = menu?.querySelector('summary');
-  const mobile = window.matchMedia('(max-width: 800px)');
+  const mobile = window.matchMedia('(max-width: 1199px)');
 
   function closeMenu(returnFocus = false) {
     if (!menu?.open) return;

@@ -1,0 +1,147 @@
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: url('assets/fonts/firasansextracondensed-normal-900.woff2') format('woff2');
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: url('assets/fonts/firasansextracondensed-italic-700.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Утверждённая обложка «Линия и мяч» из съёмки ЛАЙМа. */
+.inner-cover {
+  --cover-height: clamp(440px, 58svh, 590px);
+  --cover-shade: linear-gradient(90deg, rgb(2 19 54 / .78) 0%, rgb(2 19 54 / .69) 55%, rgb(2 19 54 / .53) 71%, rgb(2 19 54 / .08) 100%);
+
+  min-height: var(--cover-height);
+  background-color: #044785;
+  background-image: var(--cover-shade), url('assets/inner-cover-wide.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #fff;
+}
+
+.sub-hero.inner-cover {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  padding-block: clamp(52px, 6vw, 88px);
+}
+
+.sub-hero.inner-cover h1 {
+  margin: 0;
+  font-size: clamp(3.5rem, 8.5vw, 7.5rem);
+  line-height: .92;
+}
+
+.sub-hero.inner-cover h1 em { font-weight: 700; }
+
+.sub-hero.inner-cover p {
+  max-width: 44ch;
+  margin: clamp(24px, 2.8vw, 40px) 0 0;
+  font-size: clamp(1.0625rem, 1.55vw, 1.375rem);
+}
+
+@media (max-width: 660px) {
+  .inner-cover {
+    --cover-height: 420px;
+    --cover-shade: linear-gradient(145deg, rgb(2 19 54 / .78), rgb(2 19 54 / .67) 59%, rgb(2 19 54 / .27) 100%);
+
+    background-image: var(--cover-shade), url('assets/inner-cover-mobile.webp');
+  }
+
+  .sub-hero.inner-cover h1 { font-size: clamp(2.875rem, 12vw, 4.75rem); }
+  .sub-hero.inner-cover { background-position: center bottom; }
+}
+
+/* Общий шаблон внутренних страниц, утверждённый по первому экрану «Цен». */
+:root { --inner-page-gutter: clamp(16px, 5.5556vw, 80px); }
+
+.inner-cover__frame {
+  width: min(100% - 2 * var(--inner-page-gutter), 1280px);
+  margin-inline: auto;
+}
+
+.inner-cover--page {
+  display: grid;
+  align-items: center;
+  block-size: var(--cover-height);
+  min-block-size: min-content;
+  padding-block: 86px 30px;
+}
+
+@media (min-width: 661px) {
+  .inner-cover--page { --cover-shade: linear-gradient(90deg, rgb(2 19 54 / .78), rgb(2 19 54 / .69) 55%, rgb(2 19 54 / .60) 78%, rgb(2 19 54 / .08)); }
+}
+
+.inner-cover--page h1 {
+  margin: 0;
+  font: 900 clamp(3.75rem, 8.5vw, 7.75rem)/.92 var(--font-display);
+  text-transform: uppercase;
+}
+
+.inner-cover--page h1 em { font-weight: 700; }
+
+.inner-cover__lead {
+  max-width: 36ch;
+  margin: clamp(18px, 2vw, 26px) 0 0;
+  font: 400 clamp(1.0625rem, 1rem + .4vw, 1.375rem)/1.45 var(--font-prose);
+  color: rgb(240 247 255 / .88);
+  text-wrap: pretty;
+}
+
+.inner-cover__breadcrumb {
+  margin-bottom: clamp(12px, 2vw, 28px);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.inner-cover__breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.inner-cover__breadcrumb a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-inline-start: -10px;
+  padding-inline: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.inner-cover__breadcrumb [aria-hidden] { margin-right: 8px; color: #dce9f4; }
+.inner-cover__breadcrumb a:focus-visible { outline-color: #fff; }
+
+@media (hover: hover) {
+  .inner-cover__breadcrumb a:hover {
+    color: var(--lime);
+  }
+}
+
+@media (max-width: 740px) {
+  :root { --inner-page-gutter: clamp(16px, 6.4vw, 28px); }
+  .inner-cover--page { padding-block: 80px 24px; }
+  .inner-cover--page h1 { font-size: clamp(3.6rem, 13.7vw, 6.25rem); }
+  .inner-cover--page h1 em { display: block; }
+}
+
+@media (max-width: 660px) {
+  .inner-cover--page { --cover-height: 440px; background-position: center bottom; }
+}
+
+@media (max-width: 350px) {
+  .inner-cover--page h1 { font-size: min(16.7vw, 3.6rem); }
+}

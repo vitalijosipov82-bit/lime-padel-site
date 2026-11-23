@@ -22,8 +22,8 @@
 .hero-decision .hero-action[data-button-motion]:not(.is-motion-ready){background:var(--lime)!important;border-color:var(--lime)!important;color:var(--ink)!important;box-shadow:none!important;padding-left:19px!important}
 .path-cta[data-button-motion]:not(.is-motion-ready){background:transparent!important;color:#f6fff0!important}
 .club-life__signup[data-button-motion]:not(.is-motion-ready){background:transparent!important;border-color:#f6fff0!important;color:#f6fff0!important}
-#loyalty-gift .benefits__button--line[data-button-motion]:not(.is-motion-ready){background:transparent!important}
+:is(#loyalty-gift,.contact-page__contact) .benefits__button--line[data-button-motion]:not(.is-motion-ready){background:transparent!important}
 #loyalty-gift .benefits__button--fill[data-button-motion]:not(.is-motion-ready),.site-footer .site-footer__book[data-button-motion]:not(.is-motion-ready){background:var(--lime)!important;border-color:var(--lime)!important;color:var(--ink)!important}
-.visit__route[data-button-motion]:not(.is-motion-ready),.site-footer .site-footer__social[data-button-motion]:not(.is-motion-ready){background:#fff!important;border-color:#7b9286!important;color:#071a17!important}
+.visit__route[data-button-motion]:not(.is-motion-ready),.site-footer__social[data-button-motion]:not(.is-motion-ready){background:#fff!important;border-color:#7b9286!important;color:#071a17!important}
 @media(max-width:430px){.hero-decision .hero-action[data-button-motion]:not(.is-motion-ready){padding-left:15px!important}}
 @media(prefers-reduced-motion:reduce){[data-button-motion].is-motion-ready>.button-motion__face{animation:none!important;transition:none!important;transform:none!important}}

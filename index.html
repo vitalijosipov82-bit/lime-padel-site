@@ -56,15 +56,19 @@
   src: url("prototype/assets/fonts/ibm-plex-sans-cyrillic-latin.woff2") format('woff2');
 }
 
-/* Типографика ЛАЙМа — вариант D1, выбран владельцем 11 ноября 2026 (стенд work/type-lab/#d1).
-   Две семьи:
-   --font-display — Fira Sans Extra Condensed: заголовки, крупные числа, название билета;
-                    акцентное слово (em в заголовках, «ИГРАЕМ?») — тот же шрифт курсивом 900.
-   --font-text    — IBM Plex Sans: выбран владельцем 15.11.2026 вместо Golos Text.
-   Локальный variable WOFF2, настоящие веса до 700, включая 650. */
+@font-face {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("prototype/assets/fonts/inter-cyrillic-latin.woff2") format('woff2');
+}
+
+/* Роли шрифтов утверждены 22.11.2026. Подробности в TYPOGRAPHY.md. */
 :root {
   --font-display: 'Fira Sans Extra Condensed', 'Arial Narrow', sans-serif;
   --font-text: 'IBM Plex Sans', Arial, sans-serif;
+  --font-prose: Inter, var(--font-text);
   --text-body-size: 1.0625rem;
   --text-detail-size: .875rem;
   --text-control-size: .9375rem;
@@ -181,9 +185,38 @@ h3 em {
 .section-lead,
 .large-copy,
 .club-copy > p:not(.eyebrow),
+.sub-hero > p:not(.eyebrow),
+.booking > p:not(.eyebrow),
+.sub-booking > p:not(.eyebrow),
+.sub-section > p:not(.eyebrow),
+.coach-grid p,
+.contact-grid p,
+.offer-grid p,
+.empty-state p,
+.steps p,
+.faq p,
+.path-what,
+.first-game-hero__intro,
+.first-game-steps__text p,
+.coaches__fact,
+.coaches__exp,
+.coaches__back ul,
+.club-life__note,
+.benefits__lead,
+.benefits__redeem,
+.benefits__terms,
+.benefits__details p:not(.benefits__contact),
+.prices__plus,
+.prices__booking {
+  font-family: var(--font-prose);
+}
+
+.hero-description,
+.section-lead,
+.large-copy,
+.club-copy > p:not(.eyebrow),
 .sub-hero p:not(.eyebrow),
 .booking > p:not(.eyebrow) {
-  font-family: var(--font-text);
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -219,6 +252,9 @@ h3 em {
   font-weight: 700;
   letter-spacing: .02em;
 }
+
+.contact-grid p a,
+.prices__booking a { font-family: var(--font-text); }
 
 .brand-word {
   font-family: var(--font-display);
@@ -480,6 +516,19 @@ footer span { font-size: .875rem; line-height: 1.5; }
     width: min(100%, 340px);
     margin: 0;
   }
+}
+
+@font-face {
+  font-family: 'Fira Sans Extra Condensed Hero';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url("prototype/assets/fonts/firasansextracondensed-italic-700.woff2") format('woff2');
+}
+
+.home-page .hero h1.hero-title-friends {
+  font-family: 'Fira Sans Extra Condensed Hero', var(--font-display);
+  font-weight: 700;
 }
 
 /* Заголовок «ЛАЙМ ПАДЕЛ»: первое слово — лаймовым (решение владельца 12.11.2026).
@@ -1423,7 +1472,7 @@ footer span { font-size: .875rem; line-height: 1.5; }
 }
 
 /* ---------- сцена ----------
-   Без «лага»: фото не двигает скрипт. Четыре кадра во весь экран стоят в обычном потоке
+   Без «лага»: фото не двигает скрипт. Кадры во весь экран стоят в обычном потоке
    и едут вместе со страницей (как лента TWICE, но силами браузера), а закреплён только
    прозрачный слой с заголовками, фактами и маршрутом. Скрипт лишь переключает заголовок
    (IntersectionObserver по линии середины экрана) и гасит нижние углы у белого стыка. */
@@ -1795,101 +1844,81 @@ footer span { font-size: .875rem; line-height: 1.5; }
 
 </style>
   <style data-preview-source="prototype/site-navigation.css">
-/* Навигация главной: native details работает и без JavaScript. */
+/* Общая шапка: логотип — меню по центру — телефон и бронирование. */
 .skip-link {
-  position: fixed;
-  z-index: 100;
-  top: 12px;
-  left: 4vw;
-  padding: 14px 20px;
-  border-radius: 8px;
-  background: var(--lime);
-  color: var(--ink);
-  font-weight: 700;
+  position: fixed; z-index: 100; top: 12px; left: 4vw;
+  padding: 14px 20px; border-radius: 8px;
+  background: var(--lime); color: var(--ink); font-weight: 700;
   transform: translateY(-180%);
 }
 .skip-link:focus { transform: none; }
+.site-header {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center; column-gap: clamp(20px, 2vw, 32px); padding-inline: 4vw;
+}
+.site-header > .brand { grid-column: 1; grid-row: 1; justify-self: start; min-height: 44px; }
+.site-header > nav.site-header__nav {
+  display: flex; grid-column: 2; grid-row: 1; justify-content: center; align-items: center;
+  margin: 0; padding: 0; gap: clamp(14px, 1.4vw, 24px);
+  font: 600 13px/1.3 var(--font-text); letter-spacing: .01em;
+}
+.site-header > nav.site-header__nav a { display: flex; align-items: center; min-height: 44px; }
+.site-header__actions { grid-column: 3; grid-row: 1; justify-self: end; display: flex; align-items: center; gap: 16px; white-space: nowrap; }
+.site-header__phone { display: inline-flex; align-items: center; min-height: 44px; font: 500 14px/1.2 var(--font-text); }
+.site-header .site-header__book {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: 14px;
+  min-height: 44px; padding: 5px 6px 5px 16px; border: 1px solid var(--lime);
+  border-radius: 999px; background: var(--lime); color: var(--ink);
+  font: 600 14px/1.2 var(--font-text); letter-spacing: 0; text-transform: none;
+}
+.site-header__book-icon {
+  display: grid; place-items: center; flex: none;
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--ink); color: var(--lime);
+}
+.site-header__book-icon svg { display: block; width: 19px; height: 19px; }
+body .site-header :is(a, summary):focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+.site-header a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--lime); text-underline-offset: .35em; }
 .mobile-menu { display: none; }
-
-.home-page .site-header {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 40;
-  background: linear-gradient(
-    to bottom,
-    rgba(6, 36, 31, .72),
-    rgba(6, 36, 31, .70) 77%,
-    rgba(6, 36, 31, 0)
-  );
-  color: #fff;
-  transform: none;
-  transition: none;
+:is(.home-page, .first-game-page) .site-header {
+  position: fixed; inset: 0 0 auto; z-index: 40;
+  background: linear-gradient(to bottom, rgba(6,36,31,.72), rgba(6,36,31,.70) 77%, rgba(6,36,31,0));
+  color: #fff; transform: none; transition: none;
 }
-
-/* Always visible, including before scripts start and under reduced motion. */
-html:has(body.home-page) { scroll-padding-top: 98px; }
-@media (prefers-reduced-motion: reduce) {
-  .home-page .site-header { transition: none; animation: none; }
-}
-
-@media (max-width: 800px) {
-  html:has(body.home-page) { scroll-padding-top: 84px; }
-  .home-page .site-header { justify-content: space-between; }
-  .mobile-menu { display: block; }
+html:has(body:is(.home-page, .first-game-page)) { scroll-padding-top: 98px; }
+@media (max-width: 1199px) {
+  .site-header { grid-template-columns: auto minmax(0, 1fr) auto; gap: 20px; }
+  .site-header > nav.site-header__nav { display: none; }
+  .site-header__actions { grid-column: 2; }
+  .mobile-menu { display: block; grid-column: 3; grid-row: 1; justify-self: end; }
   .mobile-menu summary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    min-height: 44px;
-    padding: 8px 16px;
-    border: 1px solid #e2f7c7;
-    border-radius: 999px;
-    color: #fff;
-    font-size: .9375rem;
-    font-weight: 600;
-    cursor: pointer;
-    list-style: none;
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    min-height: 44px; padding: 8px 16px; border: 1px solid #e2f7c7; border-radius: 999px;
+    color: #fff; font-size: .9375rem; font-weight: 600; cursor: pointer; list-style: none;
   }
   .mobile-menu summary::-webkit-details-marker { display: none; }
   .mobile-menu summary svg { flex: none; }
   .mobile-menu[open] summary svg { transform: rotate(45deg); }
-  .mobile-menu summary:focus-visible { outline: 3px solid #ff6b00; outline-offset: 4px; }
-  .home-page .mobile-menu nav {
-    position: absolute;
-    z-index: 30;
-    top: 72px;
-    left: 5vw;
-    right: 5vw;
-    display: grid;
-    gap: 0;
-    max-height: calc(100svh - 96px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    margin: 0;
-    padding: 12px 20px;
-    border: 1px solid #91c745;
-    border-radius: 16px;
-    background: #06241f;
-    font-size: 1rem;
-    font-weight: 500;
-    text-transform: none;
-    letter-spacing: 0;
+  .site-header .mobile-menu nav {
+    position: absolute; z-index: 30; top: calc(100% + 4px); left: 4vw; right: 4vw;
+    display: grid; gap: 0; max-height: calc(100svh - 104px); overflow-y: auto; overscroll-behavior: contain;
+    margin: 0; padding: 12px 20px; border: 1px solid #91c745; border-radius: 16px; background: #06241f;
+    font: 500 16px/1.4 var(--font-text); text-transform: none; letter-spacing: 0;
   }
-  .mobile-menu nav a {
-    display: flex;
-    align-items: center;
-    min-height: 48px;
-    padding: 10px 4px;
-  }
+  .mobile-menu nav a { display: flex; align-items: center; min-height: 48px; padding: 10px 4px; }
   .mobile-menu nav a + a { border-top: 1px solid #315449; }
-  .mobile-menu nav .mobile-menu__booking { color: var(--lime); font-weight: 700; }
-
+  .mobile-menu nav .mobile-menu__booking { justify-content: space-between; gap: 14px; color: var(--lime); font-weight: 700; }
 }
-
-@media (min-width: 801px) {
-  .home-page .site-header nav { font-size: .875rem; }
-  .home-page .site-header > nav a { display: flex; align-items: center; min-height: 44px; }
+@media (max-width: 740px) {
+  .site-header { padding-inline: 5vw; }
+  .site-header__actions { display: none; }
+  .site-header .mobile-menu nav { left: 5vw; right: 5vw; }
+}
+@media (max-width: 800px) {
+  html:has(body:is(.home-page, .first-game-page)) { scroll-padding-top: 84px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.home-page, .first-game-page) .site-header { transition: none; animation: none; }
 }
 
 </style>
@@ -1981,7 +2010,7 @@ html:has(body.home-page) { scroll-padding-top: 98px; }
 /* Фактурный мяч из блока пробного занятия; прозрачные поля изображения учтены в размере и позиции. */
 .prices__plus::before { content: ""; position: absolute; left: -3px; top: -1px; width: 28px; height: 28px; background: url("prototype/assets/trial-ball.webp") center / contain no-repeat; }
 .prices__booking { grid-column: 1 / -1; border-top: 1px solid var(--prices-line); padding-top: 16px; font-size: clamp(16px, 1.5vw, 20px); text-wrap: pretty; }
-#prices .prices__booking a { color: #044785; text-decoration: underline; text-underline-offset: .17em; white-space: nowrap; }
+#prices .prices__booking a { color: #044785; text-decoration: none; white-space: nowrap; }
 #prices .prices__train .prices__actions { padding-top: 18px; }
 
 /* Ноутбуки */
@@ -2273,7 +2302,7 @@ html:has(body.home-page) { scroll-padding-top: 98px; }
 
 </style>
   <style data-preview-source="prototype/page-flow.css">
-/* Выбор владельца 14.11.2026: раскрытие клуба до краёв, остальные стыки — срез корта.
+/* Выбор владельца: раскрытие клуба до краёв (14.11.2026), ровный край Hero (23.11.2026).
    Подключается последним; действует только на главной с page-flow-selected. */
 .home-page.page-flow-selected { --frame-edge: 0px; --frame-radius: 0px; --flow-cut: 40px; --flow-air: var(--section-air,112px); }
 .home-page.page-flow-selected main {
@@ -2287,10 +2316,10 @@ html:has(body.home-page) { scroll-padding-top: 98px; }
 .home-page.page-flow-selected .scene__photos picture:first-child::before,
 .home-page.page-flow-selected .scene__photos picture:last-child::before { content: none; }
 .home-page.page-flow-selected .hero {
-  clip-path: polygon(0 0,100% 0,100% 100%,0 calc(100% - var(--flow-cut)));
+  clip-path: none;
 }
-/* Нижнее поле учитывает высоту среза и оставляет 40px для кнопки и её фокуса.
-   На низком окне Hero растёт по содержимому, поэтому срез не догоняет кнопку. */
+/* Поле выбранной композиции Hero сохранено после снятия среза:
+   расположение содержимого и запас для кнопки с фокусом не меняются. */
 @media (min-width: 801px) {
   .home-page.page-flow-selected .hero-main { padding-bottom: calc(var(--flow-cut) + 40px); }
 }
@@ -2398,17 +2427,17 @@ html:has(body.home-page) { scroll-padding-top: 98px; }
 #loyalty-gift .benefits__gift .benefits__actions { grid-template-rows: auto; align-content: end; }
 #loyalty-gift .benefits__action-label { margin: 0; font-size: 16px; font-weight: 650; line-height: 24px; }
 #loyalty-gift .benefits__actions > .benefits__button { width: 100%; }
-#loyalty-gift .benefits__bots { display: grid; grid-row: 2; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
-#loyalty-gift .benefits__button { display: inline-flex; align-items: center; justify-content: space-between; min-height: 46px; gap: 10px; padding: 4px 5px 4px 18px; border: 1px solid currentColor; border-radius: 28px; font-size: 15px; line-height: 1.3; font-weight: 650; }
+:is(#loyalty-gift, .contact-page__contact) .benefits__bots { display: grid; grid-row: 2; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+:is(#loyalty-gift, .contact-page__contact) .benefits__button { display: inline-flex; align-items: center; justify-content: space-between; min-height: 46px; gap: 10px; padding: 4px 5px 4px 18px; border: 1px solid currentColor; border-radius: 28px; font-size: 15px; line-height: 1.3; font-weight: 650; }
 #loyalty-gift .benefits__button--fill { color: #071a17; background: #d9f21e; border-color: #d9f21e; }
-#loyalty-gift .benefits__button-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: 0 0 36px; border-radius: 50%; background: #d9f21e; color: #071a17; overflow: hidden; transition: transform 180ms var(--scene-ease); }
+:is(#loyalty-gift, .contact-page__contact) .benefits__button-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: 0 0 36px; border-radius: 50%; background: #d9f21e; color: #071a17; overflow: hidden; transition: transform 180ms var(--scene-ease); }
 #loyalty-gift .benefits__button--fill .benefits__button-icon { background: #071a17; color: #d9f21e; }
-#loyalty-gift .benefits__button svg { flex-shrink: 0; transition: transform 240ms var(--scene-ease); }
+:is(#loyalty-gift, .contact-page__contact) .benefits__button svg { flex-shrink: 0; transition: transform 240ms var(--scene-ease); }
 #loyalty-gift .benefits__details { margin-top: 12px; font-size: 16px; line-height: 1.4; }
 #loyalty-gift :is(.benefits__lead, .benefits__stats dd, .benefits__redeem, .benefits__terms, .benefits__details p) { text-wrap: pretty; }
 #loyalty-gift .benefits__details p + p { margin-top: 6px; }
 #loyalty-gift .benefits__contact { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; column-gap: 16px; row-gap: 0; }
-#loyalty-gift .benefits__contact a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; text-decoration: underline; text-underline-offset: .2em; }
+#loyalty-gift .benefits__contact a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; text-decoration: none; }
 #loyalty-gift a:focus-visible { outline: 3px solid #044785; outline-offset: 4px; }
 #loyalty-gift .benefits__gift a:focus-visible { outline-color: #d9f21e; }
 #loyalty-gift ::selection { color: #071a17; background: #d9f21e; }
@@ -2428,8 +2457,8 @@ html:has(body.home-page) { scroll-padding-top: 98px; }
 #loyalty-gift .benefits__button:active .benefits__button-icon, #loyalty-gift .benefits__button.is-pressed .benefits__button-icon { transform: scale(.9); }
 #loyalty-gift .benefits__contact a:focus-visible { text-decoration-thickness: 2px; }
 @media (hover:hover) {
-  #loyalty-gift .benefits__button { transition: background-color .15s,color .15s; }
-  #loyalty-gift .benefits__button--line:hover { background: #efffd6; }
+  :is(#loyalty-gift, .contact-page__contact) .benefits__button { transition: background-color .15s,color .15s; }
+  :is(#loyalty-gift, .contact-page__contact) .benefits__button--line:hover { background: #efffd6; }
   #loyalty-gift .benefits__button--fill:hover { background: #efffd6; border-color: #efffd6; color: #071a17; }
 }
 @media (hover:hover) and (pointer:fine) {
@@ -2456,10 +2485,10 @@ html:has(body.home-page) { scroll-padding-top: 98px; }
 @media (max-width:480px) {
   #loyalty-gift .benefits__stats { gap: 10px; }
   #loyalty-gift .benefits__amount { gap: 8px; }
-  #loyalty-gift .benefits__bots { gap: 10px; }
-  #loyalty-gift .benefits__button { padding-left: 12px; font-size: 15px; gap: 8px; }
+  :is(#loyalty-gift, .contact-page__contact) .benefits__bots { gap: 10px; }
+  :is(#loyalty-gift, .contact-page__contact) .benefits__button { padding-left: 12px; font-size: 15px; gap: 8px; }
 }
-@media (max-width:350px) { #loyalty-gift .benefits__offer { padding-inline: 16px; } #loyalty-gift .benefits__bots { grid-template-columns: minmax(0,1fr); } }
+@media (max-width:350px) { #loyalty-gift .benefits__offer { padding-inline: 16px; } :is(#loyalty-gift, .contact-page__contact) .benefits__bots { grid-template-columns: minmax(0,1fr); } }
 @media (prefers-reduced-motion:reduce) {
   #loyalty-gift * { animation: none !important; transition: none !important; }
   #loyalty-gift .scene-label-front, #loyalty-gift .scene-label-back, #loyalty-gift .benefits__button-icon, #loyalty-gift .benefits__button-icon svg { transform: none !important; }
@@ -2604,21 +2633,22 @@ html:has(body.home-page) { scroll-padding-top: 98px; }
 .visit h2,.visit h3,.visit p,.visit dl,.visit dd{margin:0}
 .visit__copy{min-width:0}
 .visit__title{font:900 clamp(2.25rem,3vw,3rem)/1.06 'Fira Contacts',var(--font-display);letter-spacing:0;text-transform:uppercase;text-wrap:balance}
-.visit__location{margin-top:10px!important;font:400 16px/1.5 var(--font-text);color:var(--contact-secondary)}
+.visit__location{margin-top:10px!important;font:400 16px/1.5 var(--font-prose);color:var(--contact-secondary)}
 .visit__hours-title{font:500 15px/1.4 var(--font-text);letter-spacing:0;margin-top:28px!important}
 .visit__hours{display:flex;gap:28px;margin-top:10px!important;font:400 16px/1.5 var(--font-text);font-variant-numeric:tabular-nums}
 .visit__hours dt{color:var(--contact-secondary);font-size:14px;margin-bottom:2px}
 .visit__hours dd{font-weight:500;white-space:nowrap}
 .visit__way{margin-top:28px;max-width:520px}
 .visit__way h3{font:500 15px/1.4 var(--font-text);letter-spacing:0;text-transform:none;margin-bottom:12px}
-.visit__steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;font:400 16px/1.5 var(--font-text)}
+.visit__steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;font:400 16px/1.5 var(--font-prose)}
 .visit__steps li{position:relative;padding-left:24px}
 .visit__steps li::before{content:'';position:absolute;left:0;top:.72em;width:12px;height:1px;background:var(--contact-secondary)}
 .visit__routes{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .visit__route{display:inline-flex;align-items:center;justify-content:space-between;gap:22px;min-height:52px;padding:6px 8px 6px 18px;border:1px solid #7b9286;border-radius:99px;background:#fff;color:var(--contact-ink);font:500 15px/1.3 var(--font-text);text-decoration:none;white-space:nowrap}
 .visit__route>span{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:50%;background:#eaf0ec;color:#071a17}
 .visit__route svg{width:18px;height:18px}
-.visit__map{position:relative;min-width:0;width:100%;height:clamp(400px,30vw,500px);background:#e2e9e1;border-radius:2px;overflow:visible;isolation:isolate}
+.visit__route--directions{white-space:normal}
+.visit__map{position:relative;min-width:0;width:100%;height:clamp(320px,25vw,400px);background:#e2e9e1;border-radius:2px;overflow:visible;isolation:isolate}
 .visit__map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
 .visit__map-state{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:28px;background:#e2e9e1;text-align:center;pointer-events:none;transition:opacity .2s}
 .visit__map-status{font:400 16px/1.5 var(--font-text);color:#254b3d;max-width:32ch}
@@ -2636,7 +2666,7 @@ html:has(body.home-page) { scroll-padding-top: 98px; }
  .visit__hours-title,.visit__way{margin-top:24px!important}
  .visit__routes{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:10px;margin-top:24px}
  .visit__route{min-width:0;padding-left:14px;gap:8px;font-size:14px}
- .visit__map{height:360px}
+ .visit__map{height:320px}
 }
 @media(max-width:359px){.visit__routes{grid-template-columns:minmax(0,1fr)}.visit__hours{gap:20px}}
 @media(prefers-reduced-motion:reduce){.visit *{transition:none;animation:none;scroll-behavior:auto}}
@@ -2654,7 +2684,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 .site-footer .site-footer__brand{display:inline-flex;align-items:center;gap:12px;min-height:44px;width:fit-content}
 .site-footer .site-footer__brand img{display:block;width:58px;height:42px;object-fit:contain;margin:0;flex:none}
 .site-footer .site-footer__name{font:900 43px/1 'Fira Footer',var(--font-display);letter-spacing:0;color:#071a17}
-.site-footer .site-footer__description{margin:6px 0 0;font:400 13px/1.4 var(--font-text);color:#35534a}
+.site-footer .site-footer__description{margin:6px 0 0;font:400 13px/1.4 var(--font-prose);color:#35534a}
 .site-footer .site-footer__booking{margin:0;display:flex}
 .site-footer .site-footer__book{display:inline-flex;align-items:center;justify-content:space-between;gap:34px;min-height:50px;padding:5px 5px 5px 20px;border:1px solid var(--lime);border-radius:99px;background:var(--lime);color:#071a17;font:600 15px/1.3 var(--font-text)}
 .site-footer .site-footer__book span{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;background:#071a17;color:var(--lime)}
@@ -2670,15 +2700,15 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 .site-footer .site-footer__phone{display:flex;align-items:center;min-height:44px;width:fit-content;font:500 16px/1.35 var(--font-text);white-space:nowrap}
 .site-footer .site-footer__hours{display:flex;gap:6px 20px;flex-wrap:wrap;margin:0 0 12px;font:400 14px/1.5 var(--font-text);color:#35534a}
 .site-footer .site-footer__hours span{font:inherit;color:inherit;white-space:nowrap}
-.site-footer .site-footer__socials{display:flex;gap:10px}
-.site-footer .site-footer__social{display:grid;place-items:center;flex:none;width:44px;height:44px;border:1px solid #7b9286;border-radius:0;background:#fff;color:#071a17}
-.site-footer .site-footer__social svg{display:block;width:20px;height:20px;fill:currentColor}
+.site-footer__socials{display:flex;gap:10px}
+.site-footer__social{display:grid;place-items:center;flex:none;width:44px;height:44px;border:1px solid #7b9286;border-radius:0;background:#fff;color:#071a17}
+.site-footer__social svg{display:block;width:20px;height:20px;fill:currentColor}
 .site-footer .site-footer__bottom{display:flex;align-items:flex-start;gap:16px 32px;flex-wrap:wrap;padding-top:12px;border-top:1px solid #b8c8c1}
 .site-footer .site-footer__legal{display:flex;align-items:center;gap:4px 20px;flex-wrap:wrap;min-height:44px;margin:0;flex:1;font:400 13px/1.5 var(--font-text);color:#35534a}
 .site-footer .site-footer__legal span{font:inherit;color:inherit;white-space:nowrap}
 .site-footer .site-footer__legal .site-footer__legal-address{white-space:normal;text-wrap:pretty}
-@media(hover:hover){.site-footer .site-footer__nav a:hover,.site-footer .site-footer__phone:hover{text-decoration:underline;text-underline-offset:5px}.site-footer .site-footer__social:hover{background:#071a17;color:#fff;border-color:#071a17}.site-footer .site-footer__book:hover{background:#efffd6;border-color:#efffd6}}
-.site-footer .site-footer__social:active{background:#efffd6;color:#071a17}
+@media(hover:hover){.site-footer .site-footer__nav a:hover{color:var(--lime)}.site-footer__social:hover{background:#071a17;color:#fff;border-color:#071a17}.site-footer .site-footer__book:hover{background:#efffd6;border-color:#efffd6}}
+.site-footer__social:active{background:#efffd6;color:#071a17}
 @media(max-width:1100px) and (min-width:801px){.site-footer .site-footer__body{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4vw}.site-footer .site-footer__nav{gap:20px}}
 @media(max-width:800px){
  footer.site-footer{padding:56px max(16px,5vw) calc(24px + env(safe-area-inset-bottom,0px))}
@@ -2719,9 +2749,9 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 .hero-decision .hero-action[data-button-motion]:not(.is-motion-ready){background:var(--lime)!important;border-color:var(--lime)!important;color:var(--ink)!important;box-shadow:none!important;padding-left:19px!important}
 .path-cta[data-button-motion]:not(.is-motion-ready){background:transparent!important;color:#f6fff0!important}
 .club-life__signup[data-button-motion]:not(.is-motion-ready){background:transparent!important;border-color:#f6fff0!important;color:#f6fff0!important}
-#loyalty-gift .benefits__button--line[data-button-motion]:not(.is-motion-ready){background:transparent!important}
+:is(#loyalty-gift,.contact-page__contact) .benefits__button--line[data-button-motion]:not(.is-motion-ready){background:transparent!important}
 #loyalty-gift .benefits__button--fill[data-button-motion]:not(.is-motion-ready),.site-footer .site-footer__book[data-button-motion]:not(.is-motion-ready){background:var(--lime)!important;border-color:var(--lime)!important;color:var(--ink)!important}
-.visit__route[data-button-motion]:not(.is-motion-ready),.site-footer .site-footer__social[data-button-motion]:not(.is-motion-ready){background:#fff!important;border-color:#7b9286!important;color:#071a17!important}
+.visit__route[data-button-motion]:not(.is-motion-ready),.site-footer__social[data-button-motion]:not(.is-motion-ready){background:#fff!important;border-color:#7b9286!important;color:#071a17!important}
 @media(max-width:430px){.hero-decision .hero-action[data-button-motion]:not(.is-motion-ready){padding-left:15px!important}}
 @media(prefers-reduced-motion:reduce){[data-button-motion].is-motion-ready>.button-motion__face{animation:none!important;transition:none!important;transform:none!important}}
 
@@ -2730,15 +2760,18 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 <body class="home-page page-flow-selected" data-scroll-mode="strong">
   <a class="skip-link" href="#top">К&nbsp;содержимому</a>
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="ЛАЙМ Падел — наверх"><img src="images/logo/lime-padel-logo-mark.svg" alt=""><span class="brand-word">ЛАЙМ</span></a>
-    <nav aria-label="Основное меню"><a href="prototype/first-game.html">Первая игра</a><a href="prototype/prices.html">Цены</a><a href="prototype/coaches.html">Тренеры</a><a href="prototype/events.html">События</a><a href="prototype/contacts.html">Контакты</a></nav>
+    <a class="brand" href="#top" aria-label="ЛАЙМ Падел — главная"><img src="images/logo/lime-padel-logo-mark.svg" alt="" width="1000" height="720"><span class="brand-word">ЛАЙМ</span></a>
+    <nav class="site-header__nav" aria-label="Основное меню"><a href="prototype/first-game.html">Первая игра</a><a href="prototype/prices.html">Цены</a><a href="prototype/coaches.html">Тренеры</a><a href="prototype/contacts.html">Контакты</a></nav>
+    <div class="site-header__actions">
+      <a class="site-header__phone" href="tel:+79027112003">8&nbsp;(902)&nbsp;711-20-03</a>
+      <a class="site-header__book button" href="https://n1437757.yclients.ru/company/1301052/record-type?o=" data-button-motion>Забронировать<span class="site-header__book-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </div>
     <details class="mobile-menu">
       <summary data-button-motion>Меню <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true" focusable="false"><path d="M4 10h12M10 4v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></summary>
       <nav aria-label="Мобильное меню">
-        <a href="prototype/first-game.html">Первая игра</a><a href="prototype/prices.html">Цены</a>
-        <a href="prototype/coaches.html">Тренеры</a><a href="prototype/events.html">События</a>
-        <a href="prototype/contacts.html">Контакты</a>
-        <a class="mobile-menu__booking" href="https://n1437757.yclients.ru/company/1301052/record-type?o=">Записаться</a>
+        <a href="prototype/first-game.html">Первая игра</a><a href="prototype/prices.html">Цены</a><a href="prototype/coaches.html">Тренеры</a><a href="prototype/contacts.html">Контакты</a>
+        <a href="tel:+79027112003" aria-label="Позвонить в клуб">8&nbsp;(902)&nbsp;711-20-03</a>
+        <a class="mobile-menu__booking" href="https://n1437757.yclients.ru/company/1301052/record-type?o=">Забронировать<span class="site-header__book-icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
       </nav>
     </details>
   </header>
@@ -2846,10 +2879,6 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
               <li class="scene__frame">
                 <p class="scene__words"><span class="scene__line">Отдых</span> <span class="scene__line">между играми</span></p>
                 <picture class="scene__photo"><source media="(max-width: 800px)" srcset="prototype/assets/club-full-lounge-mobile.webp" width="1000" height="1780"><img src="prototype/assets/club-full-lounge-wide.webp" width="2000" height="1250" loading="lazy" alt="Кресла-мешки и столик рядом с кортом"></picture>
-              </li>
-              <li class="scene__frame scene__frame--caption">
-                <p class="scene__words">Раздевалки</p>
-                <picture class="scene__photo"><source media="(max-width: 800px)" srcset="prototype/assets/club-full-lockers-mobile.webp" width="1000" height="1780"><img src="prototype/assets/club-full-lockers-wide.webp" width="2000" height="1250" loading="lazy" alt="Раздевалка со шкафчиками и скамейками"></picture>
               </li>
               <li class="scene__frame scene__frame--caption">
                 <p class="scene__words">Душевые</p>
@@ -3053,10 +3082,10 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
     <h2 id="visit-title" class="visit__title">ул.&nbsp;Юлиуса Фучика, 90</h2>
     <div class="visit__facts"><p class="visit__location">Казань · ТЦ «Франт» · 3‑й&nbsp;этаж</p><h3 class="visit__hours-title">Часы работы</h3><dl class="visit__hours"><div><dt>Пн–пт</dt><dd>08:00–23:00</dd></div><div><dt>Сб–вс</dt><dd>08:00–22:00</dd></div></dl></div>
     <div class="visit__way"><h3>Как пройти в&nbsp;клуб</h3><ul class="visit__steps"><li>Зайди через центральный вход ТЦ&nbsp;«Франт»</li><li>Поднимись на&nbsp;эскалаторе на&nbsp;3‑й&nbsp;этаж</li><li>ЛАЙМ сразу за&nbsp;стойкой фитнес-клуба «Акимбо»</li></ul></div>
-    <div class="visit__routes" role="group" aria-label="Построить маршрут"><a class="visit__route" href="https://yandex.ru/maps/org/laym_padel/218710543140/?mode=routes&amp;rtext=~55.763469%2C49.233099&amp;ruri=~ymapsbm1%3A%2F%2Forg%3Foid%3D218710543140" target="_blank" rel="noopener" aria-label="Маршрут в Яндекс Картах, новая вкладка" data-button-motion>Яндекс Карты<span><svg viewBox="0 0 20 20" fill="none" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a><a class="visit__route" href="https://2gis.ru/kazan/directions/points/%7C49.234002%2C55.763589%3B70000001102624666" target="_blank" rel="noopener" aria-label="Маршрут в 2ГИС, новая вкладка" data-button-motion>2ГИС<span><svg viewBox="0 0 20 20" fill="none" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
+    <div class="visit__routes" role="group" aria-label="Клуб на картах"><a class="visit__route visit__route--directions" href="https://yandex.ru/maps/?mode=routes&amp;rtext=~55.763589%2C49.234002" target="_blank" rel="noopener" aria-label="Построить маршрут до ЛАЙМ Падел в Яндекс Картах, новая вкладка" data-button-motion>Построить маршрут<span><svg viewBox="0 0 20 20" fill="none" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a><a class="visit__route" href="https://2gis.ru/kazan/search/%D0%BB%D0%B0%D0%B9%D0%BC%20%D0%BF%D0%B0%D0%B4%D0%B5%D0%BB/firm/70000001102624666/49.234002%2C55.763589" target="_blank" rel="noopener" aria-label="ЛАЙМ Падел в 2ГИС, новая вкладка" data-button-motion>2ГИС<span><svg viewBox="0 0 20 20" fill="none" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
   </div>
   <div class="visit__map" data-map-shell>
-    <iframe data-map-src="https://makemap.2gis.ru/widget?data=eJxFkNFugjAUht_l7Ja4MwUVEi9cydhcNWKWbLp4QaRj1UpZKTIkvLsFM9er5s_X7_T8NUgVM8XigMkj04qzHLzPGnSVMfDgiUW6UAws4DF4DxYkV6wC78YsJU-1IXbSqHga6U5hu73-wEbsW47TGw0HztjdNhZkSmZM6W5MbZ4IqYziDm17NHaMRHMtWinOTuFhQTY4KxOc3Yf5giDSj7AoJxODxSzfKZ5pLtMOVi0wQOqHpziYU-KHSpMR0v0qcYNHpNMEX9_a-7PJwkKTkpKpMye2yWmYcZ_8uOSAa7_1uLimpKjKZF75q30ckNarud0OPr-kMfs1VeDfaZqtBccoW8qcX_9Tg4g0eLe9LRBt_N8InKU8GsfQFGL2kEK8fzMmNl36FYmcNRdxkH6u" title="ЛАЙМ Падел на карте 2ГИС" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" tabindex="0"></iframe>
+    <iframe data-map-src="https://yandex.ru/map-widget/v1/?oid=218710543140&amp;ol=biz&amp;z=17" title="ЛАЙМ Падел на Яндекс Картах" loading="lazy" allowfullscreen referrerpolicy="strict-origin-when-cross-origin" tabindex="0"></iframe>
     <div class="visit__map-state"><p class="visit__map-status" role="status">Загружаем карту…</p></div>
     <noscript><p class="visit__map-noscript">ЛАЙМ Падел · Юлиуса Фучика, 90</p></noscript>
   </div>
@@ -3181,7 +3210,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 (() => {
   const menu = document.querySelector('.mobile-menu');
   const summary = menu?.querySelector('summary');
-  const mobile = window.matchMedia('(max-width: 800px)');
+  const mobile = window.matchMedia('(max-width: 1199px)');
 
   function closeMenu(returnFocus = false) {
     if (!menu?.open) return;
@@ -3251,7 +3280,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
 </script>
 <script data-preview-source="prototype/club-scene.js">
 /* Блок «Клуб» · сцена — по мотивам twicemediahouse.com («Selected work»).
-   Фото не двигает скрипт: четыре кадра во весь экран идут в обычном потоке страницы
+   Фото не двигает скрипт: кадры во весь экран идут в обычном потоке страницы
    (их собирает этот скрипт из тех же <picture>, что стоят в списке), поверх закреплён
    слой с заголовками, фактами и маршрутом. Поэтому нет отставания от прокрутки.
    Скрипт только переключает заголовок, когда кадр пересекает середину экрана,
@@ -3633,7 +3662,7 @@ footer.site-footer{display:block;padding:28px 4vw 16px;background:#fff;color:#07
     frame.src = frame.dataset.mapSrc;
     window.setTimeout(() => {
       if (!shell.hasAttribute('data-map-loaded')) {
-        shell.querySelector('[role="status"]').textContent = 'Если карта не появилась, открой Яндекс Карты или 2ГИС';
+        shell.querySelector('[role="status"]').textContent = 'Если карта не появилась, нажми «Построить маршрут» или открой 2ГИС';
       }
     }, 12000);
   }

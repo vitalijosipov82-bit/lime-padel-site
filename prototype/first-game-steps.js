@@ -1,28 +1,40 @@
 (() => {
-  const steps = document.querySelector('.first-game-steps');
-  if (!steps) return;
+  const route = document.querySelector('.first-game-steps__list');
+  if (!route || !('IntersectionObserver' in window)) return;
 
-  const switcher = steps.querySelector('.first-game-steps__switch');
-  const buttons = [...switcher.querySelectorAll('button')];
-  const panels = buttons.map(button => document.getElementById(button.getAttribute('aria-controls')));
-  if (panels.some(panel => !panel || !steps.contains(panel))) return;
+  const steps = [...route.children];
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  let active = steps[0];
+  let observer;
 
-  const wide = matchMedia('(min-width: 761px)');
-  let active = 0;
-
-  function show(index, animate = false) {
-    active = index;
-    switcher.hidden = !wide.matches;
-    buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
-    panels.forEach((panel, i) => {
-      panel.hidden = wide.matches && i !== index;
-      panel.classList.toggle('is-step-entering', animate && i === index);
-    });
+  function mark(step) {
+    if (step === active) return;
+    active.removeAttribute('data-step-active');
+    step.setAttribute('data-step-active', '');
+    active = step;
   }
 
-  buttons.forEach((button, i) => button.addEventListener('click', () => {
-    if (i !== active) show(i, true);
-  }));
-  wide.addEventListener('change', () => show(active));
-  show(active);
+  function observeReadingLine() {
+    observer?.disconnect();
+    if (motion.matches) {
+      mark(steps[0]);
+      return;
+    }
+
+    const readingLine = Math.round(innerHeight * .52);
+    observer = new IntersectionObserver((entries) => {
+      const step = entries.find(entry => entry.isIntersecting)?.target;
+      if (step) mark(step);
+    }, { rootMargin: `-${readingLine}px 0px -${innerHeight - readingLine - 1}px` });
+
+    steps.forEach(step => observer.observe(step));
+  }
+
+  route.addEventListener('focusin', (event) => {
+    const step = event.target.closest('li');
+    if (step && !motion.matches) mark(step);
+  });
+  window.addEventListener('resize', observeReadingLine);
+  motion.addEventListener('change', observeReadingLine);
+  observeReadingLine();
 })();

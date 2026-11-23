@@ -1,4 +1,4 @@
-/* Выбор владельца 14.11.2026: раскрытие клуба до краёв, остальные стыки — срез корта.
+/* Выбор владельца: раскрытие клуба до краёв (14.11.2026), ровный край Hero (23.11.2026).
    Подключается последним; действует только на главной с page-flow-selected. */
 .home-page.page-flow-selected { --frame-edge: 0px; --frame-radius: 0px; --flow-cut: 40px; --flow-air: var(--section-air,112px); }
 .home-page.page-flow-selected main {
@@ -12,10 +12,10 @@
 .home-page.page-flow-selected .scene__photos picture:first-child::before,
 .home-page.page-flow-selected .scene__photos picture:last-child::before { content: none; }
 .home-page.page-flow-selected .hero {
-  clip-path: polygon(0 0,100% 0,100% 100%,0 calc(100% - var(--flow-cut)));
+  clip-path: none;
 }
-/* Нижнее поле учитывает высоту среза и оставляет 40px для кнопки и её фокуса.
-   На низком окне Hero растёт по содержимому, поэтому срез не догоняет кнопку. */
+/* Поле выбранной композиции Hero сохранено после снятия среза:
+   расположение содержимого и запас для кнопки с фокусом не меняются. */
 @media (min-width: 801px) {
   .home-page.page-flow-selected .hero-main { padding-bottom: calc(var(--flow-cut) + 40px); }
 }

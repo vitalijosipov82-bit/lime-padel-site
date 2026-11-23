@@ -170,6 +170,19 @@
   }
 }
 
+@font-face {
+  font-family: 'Fira Sans Extra Condensed Hero';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('assets/fonts/firasansextracondensed-italic-700.woff2') format('woff2');
+}
+
+.home-page .hero h1.hero-title-friends {
+  font-family: 'Fira Sans Extra Condensed Hero', var(--font-display);
+  font-weight: 700;
+}
+
 /* Заголовок «ЛАЙМ ПАДЕЛ»: первое слово — лаймовым (решение владельца 12.11.2026).
    styles.css красит строки заголовка в белый, поэтому цвет задан здесь явно. */
 .hero h1.hero-title-friends .hero-title-lime {

@@ -1,0 +1,127 @@
+.first-game-page {
+  --first-game-blue: #044785;
+  --first-game-pale: #efffd6;
+  --first-game-gutter: clamp(16px, 4vw, 72px);
+  --first-game-space: clamp(64px, 7.25vw, 112px);
+  --first-game-gap: clamp(20px, 3vw, 44px);
+}
+
+.first-game-frame {
+  width: min(100% - 2 * var(--first-game-gutter), 1320px);
+  margin-inline: auto;
+}
+
+.first-game-page main h2 {
+  font-size: clamp(2.65rem, 6vw, 6rem);
+  line-height: .97;
+  text-transform: uppercase;
+}
+
+.first-game-page main h2 em { display: block; color: var(--first-game-blue); font-weight: 700; }
+.first-game-page main h3 { font-size: clamp(1.7rem, 2.65vw, 2.7rem); }
+
+.first-game-cover__details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 17.25rem);
+  align-items: center;
+  gap: 8px var(--first-game-gap);
+  width: 100%;
+  margin-top: clamp(18px, 2vw, 26px);
+}
+
+.first-game-cover__details .inner-cover__lead { margin: 0; }
+
+@media (min-width: 1001px) {
+  .first-game-cover__details {
+    position: relative;
+    display: block;
+  }
+
+  .first-game-cover__details .inner-cover__lead {
+    width: min(36ch, calc(100% - 17.25rem - var(--first-game-gap)));
+  }
+
+  .first-game-cover__booking {
+    position: absolute;
+    inset-inline-end: 0;
+    top: 50%;
+    width: 17.25rem;
+    transform: translateY(-50%);
+  }
+}
+
+@media (min-width: 661px) and (max-width: 1000px) {
+  .inner-cover--page.first-game-cover { padding-block-end: 16px; }
+}
+
+.first-game-cover__rate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 9px;
+  margin: 0 0 8px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.first-game-cover__rate strong {
+  font: 900 clamp(2.25rem, 4.4vw, 3.75rem)/.95 var(--font-display);
+}
+
+.first-game-hero__action {
+  width: min(100%, 17.25rem);
+  max-width: none;
+}
+
+.first-game-hero__action::after { content: none; }
+.first-game-hero__action:focus-visible { outline: 3px solid #fff; outline-offset: 4px; }
+
+@media (max-width: 660px) {
+  .inner-cover--page.first-game-cover { padding-block-end: 12px; }
+  .first-game-cover .inner-cover__breadcrumb { margin-bottom: 10px; }
+  .first-game-cover__details { grid-template-columns: minmax(0, 1fr); margin-top: 10px; }
+  .first-game-cover__rate { margin-bottom: 6px; }
+  .first-game-cover__rate strong { font-size: clamp(1.875rem, 5.6vw, 2.25rem); }
+}
+
+@media (min-width: 491px) and (max-width: 740px) {
+  .first-game-cover.inner-cover--page h1 em { display: inline; }
+}
+
+@media (max-width: 430px) {
+  .first-game-hero__action { padding-left: 16px; font-size: 15px; }
+}
+
+@media (max-width: 359px) {
+  .first-game-hero__action { padding-left: 12px; font-size: 14px; gap: 8px; }
+}
+
+/* Кнопка на стенде выбора обложки work/inner-court-lab. */
+.first-game-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-width: min(100%, 275px);
+  min-height: 54px;
+  max-width: 100%;
+  padding: 10px 14px 10px 21px;
+  border-radius: 999px;
+  background: var(--lime);
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.first-game-action:hover { background: var(--first-game-pale); }
+
+.first-game-action > span {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}

@@ -1,0 +1,57 @@
+/* Утверждённая композиция «Профили» внутренней страницы «Тренеры».
+   Только эта страница; обложка, навигация и подвал используют общие стили. */
+.coaches-page { background: #fff; }
+.coaches-page ::selection { background: var(--lime); color: var(--ink); }
+.page-frame { width: min(100% - 2 * var(--inner-page-gutter), 1280px); margin-inline: auto; }
+.coaches-page a:focus-visible { outline: 3px solid #044785; outline-offset: 5px; }
+.coaches-page .inner-cover a:focus-visible { outline-color: #fff; }
+.coaches-page .site-header a[aria-current="page"] { text-decoration: underline; text-decoration-color: var(--lime); text-underline-offset: .35em; }
+
+.team { padding-top: clamp(40px, 4.45vw, 64px); padding-bottom: 88px; }
+.team__grid { display: grid; gap: 64px; }
+.trainer { display: grid; grid-template-columns: minmax(240px, 380px) minmax(0, 1fr); align-items: center; gap: clamp(40px, 6.25vw, 90px); scroll-margin-top: 110px; }
+.trainer + .trainer { border-top: 1px solid #c4cdc8; padding-top: 64px; }
+.trainer__photo { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 20px; background: var(--paper); }
+.trainer__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.trainer__body { max-width: 620px; }
+.trainer h2 { margin: 0 0 24px; font: 900 clamp(44px, 4.45vw, 64px)/.94 var(--font-display); letter-spacing: 0; text-transform: uppercase; }
+.trainer__fact { margin: 0; font: 600 clamp(18px, 1.4vw, 20px)/1.4 var(--font-prose); text-wrap: pretty; }
+.trainer__experience { margin: 12px 0 0; color: #465c54; font: 400 17px/1.5 var(--font-prose); text-wrap: pretty; }
+.trainer ul { display: grid; gap: 12px; margin: 28px 0 0; padding: 0; list-style: none; font: 400 17px/1.5 var(--font-prose); }
+.trainer li { border-top: 1px solid #dce2de; padding-top: 12px; text-wrap: pretty; }
+.coaches__years { white-space: nowrap; }
+
+.training { margin-top: 80px; padding-top: 56px; border-top: 1px solid #c4cdc8; scroll-margin-top: 110px; }
+.training__head { margin-bottom: 40px; }
+.training h2 { margin: 0; font: 900 clamp(40px, 4.45vw, 64px)/1 var(--font-display); text-transform: uppercase; }
+.training__options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+.training__option { display: flex; flex-direction: column; align-items: start; }
+.training__option > :last-child { margin-top: auto; }
+.training h3 { margin: 0; font: 600 20px/1.3 var(--font-text); }
+.training p { margin: 12px 0 20px; max-width: 40ch; font: 400 17px/1.5 var(--font-prose); color: #465c54; }
+/* Тот же компонент и отклик, что у «Расписания групп» на главной. */
+.training__button { width: min(100%, 340px); }
+.training__phone { display: inline-flex; align-items: center; min-height: 56px; font: 600 clamp(20px, 1.8vw, 26px)/1.2 var(--font-text); text-decoration: none; }
+@media (hover: hover) {
+  .training__phone:hover { color: #044785; }
+}
+@media (max-width: 1100px) and (min-width: 741px) {
+  .trainer { grid-template-columns: minmax(220px, .85fr) minmax(0, 1fr); gap: 32px; }
+  .trainer h2 { font-size: clamp(40px, 5vw, 52px); }
+}
+@media (max-width: 740px) {
+  .team { padding-top: 40px; padding-bottom: 56px; }
+  .team__grid { gap: 48px; }
+  .trainer { display: block; scroll-margin-top: 96px; }
+  .trainer + .trainer { padding-top: 48px; }
+  .trainer__photo { max-width: 420px; border-radius: 16px; }
+  .trainer__body { margin-top: 24px; }
+  .trainer h2 { font-size: clamp(42px, 12vw, 56px); margin-bottom: 18px; }
+  .trainer__fact { font-size: 18px; }
+  .trainer ul { margin-top: 24px; }
+  .training { margin-top: 56px; padding-top: 40px; }
+  .training h2 { font-size: clamp(36px, 10.7vw, 48px); }
+  .training__head { margin-bottom: 32px; }
+  .training__options { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .training__button { width: 100%; }
+}

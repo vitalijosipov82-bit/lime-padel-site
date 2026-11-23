@@ -19,7 +19,7 @@
     frame.src = frame.dataset.mapSrc;
     window.setTimeout(() => {
       if (!shell.hasAttribute('data-map-loaded')) {
-        shell.querySelector('[role="status"]').textContent = 'Если карта не появилась, открой Яндекс Карты или 2ГИС';
+        shell.querySelector('[role="status"]').textContent = 'Если карта не появилась, нажми «Построить маршрут» или открой 2ГИС';
       }
     }, 12000);
   }

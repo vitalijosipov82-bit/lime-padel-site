@@ -77,7 +77,7 @@
 /* Фактурный мяч из блока пробного занятия; прозрачные поля изображения учтены в размере и позиции. */
 .prices__plus::before { content: ""; position: absolute; left: -3px; top: -1px; width: 28px; height: 28px; background: url("assets/trial-ball.webp") center / contain no-repeat; }
 .prices__booking { grid-column: 1 / -1; border-top: 1px solid var(--prices-line); padding-top: 16px; font-size: clamp(16px, 1.5vw, 20px); text-wrap: pretty; }
-#prices .prices__booking a { color: #044785; text-decoration: underline; text-underline-offset: .17em; white-space: nowrap; }
+#prices .prices__booking a { color: #044785; text-decoration: none; white-space: nowrap; }
 #prices .prices__train .prices__actions { padding-top: 18px; }
 
 /* Ноутбуки */
