@@ -1,0 +1,17 @@
+/* Shared cookie controls: uses the existing LIME palette and typography. */
+.cookie-choice{position:fixed;z-index:100;inset:auto 24px 24px;max-width:1120px;margin-inline:auto;display:flex;align-items:center;gap:32px;padding:24px;background:#fff;color:#071a17;border:1px solid #d3ddd6;border-radius:20px;box-shadow:0 8px 28px #071a1714;font-family:var(--font-text,Arial,sans-serif)}
+.cookie-choice[hidden]{display:none}
+.cookie-choice__copy{flex:1;min-width:0}
+.cookie-choice .cookie-choice__copy p{margin:0;font:400 14px/1.6 var(--font-prose,Arial,sans-serif)}
+.cookie-choice a{color:#044785;text-decoration:none}
+.cookie-choice__actions{display:flex;gap:12px;flex-shrink:0}
+.cookie-choice button{min-height:48px;padding:12px 16px;border:1px solid #a5b6aa;background:#fff;color:#071a17;border-radius:999px;font:500 14px/1.35 var(--font-text,Arial,sans-serif);cursor:pointer}
+.cookie-choice button[data-cookie-accept]{background:#d9f21e;border-color:#d9f21e}
+.cookie-choice button:hover{background:#efffd6}
+.cookie-choice :is(a,button):focus-visible,.cookie-settings:focus-visible{outline:3px solid #044785;outline-offset:4px}
+.cookie-choice button:active{transform:translateY(1px)}
+.site-footer .cookie-settings,.document .cookie-settings{min-height:44px;padding:8px 0;border:0;background:transparent;color:#35534a;font:400 13px/1.5 var(--font-text,Arial,sans-serif);text-align:left;cursor:pointer}
+.document .cookie-settings{font-size:16px;color:#044785}
+@media(max-width:1000px){.cookie-choice{gap:20px;align-items:stretch;flex-direction:column}.cookie-choice__actions{flex-shrink:1}}
+@media(max-width:600px){.cookie-choice{inset:auto 12px 12px;padding:20px;gap:16px;max-height:calc(100dvh - 24px);overflow:auto}.cookie-choice__actions{display:grid;grid-template-columns:1fr;gap:10px}.cookie-choice button{width:100%;min-height:48px}}
+@media(prefers-reduced-motion:reduce){.cookie-choice *{transition:none!important;animation:none!important}}

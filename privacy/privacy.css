@@ -1,0 +1,19 @@
+/* Policy: one reading column aligned with its title, per owner reference. */
+:root{color-scheme:light}
+body.privacy-page{margin:0;background:#fff;color:#171a17}
+.privacy-page *{box-sizing:border-box}
+.skip{position:absolute;left:1rem;top:-5rem;background:#d9f21e;color:#111;padding:.8rem;z-index:100}
+.skip:focus{position:fixed;top:1rem}
+.privacy-page a,.privacy-page a:hover,.privacy-page a:focus-visible{text-decoration:none}
+.privacy-page a:focus-visible{outline:3px solid #044785;outline-offset:4px}
+.page{max-width:880px;margin:auto;padding:132px 48px 96px;font-family:Inter,Arial,sans-serif}
+.page h1{margin:0 0 42px;font-family:var(--font-display);font-size:clamp(42px,4.5vw,64px);font-weight:700;line-height:1.02;letter-spacing:-.025em}
+.document section{min-height:0;padding:0;margin:0 0 38px;scroll-margin-top:116px}
+.document section:last-child{margin-bottom:0}
+.document h2{margin:0 0 18px;font-family:var(--font-display);font-size:32px;font-weight:700;line-height:1.12;letter-spacing:normal}
+.document h3{margin:24px 0 10px;font-size:18px;font-weight:600;line-height:1.4;letter-spacing:normal}
+.document p{margin:0 0 16px;font-size:16px;line-height:1.7;overflow-wrap:anywhere}
+.document p:last-child{margin-bottom:0}
+.document a{color:#044785}
+@media(max-width:700px){.page{padding:110px 24px 64px}.page h1{font-size:clamp(32px,8.7vw,48px);margin-bottom:32px}.page h1 br{display:none}.document h2{font-size:28px}.document section{margin-bottom:32px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

@@ -1,3 +1,6 @@
+/* Logo weight adjusted by owner request, 25.11.2026; locally hosted for offline preview. */
+@font-face { font-family: 'Lime Brand'; font-style: normal; font-weight: 800; font-display: swap; src: url('assets/fonts/firasansextracondensed-normal-800.woff2') format('woff2'); }
+.site-header .brand-word { font-family: 'Lime Brand', var(--font-display); font-weight: 800; }
 /* Общая шапка: логотип — меню по центру — телефон и бронирование. */
 .skip-link {
   position: fixed; z-index: 100; top: 12px; left: 4vw;

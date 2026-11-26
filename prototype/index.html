@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="metrika.js"></script>
+  <link rel="stylesheet" href="cookie-choice.css">
+  <script src="cookie-choice.js" defer></script>
   <title>ЛАЙМ Падел — падел-клуб в Казани</title>
   <meta name="description" content="Три корта в ТЦ «Франт» в Казани. Аренда, тренировки и первое занятие в группе за 800 ₽ с человека">
   <link rel="stylesheet" href="styles.css">
@@ -64,7 +67,7 @@
         <div class="hero-copy">
           <h1 id="hero-title" class="hero-title-friends"><span class="hero-title-line hero-title-line--one hero-title-lime">ЛАЙМ</span> <span class="hero-title-line hero-title-line--two">ПАДЕЛ</span></h1>
           <div class="hero-offer">
-            <p class="hero-description">Собери друзей на&nbsp;матч или сыграй впервые с&nbsp;тренером. Три крытых корта в&nbsp;ТЦ&nbsp;«Франт»</p>
+            <p class="hero-description">Соберите друзей на&nbsp;матч или сыграйте впервые с&nbsp;тренером. Три крытых корта в&nbsp;ТЦ&nbsp;«Франт»</p>
             <div class="hero-decision">
               <a class="hero-action hero-action--book" href="https://n1437757.yclients.ru/company/1301052/record-type?o=" aria-label="Забронировать корт" data-button-motion>
                 <span class="hero-action__label" data-letter-swap aria-hidden="true">Забронировать корт</span>
@@ -75,10 +78,10 @@
         </div>
       </div>
       <div class="hero-bottom">
-        <a class="hero-badge" href="https://n1437757.yclients.ru/company/1301052/activity/select" aria-label="Пробное занятие для новичков: 800 рублей с человека — записаться" data-button-motion>
+        <a class="hero-badge" href="https://n1437757.yclients.ru/company/1301052/activity/select" aria-label="Пробное групповое занятие для новичков: 800 рублей с человека — записаться" data-button-motion>
           <svg class="hero-badge__ring" viewBox="0 0 210 210" aria-hidden="true" focusable="false">
             <defs><path id="hero-badge-circle" d="M105,105 m-90,0 a90,90 0 1,1 180,0 a90,90 0 1,1 -180,0"/></defs>
-            <g class="hero-badge__orbit"><text><textPath href="#hero-badge-circle">Пробное занятие · <tspan class="hero-badge__lime">800&nbsp;₽</tspan> с&nbsp;человека · для&nbsp;новичков ·</textPath></text></g>
+            <g class="hero-badge__orbit"><text textLength="550" lengthAdjust="spacingAndGlyphs"><textPath href="#hero-badge-circle">Пробное групповое занятие · <tspan class="hero-badge__lime">800&nbsp;₽</tspan> с&nbsp;человека ·</textPath></text></g>
           </svg>
           <img class="hero-badge__ball" src="assets/ball-flat.svg" width="298" height="298" alt="">
           <span class="hero-badge__arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -88,7 +91,7 @@
 
     <section class="intro section-pad" id="start" aria-labelledby="start-title">
       <div class="intro-head">
-        <div class="section-heading"><h2 id="start-title">ПРОБНОЕ, КОРТ<br>ИЛИ&nbsp;ТРЕНИРОВКА</h2></div>
+        <div class="section-heading"><h2 id="start-title">ПРОБНОЕ ГРУППОВОЕ ЗАНЯТИЕ,<br>КОРТ ИЛИ&nbsp;ТРЕНИРОВКА</h2></div>
       </div>
       <!-- Структура карточки: для кого → название → что входит → цена с единицей → кнопка.
            Вся карточка — одна ссылка (растянутая .path-cta). Ссылки YCLIENTS работают и без JS;
@@ -100,10 +103,10 @@
             <source media="(max-width: 700px)" srcset="assets/path-trial-stack-mobile.webp" type="image/webp">
             <img src="assets/path-trial-stack-wide.webp" width="1248" height="832" loading="lazy" alt="Ракетка, мяч и кроссовки на синем корте">
           </picture>
-          <h3>ПРОБНОЕ ЗАНЯТИЕ</h3>
+          <h3>ПРОБНОЕ ГРУППОВОЕ ЗАНЯТИЕ</h3>
           <p class="path-what">За&nbsp;час тренер покажет основы и&nbsp;поможет начать игру. В&nbsp;группе четыре игрока, можно прийти одному и&nbsp;без ракетки</p>
           <div class="path-bottom">
-            <p class="path-price"><strong>800&nbsp;₽</strong> <span>пробное занятие</span><small>Тренер, корт и&nbsp;инвентарь включены в&nbsp;стоимость</small></p>
+            <p class="path-price"><strong>800&nbsp;₽</strong> <span>с&nbsp;человека</span><small>Тренер, корт и&nbsp;инвентарь включены в&nbsp;стоимость. Пробное групповое занятие можно посетить один раз</small></p>
             <a class="path-cta" href="https://n1437757.yclients.ru/company/1301052/activity/select" data-button-motion><span class="path-cta__label">Найти группу</span><span class="path-cta__icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
           </div>
         </article></div>
@@ -115,9 +118,9 @@
           </picture>
           <h3>АРЕНДА КОРТА</h3>
           <p class="path-num">Одиночная и&nbsp;парная игра</p>
-          <p class="path-what">Выбери время и&nbsp;приходи играть. Мячи входят в&nbsp;стоимость аренды, ракетка напрокат от&nbsp;300&nbsp;₽</p>
+          <p class="path-what">Выберите время и&nbsp;приходите играть. Мячи входят в&nbsp;стоимость аренды, ракетка напрокат от&nbsp;300&nbsp;₽</p>
           <div class="path-bottom">
-            <p class="path-price"><small class="path-price__format">Корт «Сингл»</small><span>от</span> <strong>2&nbsp;000&nbsp;₽</strong> <span>за&nbsp;час</span><small>Парный корт&nbsp;— от&nbsp;3&nbsp;000&nbsp;₽ за&nbsp;час</small></p>
+            <p class="path-price"><small class="path-price__format">Одиночный корт «Сингл»</small><span>от</span> <strong>2&nbsp;000&nbsp;₽</strong> <span>за&nbsp;час</span><small>Парный корт&nbsp;— от&nbsp;3&nbsp;000&nbsp;₽ за&nbsp;час</small></p>
             <a class="path-cta" href="https://n1437757.yclients.ru/company/1301052/personal/select-services?o=" data-button-motion><span class="path-cta__label">Выбрать корт</span><span class="path-cta__icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
           </div>
         </article></div>
@@ -129,10 +132,10 @@
           </picture>
           <h3>ТРЕНИРОВКИ</h3>
           <p class="path-num">Техника и&nbsp;игровая практика</p>
-          <p class="path-what">Отрабатывай удары индивидуально или в&nbsp;группе. На&nbsp;игровой тренировке тренер подскажет, что исправить по&nbsp;ходу матча</p>
+          <p class="path-what">Отрабатывайте удары индивидуально или в&nbsp;группе. На&nbsp;игровой тренировке участники играют, а&nbsp;тренер наблюдает и&nbsp;подсказывает, что исправить</p>
           <div class="path-bottom">
             <!-- 1650 руб. — игровая тренировка, 1 час, с человека (PRICES.md, подтверждено владельцем 11.11.2026). -->
-            <p class="path-price"><small class="path-price__format">Игровая тренировка</small><strong>1&nbsp;650&nbsp;₽</strong> <span>за&nbsp;час с&nbsp;человека</span><small>Индивидуальная&nbsp;— от&nbsp;4&nbsp;500&nbsp;₽ за&nbsp;час</small></p>
+            <p class="path-price"><small class="path-price__format">Игровая тренировка</small><strong>1&nbsp;650&nbsp;₽</strong> <span>за&nbsp;час с&nbsp;человека</span><small>Индивидуальная&nbsp;— от&nbsp;4&nbsp;500&nbsp;₽ за&nbsp;час<br>Запись по&nbsp;телефону: <a href="tel:+79027112003" style="position:relative;z-index:2;color:inherit">8&nbsp;(902)&nbsp;711-20-03</a></small></p>
             <a class="path-cta" href="https://n1437757.yclients.ru/company/1301052/activity/select" data-button-motion><span class="path-cta__label">Расписание групп</span><span class="path-cta__icon" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
           </div>
         </article></div>
@@ -143,7 +146,7 @@
       <div class="scene">
         <div class="scene__pin">
           <ul class="scene__facts" aria-label="Клуб в цифрах">
-            <li class="scene__fact">Форматы игры<strong>Сингл и&nbsp;парный&nbsp;корт</strong></li>
+            <li class="scene__fact">Форматы игры<strong>Одиночный и&nbsp;парный&nbsp;корт</strong></li>
             <li class="scene__fact">Часы работы<strong class="scene__hours">Пн–пт 08:00–23:00<br>Сб–вс 08:00–22:00</strong></li>
             <li class="scene__fact">ТЦ «Франт», 3‑й&nbsp;этаж<strong>Казань, ул.&nbsp;Юлиуса Фучика,&nbsp;90</strong></li>
           </ul>
@@ -183,7 +186,7 @@
           <article class="prices__card prices__court" aria-labelledby="prices-court-title">
             <h3 id="prices-court-title">Аренда корта</h3>
             <table class="prices__table" aria-labelledby="prices-court-title"><caption class="prices__sr">Аренда корта за час</caption>
-              <thead><tr><th scope="col">За&nbsp;час</th><th scope="col">Сингл</th><th scope="col">Пара</th></tr></thead>
+              <thead><tr><th scope="col">За&nbsp;час</th><th scope="col">Сингл</th><th scope="col">Парный</th></tr></thead>
               <tbody><tr><th scope="row">Будни<span>08:00–16:00</span></th><td>2 000 ₽</td><td>3 000 ₽</td></tr><tr><th scope="row">Будни<span>16:00–23:00</span></th><td>2 500 ₽</td><td>3 500 ₽</td></tr><tr><th scope="row">Выходные</th><td>2 500 ₽</td><td>3 500 ₽</td></tr></tbody>
             </table>
             <p class="prices__plus">Мячи включены</p>
@@ -198,7 +201,7 @@
         <div class="prices__col prices__col--train">
           <article class="prices__card prices__train" aria-labelledby="prices-training-title">
             <h3 id="prices-training-title">Тренировки</h3>
-            <ul class="prices__list"><li><span class="prices__name">Пробное<small>1&nbsp;час</small></span><span class="prices__sum">800 ₽<small>с&nbsp;человека</small></span></li><li><span class="prices__name">Групповая<small>1&nbsp;час</small></span><span class="prices__sum">2 200 ₽<small>с&nbsp;человека</small></span></li><li><span class="prices__name">Игровая<small>1&nbsp;час</small></span><span class="prices__sum">1 650 ₽<small>с&nbsp;человека</small></span></li><li><span class="prices__name">Игровая<small>1,5&nbsp;часа</small></span><span class="prices__sum">2 500 ₽</span></li><li><span class="prices__name">Индивидуальная<small>До&nbsp;16:00, <span class="prices__group-size">1–2&nbsp;человека</span></small></span><span class="prices__sum">4 500 ₽<small>за&nbsp;час</small></span></li><li><span class="prices__name">Индивидуальная<small>После 16:00, <span class="prices__group-size">1–2&nbsp;человека</span></small></span><span class="prices__sum">5 500 ₽<small>за&nbsp;час</small></span></li></ul>
+            <ul class="prices__list"><li><span class="prices__name">Пробное групповое занятие<small>1&nbsp;час</small></span><span class="prices__sum">800 ₽<small>с&nbsp;человека</small></span></li><li><span class="prices__name">Групповая<small>1&nbsp;час</small></span><span class="prices__sum">2 200 ₽<small>с&nbsp;человека</small></span></li><li><span class="prices__name">Игровая<small>1&nbsp;час</small></span><span class="prices__sum">1 650 ₽<small>с&nbsp;человека</small></span></li><li><span class="prices__name">Игровая<small>1,5&nbsp;часа</small></span><span class="prices__sum">2 500 ₽<small>с&nbsp;человека</small></span></li><li><span class="prices__name">Индивидуальная<small>До&nbsp;16:00, <span class="prices__group-size">1–2&nbsp;человека</span></small></span><span class="prices__sum">4 500 ₽<small>за&nbsp;час</small></span></li><li><span class="prices__name">Индивидуальная<small>С&nbsp;16:00, <span class="prices__group-size">1–2&nbsp;человека</span></small></span><span class="prices__sum">5 500 ₽<small>за&nbsp;час</small></span></li></ul>
             <p class="prices__plus">Тренер, корт и&nbsp;инвентарь включены в&nbsp;стоимость</p>
           </article>
         </div>
@@ -221,13 +224,13 @@
               <div class="coaches__front">
                 <div class="coaches__photo"><img src="assets/coaches-yulia-720.webp" srcset="assets/coaches-yulia-480.webp 480w, assets/coaches-yulia-720.webp 720w" sizes="(max-width: 700px) 46vw, 24vw" width="720" height="900" alt="Юлия Бартова на корте клуба" loading="lazy" decoding="async"></div>
                 <h3 id="coaches-yulia">Юлия<br>Бартова</h3>
-                <p class="coaches__fact">Мастер спорта России</p>
-                <p class="coaches__exp">В&nbsp;теннисе с&nbsp;4&nbsp;лет. Тренирует больше 4&nbsp;лет</p>
+                <p class="coaches__fact">Мастер спорта по&nbsp;теннису</p>
+                <p class="coaches__exp">Входила в&nbsp;сборную субъекта РФ по&nbsp;теннису</p>
                 <button class="coaches__turn" type="button" aria-expanded="false" aria-controls="coaches-yulia-back" hidden data-button-motion><span class="coaches__plus" aria-hidden="true"></span>Ещё о&nbsp;Юлии</button>
               </div>
               <div class="coaches__back" id="coaches-yulia-back" role="group" aria-label="Ещё о&nbsp;Юлии">
                 <p class="coaches__back-name" aria-hidden="true">Юлия<br>Бартова</p>
-                <ul><li>Мастер спорта с&nbsp;2014&nbsp;года</li><li>Высшее спортивное образование</li><li>Член Федерации падела Республики Татарстан, помогает развивать падел в&nbsp;регионе</li></ul>
+                <ul><li>Высшее профильное спортивное образование: бакалавриат и&nbsp;магистратура с&nbsp;отличием</li><li>Сертификат тренерских курсов ФПР (Pre-level)</li></ul>
                 <button class="coaches__turn coaches__return" type="button" hidden data-button-motion><span class="coaches__arrow" aria-hidden="true">→</span>Назад к&nbsp;фото</button>
               </div>
             </div>
@@ -237,13 +240,13 @@
               <div class="coaches__front">
                 <div class="coaches__photo"><img src="assets/coaches-ruslan-720.webp" srcset="assets/coaches-ruslan-480.webp 480w, assets/coaches-ruslan-720.webp 720w" sizes="(max-width: 700px) 46vw, 24vw" width="720" height="900" alt="Руслан Алиуллов на корте клуба" loading="lazy" decoding="async"></div>
                 <h3 id="coaches-ruslan">Руслан<br>Алиуллов</h3>
-                <p class="coaches__fact">Красный диплом Поволжского университета физкультуры</p>
-                <p class="coaches__exp">Тренирует больше 4&nbsp;лет</p>
+                <p class="coaches__fact">Первый взрослый разряд по&nbsp;теннису</p>
+                <p class="coaches__exp">Тренерский стаж — более 5&nbsp;лет</p>
                 <button class="coaches__turn" type="button" aria-expanded="false" aria-controls="coaches-ruslan-back" hidden data-button-motion><span class="coaches__plus" aria-hidden="true"></span>Ещё о&nbsp;Руслане</button>
               </div>
               <div class="coaches__back" id="coaches-ruslan-back" role="group" aria-label="Ещё о&nbsp;Руслане">
                 <p class="coaches__back-name" aria-hidden="true">Руслан<br>Алиуллов</p>
-                <ul><li>Окончил с&nbsp;красным дипломом Поволжский государственный университет физической культуры, спорта и&nbsp;туризма</li><li>Член Федерации падела Республики Татарстан, помогает развивать падел в&nbsp;регионе</li></ul>
+                <ul><li>Высшее профильное спортивное образование: бакалавриат и&nbsp;магистратура с&nbsp;отличием</li><li>Аспирант по&nbsp;направлению «Физиология человека и&nbsp;животных»</li><li>Сертификат тренерских курсов ФПР (Pre-level)</li></ul>
                 <button class="coaches__turn coaches__return" type="button" hidden data-button-motion><span class="coaches__arrow" aria-hidden="true">→</span>Назад к&nbsp;фото</button>
               </div>
             </div>
@@ -253,13 +256,13 @@
               <div class="coaches__front">
                 <div class="coaches__photo"><img src="assets/coaches-timur-court-720.webp" srcset="assets/coaches-timur-court-480.webp 480w, assets/coaches-timur-court-720.webp 720w" sizes="(max-width: 700px) 46vw, 24vw" width="720" height="900" alt="Тимур Науметов в клубе" loading="lazy" decoding="async"></div>
                 <h3 id="coaches-timur">Тимур<br>Науметов</h3>
-                <p class="coaches__fact">Входил в&nbsp;топ‑10 игроков России в&nbsp;одиночном и&nbsp;парном разрядах</p>
-                <p class="coaches__exp">Был в&nbsp;сборных России и&nbsp;Татарстана в&nbsp;<span class="coaches__years">2020–2026</span>&nbsp;годах</p>
+                <p class="coaches__fact">Топ‑130 игроков России по&nbsp;паделу</p>
+                <p class="coaches__exp">Член сборных России и&nbsp;Татарстана в&nbsp;2020–2026&nbsp;годах</p>
                 <button class="coaches__turn" type="button" aria-expanded="false" aria-controls="coaches-timur-back" hidden data-button-motion><span class="coaches__plus" aria-hidden="true"></span>Ещё о&nbsp;Тимуре</button>
               </div>
               <div class="coaches__back" id="coaches-timur-back" role="group" aria-label="Ещё о&nbsp;Тимуре">
                 <p class="coaches__back-name" aria-hidden="true">Тимур<br>Науметов</p>
-                <ul><li>Многократный победитель и&nbsp;призёр всероссийских соревнований и&nbsp;турниров серии TE</li><li>Участник чемпионата России и&nbsp;турниров серии ITF</li></ul>
+                <ul><li>Трёхкратный финалист чемпионата России по&nbsp;теннису в&nbsp;парном и&nbsp;командном разрядах</li><li>Победитель и&nbsp;призёр всероссийских соревнований и&nbsp;турниров серии TE, участник турниров ITF</li><li>Сертификат тренерских курсов ФПР (Pre-level)</li></ul>
                 <button class="coaches__turn coaches__return" type="button" hidden data-button-motion><span class="coaches__arrow" aria-hidden="true">→</span>Назад к&nbsp;фото</button>
               </div>
             </div>
@@ -269,13 +272,13 @@
               <div class="coaches__front">
                 <div class="coaches__photo"><img src="assets/coaches-aleksey-court-720.webp" srcset="assets/coaches-aleksey-court-480.webp 480w, assets/coaches-aleksey-court-720.webp 720w" sizes="(max-width: 700px) 46vw, 24vw" width="720" height="900" alt="Алексей Дивин с ракеткой в клубе" loading="lazy" decoding="async"></div>
                 <h3 id="coaches-aleksey">Алексей<br>Дивин</h3>
-                <p class="coaches__fact">Входил в&nbsp;топ‑12 Российского теннисного тура</p>
-                <p class="coaches__exp">Кандидат в&nbsp;мастера спорта. В&nbsp;теннисе 14&nbsp;лет, тренирует 3&nbsp;года</p>
+                <p class="coaches__fact">Входил в&nbsp;топ‑12 Российского теннисного тура (РТТ)</p>
+                <p class="coaches__exp">Кандидат в&nbsp;мастера спорта по&nbsp;теннису с&nbsp;12&nbsp;лет</p>
                 <button class="coaches__turn" type="button" aria-expanded="false" aria-controls="coaches-aleksey-back" hidden data-button-motion><span class="coaches__plus" aria-hidden="true"></span>Ещё об&nbsp;Алексее</button>
               </div>
               <div class="coaches__back" id="coaches-aleksey-back" role="group" aria-label="Ещё об&nbsp;Алексее">
                 <p class="coaches__back-name" aria-hidden="true">Алексей<br>Дивин</p>
-                <ul><li>Играл за&nbsp;сборную Рязани, был в&nbsp;резерве сборной России</li><li>Учился в&nbsp;Словацкой академии</li></ul>
+                <ul><li>Многократный призёр турниров ФПР‑100</li><li>Входил в&nbsp;резерв сборной России по&nbsp;теннису</li><li>Обладатель тренерского сертификата ФПР (Pre-level)</li></ul>
                 <button class="coaches__turn coaches__return" type="button" hidden data-button-motion><span class="coaches__arrow" aria-hidden="true">→</span>Назад к&nbsp;фото</button>
               </div>
             </div>
@@ -294,7 +297,7 @@
             <div class="club-life__poster-stage"><div class="club-life__print"><img class="club-life__poster" src="assets/event-fprt-selected.webp" alt="Афиша ФПРТ 100: игрок на корте, 12 декабря" width="992" height="1586" loading="lazy" decoding="async"></div></div>
             <div class="club-life__info">
               <h3 id="event-fprt-title">Турнир ФПРТ&nbsp;100</h3>
-              <p>12&nbsp;декабря, 12&nbsp;пар. Взнос 7&nbsp;000&nbsp;₽ с&nbsp;пары</p>
+              <p>12&nbsp;декабря · 12&nbsp;пар<br>Взнос&nbsp;— 7&nbsp;000&nbsp;₽ с&nbsp;пары</p>
               <p class="club-life__note">Регистрация на&nbsp;сайте&nbsp;ФПР</p>
             </div>
           </article>
@@ -302,8 +305,8 @@
             <div class="club-life__poster-stage"><div class="club-life__print"><img class="club-life__poster" src="assets/event-friday-selected.webp" alt="Афиша «Пятница. На корте»: игрок с ракеткой для падела" width="941" height="1672" loading="lazy" decoding="async"></div></div>
             <div class="club-life__info">
               <h3 id="event-friday-title">Пятничный американо</h3>
-              <p><span class="club-life__time">21:00–23:00</span>, 9&nbsp;участников</p>
-              <p class="club-life__note">Ближайшую дату уточняйте в&nbsp;клубе</p>
+              <p><span class="club-life__time">21:00–23:00</span> · 9&nbsp;участников</p>
+              <p class="club-life__note">Ближайшую дату и&nbsp;условия участия уточняйте в&nbsp;клубе</p>
             </div>
           </article>
         </div>
@@ -318,14 +321,14 @@
   <div class="benefits__offers">
     <article class="benefits__offer benefits__loyalty" aria-labelledby="loyalty-title">
       <h3 id="loyalty-title">Карта лояльности</h3>
-      <p class="benefits__lead">Копи баллы за&nbsp;визиты в&nbsp;клуб</p>
+      <p class="benefits__lead">Получайте баллы за&nbsp;визиты в&nbsp;клуб и&nbsp;оплачивайте ими следующие покупки</p>
       <div class="benefits__metrics">
         <dl class="benefits__stats">
           <div><dt>3<span>%</span></dt><dd>вернём баллами в&nbsp;день визита</dd></div>
           <div><dt><small>до</small> 50<span>%</span></dt><dd>суммы покупки можно оплатить баллами</dd></div>
         </dl>
       </div>
-      <p class="benefits__terms">Программа не&nbsp;совмещается со&nbsp;скидками и&nbsp;акциями</p>
+      <p class="benefits__terms">1&nbsp;балл&nbsp;=&nbsp;1&nbsp;₽. Программа не&nbsp;совмещается со&nbsp;скидками и&nbsp;акциями</p>
       <div class="benefits__actions">
         <p class="benefits__action-label">Оформить карту</p>
         <div class="benefits__bots">
@@ -337,10 +340,10 @@
     </article>
     <article class="benefits__offer benefits__gift" aria-labelledby="gift-title">
       <h3 id="gift-title">Подарочный сертификат</h3>
-      <p class="benefits__lead">Подари игру в&nbsp;ЛАЙМе. Получатель сам выберет корт, тренировку или другую услугу клуба</p>
+      <p class="benefits__lead">Подарите игру в&nbsp;клубе Лайм&nbsp;— получатель сам выберет услугу</p>
       <div class="benefits__metrics">
         <p class="benefits__amount"><span>4&nbsp;500</span><span class="benefits__dash">–</span><span>15&nbsp;000&nbsp;₽</span></p>
-        <p class="benefits__redeem">При&nbsp;записи назовите номер сертификата</p>
+        <p class="benefits__redeem">Любая сумма в&nbsp;этом диапазоне</p>
       </div>
       <p class="benefits__terms">За&nbsp;покупку сертификата баллы не&nbsp;начисляются</p>
       <div class="benefits__actions">
@@ -348,7 +351,7 @@
       </div>
       <div class="benefits__details">
         <p>За&nbsp;бумажным сертификатом на&nbsp;аренду корта, групповое или&nbsp;индивидуальное занятие обращайтесь к&nbsp;администратору</p>
-        <p>Сертификат на&nbsp;сумму любого доступного номинала можно купить онлайн или у&nbsp;администратора</p>
+        <p>Сертификат на&nbsp;сумму можно купить онлайн или у&nbsp;администратора</p>
         <p class="benefits__contact"><span>Администратор клуба</span><a href="tel:+79027112003">8&nbsp;(902)&nbsp;711-20-03</a></p>
       </div>
     </article>
@@ -359,7 +362,7 @@
   <div class="visit__copy">
     <h2 id="visit-title" class="visit__title">ул.&nbsp;Юлиуса Фучика, 90</h2>
     <div class="visit__facts"><p class="visit__location">Казань · ТЦ «Франт» · 3‑й&nbsp;этаж</p><h3 class="visit__hours-title">Часы работы</h3><dl class="visit__hours"><div><dt>Пн–пт</dt><dd>08:00–23:00</dd></div><div><dt>Сб–вс</dt><dd>08:00–22:00</dd></div></dl></div>
-    <div class="visit__way"><h3>Как пройти в&nbsp;клуб</h3><ul class="visit__steps"><li>Зайди через центральный вход ТЦ&nbsp;«Франт»</li><li>Поднимись на&nbsp;эскалаторе на&nbsp;3‑й&nbsp;этаж</li><li>ЛАЙМ сразу за&nbsp;стойкой фитнес-клуба «Акимбо»</li></ul></div>
+    <div class="visit__way"><h3>Как пройти в&nbsp;клуб</h3><ul class="visit__steps"><li>Зайдите через центральный вход ТЦ&nbsp;«Франт»</li><li>Поднимитесь на&nbsp;эскалаторе на&nbsp;3‑й&nbsp;этаж</li><li>ЛАЙМ сразу за&nbsp;стойкой фитнес-клуба «Акимбо»</li></ul></div>
     <div class="visit__routes" role="group" aria-label="Клуб на картах"><a class="visit__route visit__route--directions" href="https://yandex.ru/maps/?mode=routes&amp;rtext=~55.763589%2C49.234002" target="_blank" rel="noopener" aria-label="Построить маршрут до ЛАЙМ Падел в Яндекс Картах, новая вкладка" data-button-motion>Построить маршрут<span><svg viewBox="0 0 20 20" fill="none" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a><a class="visit__route" href="https://2gis.ru/kazan/search/%D0%BB%D0%B0%D0%B9%D0%BC%20%D0%BF%D0%B0%D0%B4%D0%B5%D0%BB/firm/70000001102624666/49.234002%2C55.763589" target="_blank" rel="noopener" aria-label="ЛАЙМ Падел в 2ГИС, новая вкладка" data-button-motion>2ГИС<span><svg viewBox="0 0 20 20" fill="none" width="18" height="18" aria-hidden="true" focusable="false"><path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
   </div>
   <div class="visit__map" data-map-shell>
@@ -375,7 +378,7 @@
       <div class="site-footer__booking booking-actions"><a class="site-footer__book" href="https://n1437757.yclients.ru/company/1301052/record-type?o=" data-button-motion>Забронировать корт<span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true" focusable="false"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a></div>
     </div>
     <div class="site-footer__body">
-      <nav class="site-footer__nav" aria-label="Навигация в подвале"><div class="site-footer__nav-group"><h2 class="site-footer__heading">Навигация</h2><ul><li><a href="first-game.html">Первая игра</a></li><li><a href="#prices">Цены</a></li><li><a href="#coaches">Тренеры</a></li></ul></div><div class="site-footer__nav-group"><h2 class="site-footer__heading">Клуб</h2><ul><li><a href="#club">О клубе</a></li><li><a href="#loyalty-gift">Лояльность и&nbsp;сертификаты</a></li><li><a href="#contacts">Контакты</a></li></ul></div></nav>
+      <nav class="site-footer__nav" aria-label="Навигация в подвале"><div class="site-footer__nav-group"><h2 class="site-footer__heading">Навигация</h2><ul><li><a href="first-game.html">Первая игра</a></li><li><a href="prices.html">Цены</a></li><li><a href="coaches.html">Тренеры</a></li></ul></div><div class="site-footer__nav-group"><h2 class="site-footer__heading">Клуб</h2><ul><li><a href="#club">О клубе</a></li><li><a href="#loyalty-gift">Лояльность и&nbsp;сертификаты</a></li><li><a href="contacts.html">Контакты</a></li></ul></div></nav>
       <div class="site-footer__contact">
         <h2 class="site-footer__heading">Контакты</h2>
         <address class="site-footer__address">Казань, ул.&nbsp;Юлиуса Фучика,&nbsp;90<br>ТЦ «Франт», 3‑й&nbsp;этаж</address>
@@ -385,6 +388,7 @@
       </div>
     </div>
     <div class="site-footer__bottom">
+      <a class="site-footer__privacy" href="../privacy/index.html">Политика обработки персональных данных</a>
       <p class="site-footer__legal"><span>ООО «СМЭШ»</span><span>ИНН&nbsp;1684001996</span><span>КПП&nbsp;168401001</span><span>ОГРН&nbsp;1221600008288</span><span class="site-footer__legal-address">Юр.&nbsp;адрес: 420059, РТ, г.&nbsp;Казань, ул.&nbsp;Павлюхина, д.&nbsp;91, офис&nbsp;58</span></p>
     </div>
   </footer>
