@@ -57,7 +57,7 @@
   font-family: var(--font-text);
   font-size: 13.5px;
   font-weight: 700;
-  letter-spacing: 3.11912px; /* IBM Plex Sans: измеренная длина надписи ≈552px при окружности565px. */
+  letter-spacing: 0; /* Glyph positions close the circle consistently, including Safari. */
   text-transform: uppercase;
   fill: #fff;
 }

@@ -15,6 +15,8 @@
     // Fractional card heights can leave the section <1px from the native scroll target.
     const height = club.querySelector('.scene__pin').clientHeight;
     const p = top <= 1 ? 0 : Math.min(1,top / (height * .85));
+    // At entry facts hug the photo corners; near the viewport top they clear the header.
+    club.style.setProperty('--club-fact-top', `${Math.max(24, 92 - Math.max(0, top))}px`);
     if (p === lastProgress) return;
     lastProgress = p;
     const narrow = innerWidth <= 800;

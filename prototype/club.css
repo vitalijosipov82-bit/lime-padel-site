@@ -452,7 +452,7 @@
   .scene-club .scene__fact strong { font-size: 1rem; line-height: 1.25; }
 
   .scene-club.is-scene .scene__fact:nth-child(1),
-  .scene-club.is-scene .scene__fact:nth-child(2) { top: 92px; max-width: calc(50% - 28px); }
+  .scene-club.is-scene .scene__fact:nth-child(2) { top: var(--club-fact-top, 92px); max-width: calc(50% - 28px); }
   .scene-club.is-scene .scene__fact:nth-child(1) { left: var(--club-edge); }
   .scene-club.is-scene .scene__fact:nth-child(2) { right: var(--club-edge); }
   .scene-club.is-scene .scene__fact:nth-child(3) {
